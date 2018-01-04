@@ -1,0 +1,21 @@
+@charset "utf-8";
+#fm{
+    border:1px;
+	background: rgba(0,0,0,0.5);
+    color:#ffff;
+    padding:20px 30px;
+}
+
+h1{
+    text-align: center;
+}
+body{
+	margin:0;
+	padding:0;
+	background: url("../image/table.jpg");
+  	background-size: cover;
+  	background-position: center center; 
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+
+}

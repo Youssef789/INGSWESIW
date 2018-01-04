@@ -1,0 +1,36 @@
+@charset "utf-8";
+h2{
+	
+	margin-bottom: 10px;
+}
+.container
+{
+	margin-top: 100px
+}
+
+.wrap-login{
+	border:0px;
+	background: rgba(0,0,0,0.5);
+	color:#ffff;
+	padding:50px 40px;
+	
+}
+body {
+	margin:0;
+	padding:0;
+	background: url("../image/background-login.jpg");
+  	background-size: cover;
+  	background-position: center center; 
+	background-repeat:no-repeat;
+	background-attachment: fixed;
+    font-family: 'Barlow', sans-serif;
+
+}
+
+
+.btn{
+
+    background-color: #138dff;
+   
+}
+
