@@ -1,5 +1,6 @@
 package persistence;
 
+import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
 
 public class PostgresDAOFactory extends DAOFactory {
@@ -24,6 +25,11 @@ public class PostgresDAOFactory extends DAOFactory {
 		return new UtenteDaoJDBC(dataSource);
 	}
 
+	@Override
+	public RicettaDao getRicrttaDAO() {
+		return new RicettaDaoJDBC(dataSource);
+	}
+	
 	@Override
 	public UtilDao getUtilDAO() {
 		return new UtilDao(dataSource);

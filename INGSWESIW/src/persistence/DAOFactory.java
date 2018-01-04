@@ -1,5 +1,6 @@
 package persistence;
 
+import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
 
 public abstract class DAOFactory {
@@ -41,5 +42,6 @@ public abstract class DAOFactory {
 		// --- Factory specification: concrete factories implementing this spec must provide this methods! ---
 		
 		public abstract UtenteDao getUtenteDAO();
+		public abstract RicettaDao getRicrttaDAO();
 		public abstract persistence.UtilDao getUtilDAO();
 }

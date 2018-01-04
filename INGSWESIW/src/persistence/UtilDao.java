@@ -18,6 +18,7 @@ public class UtilDao {
 		try {
 			String delete = "drop SEQUENCE if EXISTS sequenza_id;"
 					+ "drop table if exists utente;"
+					+ "drop table if exists ricetta;"
 					;
 			PreparedStatement statement = connection.prepareStatement(delete);
 			
@@ -42,13 +43,18 @@ public class UtilDao {
 		Connection connection = dataSource.getConnection();
 		try {
 			
-			String delete = "create SEQUENCE sequenza_id;"
-					+ "create table utente(email CHARACTER(255) primary key,"				
+			String create = "create SEQUENCE sequenza_id;"
+					+ "create table utente(id CHARACTER(255) primary key,"				
 					+ "name VARCHAR(255),username VARCHAR(255),"
-					+ "birthday DATE, password VARCHAR(255));"
+					+ "email VARCHAR(255),password VARCHAR(255));"
+					+ "create table ricetta(id CHARACTER(255) primary key,"
+					+ "title VARCHAR(255),category VARCHAR(255),"
+					+ "difficulty VARCHAR(255),preparationTime VARCHAR(255),"
+					+ "image bytea,ingredient VARCHAR(1000),"
+					+ "description VARCHAR(5000),preparation VARCHAR(9000));"
 					;
 			
-			PreparedStatement statement = connection.prepareStatement(delete);
+			PreparedStatement statement = connection.prepareStatement(create);
 			
 			statement.executeUpdate();
 			System.out.println("Executed create database");
@@ -73,8 +79,12 @@ public class UtilDao {
 			try {
 				String delete = "delete FROM utente";
 				PreparedStatement statement = connection.prepareStatement(delete);
-				
 				statement.executeUpdate();
+				
+				delete = "delete FROM ricetta";
+				statement = connection.prepareStatement(delete);
+				statement.executeUpdate();
+
 			} catch (SQLException e) {
 				
 				throw new PersistenceException(e.getMessage());

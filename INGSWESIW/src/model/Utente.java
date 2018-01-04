@@ -1,14 +1,22 @@
 package model;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public class Utente {
+	
 	
 	private Long id;
 	private String name;
 	private String username;
 	private String email;
-	private Date birthday;
+	//!!!!!!!!
+	private Set<Commento>commenti;
+	private Set<Ricetta>ricette;
+	List<Utente> followers = new LinkedList<Utente>();
+	List<Utente> following = new LinkedList<Utente>();
 
 	public Utente(String name,String username,String email) {
 		this.name=name;
@@ -20,6 +28,14 @@ public class Utente {
 		
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -44,12 +60,5 @@ public class Utente {
 		this.email = email;
 	}
 
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
 	
 }

@@ -1,3 +1,6 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +14,7 @@
 		<div class="row">
 			<div class="wrap-login col-md-4 col-md-offset-4">
 			<h2>Login</h2>
-				<form action="login" method="post">
+				<form method="post" action="Login">
 				  <div class="form-group">
 				    <label for="email">Email address:</label>
 				     <input name="email" type="email" class="form-control" >

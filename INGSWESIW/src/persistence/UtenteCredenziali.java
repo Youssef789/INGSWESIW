@@ -18,7 +18,7 @@ public class UtenteCredenziali extends Utente{
 		Connection connection = this.dataSource.getConnection();
 		try {
 			PreparedStatement statement;
-			String query = "select * from utente where username = ?";
+			String query = "select * from utente where email = ?";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, this.getEmail());
 			ResultSet result = statement.executeQuery();

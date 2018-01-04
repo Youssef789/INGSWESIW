@@ -24,25 +24,14 @@ public class MainJDBC {
 //	- Aggiungere l'entita' CORSO(codice, nome), molti a molti con Studente.
 	
 	public static void main(String args[]) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(1995, Calendar.MARCH, 21); // // 21 marzo 1995
-		Date date1 = cal.getTime();
-		cal.set(1996, Calendar.APRIL, 12); // 12 aprile 1996
-		Date date2 = cal.getTime();
-		cal.set(1998, Calendar.OCTOBER, 1);  // 1 ottobre 1998
-		Date date3 = cal.getTime();
+		
 
 		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
 		UtilDao util = factory.getUtilDAO();
 		util.dropDatabase();
 		
 		util.createDatabase();
-		
-		//crea studenti
-		//crea gruppo
-		//find studenti
-		//find gruppo
-		//delete gruppo/studenti
+	
 		
 		UtenteDao utenteDao = factory.getUtenteDAO();
 		
@@ -56,6 +45,11 @@ public class MainJDBC {
 		utenteDao.save(utente2);
 		utenteDao.setPassword(utente1, "123");
 		utenteDao.setPassword(utente2, "012");
+		
+		System.out.println("Elenco studenti");
+		for(Utente utente : utenteDao.findAll()) {
+			System.out.println(utente);
+		}
 
 		
 	}

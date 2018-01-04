@@ -22,13 +22,14 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into utente(name,username,email) values (?,?,?)";
+			Long id = IdBroker.getId(connection);
+			utente.setId(id);
+			String insert = "insert into utente(id,name,username,email) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-			statement.setString(1, utente.getName());
-			statement.setString(2, utente.getUsername());
-			statement.setString(3, utente.getEmail());
-//			long secs = utente.getBirthday().getTime();
-//			statement.setDate(4, new java.sql.Date(secs));
+			statement.setLong(1, utente.getId());
+			statement.setString(2, utente.getName());
+			statement.setString(3, utente.getUsername());
+			statement.setString(4, utente.getEmail());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -55,10 +56,10 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				utente = new Utente();
-				utente.setEmail(result.getString("email"));				
+				utente.setName(result.getString("name"));
 				utente.setUsername(result.getString("username"));
-				long secs = result.getDate("birthday").getTime();
-				utente.setBirthday(new java.util.Date(secs));
+				utente.setEmail(result.getString("email"));				
+				
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -86,10 +87,9 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				utente = new Utente();
+				utente.setName(result.getString("name"));
 				utente.setUsername(result.getString("username"));
-				utente.setEmail(result.getString("email"));
-				long secs = result.getDate("birthday").getTime();
-				utente.setBirthday(new java.util.Date(secs));
+				utente.setEmail(result.getString("email"));		
 				
 				utenti.add(utente);
 			}
@@ -109,12 +109,11 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update utente SET id = ?, username = ?, email = ?, brithday = ? WHERE email=?";
+			String update = "update utente SET name = ?, username = ? WHERE email=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, utente.getUsername());
-			statement.setString(2, utente.getEmail());
-			long secs = utente.getBirthday().getTime();
-			statement.setDate(4, new java.sql.Date(secs));
+			statement.setString(1, utente.getName());
+			statement.setString(2, utente.getUsername());
+			statement.setString(3, utente.getEmail());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -132,7 +131,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void delete(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM utente WHERE id = ? ";
+			String delete = "delete FROM utente WHERE email = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, utente.getEmail());
 			statement.executeUpdate();
@@ -168,19 +167,42 @@ public class UtenteDaoJDBC implements UtenteDao{
 		}
 		
 	}
+	
+	@Override
+	public boolean checkLogin(String email, String password) {
+		boolean status=false;
+	
+		Connection connection = this.dataSource.getConnection();
+		//Utente utente = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from utente where email = ? and password = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, email);
+			statement.setString(2, password);
+			ResultSet result = statement.executeQuery();
+			status= result.next();
+			}catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		return status;
+			
+
+	}
 
 	@Override
 	public UtenteCredenziali findByPrimaryKeyCredential(String email) {
-		
 		Utente utente = findByPrimaryKey(email);
 		UtenteCredenziali utenteCredenziali = null;
 		if (utente != null){
 			utenteCredenziali = new UtenteCredenziali(dataSource);
+			utenteCredenziali.setName(utente.getName());
 			utenteCredenziali.setUsername(utente.getUsername());
 			utenteCredenziali.setEmail(utente.getEmail());
-			utenteCredenziali.setBirthday(utente.getBirthday());			
 		}
 		return utenteCredenziali;
 	}
+
+	
 
 }
