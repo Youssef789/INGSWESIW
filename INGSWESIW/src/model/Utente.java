@@ -4,11 +4,10 @@ import java.util.Date;
 
 public class Utente {
 	
-	private Long id;
+	
 	private String name;
 	private String username;
 	private String email;
-	private Date birthday;
 
 	public Utente(String name,String username,String email) {
 		this.name=name;
@@ -44,12 +43,5 @@ public class Utente {
 		this.email = email;
 	}
 
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
 	
 }

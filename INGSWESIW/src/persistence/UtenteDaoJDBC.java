@@ -27,8 +27,6 @@ public class UtenteDaoJDBC implements UtenteDao{
 			statement.setString(1, utente.getName());
 			statement.setString(2, utente.getUsername());
 			statement.setString(3, utente.getEmail());
-//			long secs = utente.getBirthday().getTime();
-//			statement.setDate(4, new java.sql.Date(secs));
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -55,10 +53,10 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				utente = new Utente();
-				utente.setEmail(result.getString("email"));				
+				utente.setName(result.getString("name"));
 				utente.setUsername(result.getString("username"));
-				long secs = result.getDate("birthday").getTime();
-				utente.setBirthday(new java.util.Date(secs));
+				utente.setEmail(result.getString("email"));				
+				
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -86,10 +84,9 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				utente = new Utente();
+				utente.setName(result.getString("name"));
 				utente.setUsername(result.getString("username"));
-				utente.setEmail(result.getString("email"));
-				long secs = result.getDate("birthday").getTime();
-				utente.setBirthday(new java.util.Date(secs));
+				utente.setEmail(result.getString("email"));		
 				
 				utenti.add(utente);
 			}
@@ -109,12 +106,11 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update utente SET id = ?, username = ?, email = ?, brithday = ? WHERE email=?";
+			String update = "update utente SET name = ?, username = ?, email = ? WHERE email=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, utente.getUsername());
-			statement.setString(2, utente.getEmail());
-			long secs = utente.getBirthday().getTime();
-			statement.setDate(4, new java.sql.Date(secs));
+			statement.setString(1, utente.getName());
+			statement.setString(2, utente.getUsername());
+			statement.setString(3, utente.getEmail());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -132,7 +128,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void delete(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete FROM utente WHERE id = ? ";
+			String delete = "delete FROM utente WHERE email = ? ";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, utente.getEmail());
 			statement.executeUpdate();
@@ -176,9 +172,9 @@ public class UtenteDaoJDBC implements UtenteDao{
 		UtenteCredenziali utenteCredenziali = null;
 		if (utente != null){
 			utenteCredenziali = new UtenteCredenziali(dataSource);
+			utenteCredenziali.setName(utente.getName());
 			utenteCredenziali.setUsername(utente.getUsername());
 			utenteCredenziali.setEmail(utente.getEmail());
-			utenteCredenziali.setBirthday(utente.getBirthday());			
 		}
 		return utenteCredenziali;
 	}

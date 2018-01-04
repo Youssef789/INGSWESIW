@@ -37,13 +37,9 @@ public class CreateAccount extends HttpServlet {
 		String name = request.getParameter("name");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
-		String birthday = request.getParameter("birthday");
 		String password = request.getParameter("password");
-		DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.ITALIAN);
-		Date date;
 		
 			Utente utente = new Utente(name,username,email);
-			//utente.setBirthday(date);
 
 			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			utenteDao.save(utente);

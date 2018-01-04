@@ -28,12 +28,10 @@ public class Login extends HttpServlet {
 		session.setAttribute("email", null);
 		String email= request.getParameter("email");
 		String password= request.getParameter("password");
-		System.out.println("sa7");
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 		UtenteCredenziali utente = dao.findByPrimaryKeyCredential(email);
 		if(password.equals(utente.getPassword()))
 		{
-			System.out.println("ok");
 			//HttpSession session = request.getSession();
 			//session.setAttribute("username",email);
 			response.sendRedirect("index.html");
