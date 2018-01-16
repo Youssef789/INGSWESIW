@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import persistence.DatabaseManager;
-import persistence.UtenteCredenziali;
 import persistence.dao.UtenteDao;
-
+import persistence.dao.jdbc.UtenteConPassword;
 
 public class Login extends HttpServlet {
 	
@@ -32,13 +31,8 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String email= request.getParameter("email");
 		String password= request.getParameter("password");
-<<<<<<< HEAD
-			
-		
-=======
->>>>>>> refs/remotes/origin/master
+
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-<<<<<<< HEAD
 		if(dao.checkLogin(email, password)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("username",email);
@@ -61,17 +55,13 @@ public class Login extends HttpServlet {
 			out.println("</body>");
 			out.println("</html>");
 			//response.sendRedirect("login.jsp");
-=======
-		UtenteCredenziali utente = dao.findByPrimaryKeyCredential(email);
-		if(password.equals(utente.getPassword()))
-		{
-			//HttpSession session = request.getSession();
-			//session.setAttribute("username",email);
-			response.sendRedirect("index.html");
->>>>>>> refs/remotes/origin/master
-		}
+
+	
 		
 	}
+		
+	}
+		
 
 
 

@@ -3,27 +3,27 @@ package persistence;
 import java.sql.*;
 
 public class DataSource {
-	final private String dbURI;// = "jdbc:postgresql://localhost/test";
-	final private String userName;// = "postgres";
-	final private String password;// = "postgres";
+								
+	final private String dbURI; // = "jdbc:postgresql://localhost/SoRecipes"; (utilizzo reale)
+								// = "jdbc:postgresql://localhost/test";      (esempio)
 	
-	
+	final private String username; // = "postgres";
+	final private String password; // = "postgres";
 
-	public DataSource(String dbURI, String userName, String password) {
-		this.dbURI=dbURI;
-		this.userName=userName;
-		this.password=password;
+	public DataSource(String dbURI, String username, String password) {
+		this.dbURI = dbURI;
+		this.username = username;
+		this.password = password;
 	}
 
 	public Connection getConnection() throws PersistenceException {
 		Connection connection = null;
 		try {
-		    connection = DriverManager.getConnection(dbURI,userName,password);
-			
-		
-		} catch(SQLException e) {
+			connection = DriverManager.getConnection(dbURI, username, password);	
+		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		}
 		return connection;
 	}
+	
 }

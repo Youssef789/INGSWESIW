@@ -1,4 +1,4 @@
-package persistence;
+package persistence.dao.jdbc;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,6 +13,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import model.Ricetta;
+import persistence.DataSource;
+import persistence.IdBroker;
+import persistence.PersistenceException;
 import persistence.dao.RicettaDao;
 
 public class RicettaDaoJDBC implements RicettaDao{

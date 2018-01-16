@@ -1,4 +1,4 @@
-package persistence;
+package persistence.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import model.Utente;
+import persistence.DataSource;
+import persistence.IdBroker;
+import persistence.PersistenceException;
 import persistence.dao.UtenteDao;
 
 public class UtenteDaoJDBC implements UtenteDao{
@@ -26,16 +29,12 @@ public class UtenteDaoJDBC implements UtenteDao{
 			utente.setId(id);
 			String insert = "insert into utente(id,name,username,email) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
-<<<<<<< HEAD
+
 			statement.setLong(1, utente.getId());
 			statement.setString(2, utente.getName());
 			statement.setString(3, utente.getUsername());
 			statement.setString(4, utente.getEmail());
-=======
-			statement.setString(1, utente.getName());
-			statement.setString(2, utente.getUsername());
-			statement.setString(3, utente.getEmail());
->>>>>>> refs/remotes/origin/master
+			
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -115,11 +114,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-<<<<<<< HEAD
 			String update = "update utente SET name = ?, username = ? WHERE email=?";
-=======
-			String update = "update utente SET name = ?, username = ?, email = ? WHERE email=?";
->>>>>>> refs/remotes/origin/master
+
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getName());
 			statement.setString(2, utente.getUsername());
@@ -201,11 +197,11 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public UtenteCredenziali findByPrimaryKeyCredential(String email) {
+	public UtenteConPassword findByPrimaryKeyCredential(String email) {
 		Utente utente = findByPrimaryKey(email);
-		UtenteCredenziali utenteCredenziali = null;
+		UtenteConPassword utenteCredenziali = null;
 		if (utente != null){
-			utenteCredenziali = new UtenteCredenziali(dataSource);
+			utenteCredenziali = new UtenteConPassword(dataSource);
 			utenteCredenziali.setName(utente.getName());
 			utenteCredenziali.setUsername(utente.getUsername());
 			utenteCredenziali.setEmail(utente.getEmail());

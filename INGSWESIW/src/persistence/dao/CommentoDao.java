@@ -6,11 +6,14 @@ import model.Commento;
 
 public interface CommentoDao {
 	
-	public void save(Commento commento);  // Create
-	public Commento findByPrimaryKey(Long id);     // Retrieve
+	public void save(Commento commento);  
+	
+	public Commento findByPrimaryKey(Long id);
+	
 	public List<Commento> findAll();       
-	public void update(Commento commento); //Update
-	public void delete(Commento commento); //Delete	
-
+	
+	public void update(Commento commento); 
+	
+	public void delete(Commento commento);	
 
 }
