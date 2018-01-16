@@ -32,17 +32,11 @@ public class CreateAccount extends HttpServlet {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-<<<<<<< HEAD
 		try {
-=======
->>>>>>> refs/remotes/origin/master
+
 		
 			Utente utente = new Utente(name,username,email);
-<<<<<<< HEAD
-			
-=======
 
->>>>>>> refs/remotes/origin/master
 			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			utenteDao.save(utente);
 			utenteDao.setPassword(utente, password);

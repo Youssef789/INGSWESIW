@@ -8,21 +8,18 @@ import java.util.Set;
 public class Utente {
 	
 	
-<<<<<<< HEAD
+
 	private Long id;
-=======
->>>>>>> refs/remotes/origin/master
 	private String name;
 	private String username;
 	private String email;
-<<<<<<< HEAD
+
 	//!!!!!!!!
 	private Set<Commento>commenti;
 	private Set<Ricetta>ricette;
 	List<Utente> followers = new LinkedList<Utente>();
 	List<Utente> following = new LinkedList<Utente>();
-=======
->>>>>>> refs/remotes/origin/master
+
 
 	public Utente(String name,String username,String email) {
 		this.name=name;
