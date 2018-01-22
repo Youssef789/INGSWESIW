@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 	<link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="css/login.css">
 <title>Login</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
 				<form method="post" action="Login">
 				  <div class="form-group">
 				    <label for="email">Email address:</label>
-				     <input name="email" type="email" class="form-control" >
+				     <input name="username" type="username" class="form-control" >
 				  </div>
 				  <div class="form-group">
 				    <label for="pwd">Password:</label>

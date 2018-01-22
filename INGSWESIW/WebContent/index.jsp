@@ -15,8 +15,9 @@
   }
   #right{
   position: absolute;
+  top:100px;
   left: 200px;
-  width: 700px;
+  width: 750px;
  
   }
   #search{ width: 500px;}
@@ -75,12 +76,11 @@
 				
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="signup" href="pages/account.jsp">Sign Up</a></li>
-					<li><a id="signin" href="pages/login.jsp">Login</a></li>
-					<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#">For${utente.username}<span class="caret"></span></a>
+					<li><a id="signin" href="login.jsp">Login</a></li>
+					<li class="dropdown"><a id="user" class="dropdown-toggle"data-toggle="dropdown" href="#">welcome : ${username}<span class="caret"></span></a>
 					<ul class="dropdown-menu ">
+						<li><a href="/web/recipe">Profile</a></li>
 						<li><a href="/web/recipe">Create Recipe</a></li>
-						<li><a href="#">Page</a></li>
-						<li><a href="#">Page</a></li>
 					</ul>	
 				</li>				
 				</ul>
@@ -126,7 +126,7 @@
         		 		<li>
         		 		<figure class="recipe-photo">
         		 		<img src="image/table.jpg"<a href=""></a>>
-        		 		<a href="">${prova}</a>
+        		 		<a href="GetRecipe">${prova}S</a>
         		 		</figure>
         		 		</li>
         		 	</ul>
@@ -150,6 +150,7 @@
     <script src="js/jquery-3.2.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script src="js/loginwithfb.js" ></script>
+	<script src="js/login.js" ></script>
 	
 </body>
 </html>
