@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/account.css">
+<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/account.css">
 <title>Create your Account</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
 <section class="moduleRegistration" class="row">
 	
 <div class="col-md-4 col-md-offset-4" id="fm" >
-	<form action="CreateAccount" method="post" >
+	<form action="Account" method="post" >
 		<div class="form-group"><label for="name">Full Name:</label><input name="name" type="text" placeholder="full name" class="form-control" /> </div> 
 		<div class="form-group"><label for="username">Username:</label> <input name="username" type="text" placeholder="Username" class="form-control" /> </div> 
 		<div class="form-group"><label for="email">Email:</label><input name="email" type="email" placeholder="Email" class="form-control" /></div> 

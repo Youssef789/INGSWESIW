@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +20,8 @@ public class Login extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispacher = request.getRequestDispatcher("login.jsp");
-		dispacher.forward(request, response);
+//		RequestDispatcher dispacher = request.getRequestDispatcher("pages/login.jsp");
+//		dispacher.forward(request, response);
 	}
 	
 	@Override
@@ -28,11 +29,12 @@ public class Login extends HttpServlet {
 		//HttpSession session = request.getSession();
 		//session.setAttribute("email", null);
 		//System.out.println("post");
-
+		//RequestDispatcher dispacher = request.getRequestDispatcher("web/login.jsp");
+		
 		PrintWriter out = response.getWriter();
 		String email= request.getParameter("email");
 		String password= request.getParameter("password");
-
+		
 		UtenteDao dao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 		if(dao.checkLogin(email, password)) {
 			HttpSession session = request.getSession();
@@ -45,7 +47,9 @@ public class Login extends HttpServlet {
 			out.println("<h1>Login effettuato con successo</h1>");			
 			out.println("</body>");
 			out.println("</html>");
-			response.sendRedirect("index.jsp");
+			
+			//response.forfo("index.jsp");
+			//dispacher.forward(request, response);
 		}else {
 			response.setContentType("text/html");
 			out.println("<html>");
@@ -55,6 +59,7 @@ public class Login extends HttpServlet {
 			out.println("<a href=\"login.jsp\">click here for login</a>");
 			out.println("</body>");
 			out.println("</html>");
+			
 			//response.sendRedirect("login.jsp");
 
 	

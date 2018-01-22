@@ -8,20 +8,10 @@ import model.Utente;
 import persistence.dao.UtenteDao;
 
 public class MainJDBC {
-//ESERCIZIO (richiede Java8	
+//  richiede Java8	
 //	install Postgres https://www.postgresql.org/download/
 //  scegliere utente: postgres -- password: postgres
-//	
-//	Lanciare PGADIMN oppure psql 
-//	create database test;
-//
-//
-//
-//	- Vedere MainJDBC File.
-//	- Testare i Dao Studente e Gruppo.
-//	- Aggiungere l'entita' INDIRIZZO(codice, nome) per lo studente 
-	//(uno studente ha un solo indirizzo)
-//	- Aggiungere l'entita' CORSO(codice, nome), molti a molti con Studente.
+
 	
 	public static void main(String args[]) {
 		
@@ -46,7 +36,7 @@ public class MainJDBC {
 		utenteDao.setPassword(utente1, "123");
 		utenteDao.setPassword(utente2, "012");
 		
-		System.out.println("Elenco studenti");
+		System.out.println("Elenco utente");
 		for(Utente utente : utenteDao.findAll()) {
 			System.out.println(utente);
 		}

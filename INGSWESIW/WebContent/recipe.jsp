@@ -17,7 +17,7 @@
 		<h2 style="text-align: center">
 			<strong>crea la tua ricetta</strong>
 		</h2>
-		<form action="CreateRecipe" method="post">
+		<form action="CreateRecipe" method="post" enctype='multipart/form-data'>
 			<div class="form-group"><label for="title">Titolo:</label><input name="title" type="text" placeholder="Titolo" class="form-control" /> </div> 
 			<div class="form-group"><label for="photo">sceglie la foto principale:</label><input type="file" name="photo" id="file"> </div>			
 			<div class="form-group"><label for="category">Categoria:</label>

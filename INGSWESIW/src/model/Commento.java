@@ -1,10 +1,15 @@
 package model;
 
+import java.util.Date;
+
 public class Commento {
 	
 	private Long id;
 	private String text;
+	private Date date;
 	private Utente utente;
+	private Ricetta ricetta;
+
 	
 	public Commento(Long id, String text) {
 		this.id=id;
@@ -37,6 +42,24 @@ public class Commento {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	public Ricetta getRicetta() {
+		return ricetta;
+	}
+
+	public void setRicetta(Ricetta ricetta) {
+		this.ricetta = ricetta;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	
 	
 
 }

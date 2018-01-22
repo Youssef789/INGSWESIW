@@ -1,11 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="user" class="model.Ricetta" scope="session" />
-<jsp:setProperty name="user" property="title" value="fin."/>
 <html>
 <head>
 <meta charset="utf-8">
   <link rel="stylesheet" href="https://bootswatch.com/3/cosmo/bootstrap.min.css">
+
   <style >
   #fb-btn{margin-top:15px;}
   #mainNav{
@@ -21,14 +20,33 @@
  
   }
   #search{ width: 500px;}
-  
   #home,#yourprofile{display:block;}
+  .recipe-showcase{
+  list-style: none;
+  width:100%;
+  }
+  .recipe-showcase li{
+  display: block;
+  width: 75%;
+  folat:left;
+  }
+  .recipe-photo
+  {
+  width: 100%;
+  margin: 0;
+  }
+  .recipe-photo img
+  {
+  width: 100%;
+  height: auto;
+  
+  }
   </style>
 <title>SocialCook</title>
 </head>
 <body>
 
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top" id=nav>
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">SocialCook</a>
@@ -52,12 +70,24 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="home" href="#">Home</a></li>
 					<li><a id="yourprofile" href="profile.html">Profile</a></li>
+					
 				</ul>
+				
 				<ul class="nav navbar-nav navbar-right">
-					<li><a id="signup" href="account.jsp">Sign Up</a></li>
-					<li><a id="signin" href="login.jsp">Login</a></li>
+					<li><a id="signup" href="pages/account.jsp">Sign Up</a></li>
+					<li><a id="signin" href="pages/login.jsp">Login</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"data-toggle="dropdown" href="#">For${utente.username}<span class="caret"></span></a>
+					<ul class="dropdown-menu ">
+						<li><a href="/web/recipe">Create Recipe</a></li>
+						<li><a href="#">Page</a></li>
+						<li><a href="#">Page</a></li>
+					</ul>	
+				</li>				
 				</ul>
 
+				
+
+				
 			</div>
 
 		</div>
@@ -82,38 +112,44 @@
 			</div>
 			
 			<div class="col-xs-9" id="right">
-				<h3  id="heading">log in to view your profile</h3>
         		<div id="profile"></div>
         		 
-        		 <div class="table-responsive">
-        		 <table class="table">
-		<thead>
-		<tr>
-			<th>Titilo</th>
-			<th>categoria</th>
-			<th></th>			
-		</tr>
-		</thead>
-		
-		<tbody id="elenco ricette">
-		
-		<c:forEach items="${ricette}" var="ricetta">
-			<tr class="success ricetta">
-				<td>${ricetta.title}</td>
-				<td>${ricetta.category}</td>			
-			</tr>			
+        		 <section class="recipe">
+        		 	<ul class="recipe-showcase">
+        		 	
+        		 		<li>
+        		 		<figure class="recipe-photo">
+        		 		<img src="image/table.jpg">
+        		 		<a href="">title1</a>
+        		 		</figure>
+        		 		</li>
+        		 		<li>
+        		 		<figure class="recipe-photo">
+        		 		<img src="image/table.jpg"<a href=""></a>>
+        		 		<a href="">${prova}</a>
+        		 		</figure>
+        		 		</li>
+        		 	</ul>
+        		 	<table>
+        		 		<c:forEach var="recipe" items="${recipes}">
+			<tr class="success recipes">
+				<td>${recipe.id}</td>
+				<td>${recipe.category}</td>
+			</tr>	
+					
 		</c:forEach>
-							
-		</tbody>
-        		 </table>
-        		 </div>
-
-			</div>
+        		 	</table>
+        		 
+        		 
+        		 </section>		
 		
-		</div>
-	
 	</div>
+	</div>
+		   </div>
 
-    <script src="js/loginwithfb.js" ></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script src="js/loginwithfb.js" ></script>
+	
 </body>
 </html>

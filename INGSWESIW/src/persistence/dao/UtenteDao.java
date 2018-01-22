@@ -5,12 +5,17 @@ import model.Utente;
 import persistence.UtenteCredenziali;
 
 public interface UtenteDao {
-	public void save(Utente utente);  // Create
-	public Utente findByPrimaryKey(String email);     // Retrieve
+	public void save(Utente utente); // Create
+	public Utente findByPrimaryKey(Long id); // Retrieve
+	public Utente findByPrimaryKeyJoinRecipe(Long id);
+	public Utente findByPrimaryKeyJoinComment(Long id);
+	public Utente findByPrimaryKeyJoinVote(Long id);
 	public List<Utente> findAll();       
 	public void update(Utente utente); //Update
 	public void delete(Utente utente); //Delete	
-	public boolean checkLogin(String email,String password) ;
+	public boolean checkLogin(String email,String password);
+	public void setFollower(Utente utente,Utente utente2);
+	public void setFollowing(Utente utente,Utente utente2);
 	public void setPassword(Utente utente, String password);
-	public UtenteCredenziali findByPrimaryKeyCredential(String email); 
+	public UtenteCredenziali findByPrimaryKeyCredential(Long id); 
 }

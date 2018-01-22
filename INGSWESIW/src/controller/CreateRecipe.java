@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -11,13 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 import model.Ricetta;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
-
-@MultipartConfig(maxFileSize=169999999)
+@MultipartConfig
 public class CreateRecipe extends HttpServlet {
-	
+	private static final String SAVE_DIR="image";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -25,27 +27,24 @@ public class CreateRecipe extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        
+        String imagePath="C:/Users/my/git/INGSWESIW/INGSWESIW/WebContent/image/" + File.separator + SAVE_DIR ;
+        Part filePart = request.getPart("photo");
+        String imageName=extracFilename(filePart);
+        filePart.write(imagePath + File.separator + imageName);
 		String title =request.getParameter("title");
 		String category=request.getParameter("category");
-		//String image=request.getParameter("image");
 		String difficulty=request.getParameter("difficulty");
 		String preparationTime=request.getParameter("preparationTime");
 		String ingredient=request.getParameter("ingredient");
 		String description=request.getParameter("description");
 		String preparation=request.getParameter("preparation");
-		Part image =request.getPart("photo");
-		//String content = request.getContentType();
-		InputStream inputStream=null;
-		if(image!=null)
-		{
-			long fileSize=image.getSize();
-			String fileContent=image.getContentType();
-			System.out.println(fileContent+fileSize);
-			inputStream=image.getInputStream();
-		}
+		imagePath=imagePath + File.separator + imageName;
 		Ricetta ricetta=new Ricetta();
 		ricetta.setTitle(title);
-		ricetta.setImage(inputStream);
+		ricetta.setImageName(imageName);
+		ricetta.setImagePath(imagePath);
 		ricetta.setCategory(category);
 		ricetta.setDifficulty(difficulty);
 		ricetta.setPreparationTime(preparationTime);
@@ -62,6 +61,18 @@ public class CreateRecipe extends HttpServlet {
 		out.println("<h1>hai creato la tua ricetta:</h1>");
 		out.println("</body>");
 		out.println("</html>");	
+	}
+
+
+	private String extracFilename(Part filePart) {
+		String contentDisp = filePart.getHeader("content-disposition");
+		String [] items =contentDisp.split(";");
+		for (String string : items) {
+			if(string.trim().startsWith("filename")) {
+				return string.substring(string.indexOf("=")+2, string.length() -1);
+			}
+		}
+		return " ";
 	}
 
 }

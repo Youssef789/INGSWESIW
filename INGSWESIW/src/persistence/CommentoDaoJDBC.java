@@ -25,13 +25,14 @@ public class CommentoDaoJDBC implements CommentoDao {
 		try {
 			Long id = IdBroker.getId(connection);
 			commento.setId(id);
-			String insert = "insert into commento(id,text,utente_id) values (?,?,?)";
+			String insert = "insert into commento(id,text,utente_id,ricetta_id) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, commento.getId());
 			statement.setString(2, commento.getText());
 			statement.setLong(3,commento.getUtente().getId());
+			statement.setLong(4,commento.getRicetta().getId());
 
-		
+
 			statement.executeUpdate();
 		}catch (SQLException  e) {
 			if (connection != null) {

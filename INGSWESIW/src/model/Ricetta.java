@@ -1,33 +1,36 @@
 package model;
 
 import java.io.InputStream;
-import java.sql.Blob;
+import java.util.HashSet;
 import java.util.Set;
-
-import javax.servlet.http.Part;
 
 public class Ricetta {
 	
 	private Long id;
 	private String title;
 	private String category;
-	private InputStream image;
+	private String imageName;
+	private String imagePath;
 	private String difficulty;
 	private String preparationTime;
 	private String ingredient;
 	private String description;
 	private String preparation;
-	private Set<Commento>commenti;
+	private Utente utente;
+	
+	private Set<Commento>comments;
+	private Set<Voto>votes;
 	
 	public Ricetta() {
 		
 	}
 	
-	public Ricetta(String title,String category, InputStream image,String difficulty,String preparationTime
+	public Ricetta(String title,String category, String imageName,String imagePath,String difficulty,String preparationTime
 			,String ingredient,String description,String preparation) {
 		this.title=title;
 		this.category=category;
-		this.image=image;
+		this.imageName=imageName;
+		this.imagePath=imagePath;
 		this.difficulty=difficulty;
 		this.preparationTime=preparationTime;
 		this.ingredient=ingredient;
@@ -54,12 +57,23 @@ public class Ricetta {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public  InputStream getImage() {
-		return image;
+	
+	public String getImageName() {
+		return imageName;
 	}
-	public void setImage( InputStream inputStream) {
-		this.image = inputStream;
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
 	public String getDifficulty() {
 		return difficulty;
 	}
@@ -90,6 +104,45 @@ public class Ricetta {
 	public void setPreparation(String preparation) {
 		this.preparation = preparation;
 	}
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+
+	public Set<Commento> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Commento> comments) {
+		this.comments = comments;
+	}
+	
+	public void addComment(Commento comment) {
+		if(comments == null) {
+			comments=new HashSet<Commento>();
+		}
+		comments.add(comment);
+	}
+	
+	public Set<Voto> getVotes() {
+		return votes;
+	}
+
+	public void setVotes(Set<Voto> votes) {
+		this.votes = votes;
+	}
+	
+	public void addvote(Voto vote) {
+		if(votes == null) {
+			votes=new HashSet<Voto>();
+		}
+		votes.add(vote);
+	}
+
 	@Override
 	public String toString() {
 		return super.toString();

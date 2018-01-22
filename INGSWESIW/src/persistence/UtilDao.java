@@ -17,8 +17,10 @@ public class UtilDao {
 		Connection connection = dataSource.getConnection();
 		try {
 			String delete = "drop SEQUENCE if EXISTS sequenza_id;"
-					+ "drop table if exists utente;"
+					+ "drop table if exists commento;"
+					+ "drop table if exists voto;"
 					+ "drop table if exists ricetta;"
+					+ "drop table if exists utente;"
 					;
 			PreparedStatement statement = connection.prepareStatement(delete);
 			
@@ -44,14 +46,18 @@ public class UtilDao {
 		try {
 			
 			String create = "create SEQUENCE sequenza_id;"
-					+ "create table utente(id CHARACTER(255) primary key,"				
+					+ "create table utente(\"id\" bigint primary key,"				
 					+ "name VARCHAR(255),username VARCHAR(255),"
 					+ "email VARCHAR(255),password VARCHAR(255));"
 					+ "create table ricetta(id CHARACTER(255) primary key,"
 					+ "title VARCHAR(255),category VARCHAR(255),"
 					+ "difficulty VARCHAR(255),preparationTime VARCHAR(255),"
-					+ "image bytea,ingredient VARCHAR(1000),"
-					+ "description VARCHAR(5000),preparation VARCHAR(9000));"
+					+ "image_name VARCHAR(255),image_path VARCHAR(255),ingredient VARCHAR(1000),"
+					+ "description VARCHAR(5000),preparation VARCHAR(9000),utente_id bigint REFERENCES utente(\"id\"));"
+					+ "create table commento(\"id\" bigint primary key,text VARCHAR(255),"				
+					+ "utente_id bigint REFERENCES utente(\"id\"),ricetta_id bigint REFERENCES utente(\"id\"));"
+					+ "create table voto(\"id\" bigint primary key,voto bigint,"				
+					+ "utente_id bigint REFERENCES utente(\"id\"),ricetta_id bigint REFERENCES utente(\"id\"));"
 					;
 			
 			PreparedStatement statement = connection.prepareStatement(create);
@@ -84,6 +90,15 @@ public class UtilDao {
 				delete = "delete FROM ricetta";
 				statement = connection.prepareStatement(delete);
 				statement.executeUpdate();
+				
+				delete = "delete FROM commento";
+				statement = connection.prepareStatement(delete);
+				statement.executeUpdate();
+				
+				delete = "delete FROM voto";
+				statement = connection.prepareStatement(delete);
+				statement.executeUpdate();
+				
 
 			} catch (SQLException e) {
 				
