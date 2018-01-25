@@ -30,8 +30,8 @@ public class VotoDaoJDBC implements VotoDao {
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, voto.getId());
 			statement.setLong(2, voto.getValore());
-			statement.setLong(4,voto.getRicetta().getId());
-			statement.setLong(3,voto.getUtente().getId());
+			statement.setLong(3,voto.getRicetta().getId());
+			statement.setString(4,voto.getUtente().getUsername());
 			statement.executeUpdate();
 		}catch (SQLException  e) {
 			if (connection != null) {
