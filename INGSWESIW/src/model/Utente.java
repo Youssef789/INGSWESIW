@@ -21,7 +21,10 @@ public class Utente {
 
 	private Set<Utente> followings = new HashSet<Utente>();
 	private Set<Utente> followers = new HashSet<Utente>();
-
+	
+	/* Da implementare: notifiche ricevute */
+	/* Da implementare: segnalazioni effettuate */
+	
 	public Utente() { }
 	
 	public String getUsername() {
