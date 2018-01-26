@@ -5,13 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Commento;
+import model.Ricetta;
+import model.Utente;
 import persistence.DataSource;
 import persistence.IdBroker;
 import persistence.PersistenceException;
 import persistence.dao.CommentoDao;
+import persistence.dao.RicettaDao;
+import persistence.dao.UtenteDao;
 
 public class CommentoDaoJDBC implements CommentoDao {
 
@@ -85,31 +90,36 @@ public class CommentoDaoJDBC implements CommentoDao {
 
 	@Override
 	public List<Commento> findAll() {
-		
 		Connection connection = this.dataSource.getConnection();
-		List<Commento> commenti= new ArrayList<>();
+		List<Commento> commenti= new LinkedList<Commento>();
 		try {
-			Commento commento;
+			Commento commento = null;
 			PreparedStatement statement;
-			String query="select * from commento";
+			String query = "select * from commento";
 			statement = connection.prepareStatement(query);
-			ResultSet result=statement.executeQuery();
-			while (result.next())
-			{
-				commento=new Commento();
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				commento = new Commento();
 				commento.setId(result.getLong("id"));
-				commento.setText(result.getString("category"));
+				commento.setData(result.getDate("data"));
+				commento.setTesto(result.getString("testo"));
+				RicettaDao ricettaDao = new RicettaDaoJDBC(dataSource);
+				Ricetta ricetta = ricettaDao.findByPrimaryKey(result.getLong("ricetta_id"));
+				commento.setRicetta(ricetta);
+				UtenteDao utenteDao = new UtenteDaoJDBC(dataSource);
+				Utente utente = utenteDao.findByPrimaryKey(result.getString("utente_username"));
+				commento.setUtente(utente);
 				commenti.add(commento);
 			}
 		} catch (SQLException e) {
-		throw new PersistenceException(e.getMessage());
-	} finally {
-		try {
-			connection.close();
-		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
 		}
-	}
 		return commenti;
 	}
 
@@ -117,11 +127,9 @@ public class CommentoDaoJDBC implements CommentoDao {
 	public void update(Commento commento) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update commento SET text =? WHERE id=?";
+			String update = "update commento SET text = ? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			//statement.setLong(1, ricetta.getId());
 			statement.setString(2, commento.getText());
-			
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

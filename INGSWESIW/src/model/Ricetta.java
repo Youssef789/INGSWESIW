@@ -167,7 +167,7 @@ public class Ricetta {
 	
 	@Override
 	public String toString() {
-		return "Ricetta [id = " + id + ", titolo = " + titolo + ", utente.username = " + utente.getUsername() + "]";
+		return "Ricetta [id = " + id + ", titolo = " + titolo + ", categoria = " + categoria.toString() + ", difficolta = " + difficolta.toString() + "]";
 	}
 		
 	////////////////////////////////////////////////////////////////////////////

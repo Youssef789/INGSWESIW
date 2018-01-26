@@ -10,6 +10,7 @@ public class Utente {
 	private String username;
 	private String email;
 	private String password;
+	
 	private Immagine immagineProfilo;
 	
 	private Set<Ricetta> ricettePubblicate = new HashSet<Ricetta>();
@@ -110,7 +111,7 @@ public class Utente {
 	
 	@Override
 	public String toString() {
-		return "Utente [username = " + username + ", email = " + email + ", password = " + password + ", immagineProfilo = " + immagineProfilo.getPath() + "]";
+		return "Utente [username = " + username + ", email = " + email + ", password = " + password + "]";
 	}
 	
 	///////////////////////////////////////////////////////////

@@ -6,11 +6,20 @@ import model.Ricetta;
 
 public interface RicettaDao {
 	
-	public void save(Ricetta ricetta);  // Create
-	public Ricetta findByPrimaryKey(Long id);     // Retrieve
-	public List<Ricetta> findByCategory(String Type);
+	public void save(Ricetta ricetta);
+	
+	public Ricetta findByPrimaryKey(Long id);
+	
 	public List<Ricetta> findAll();       
-	public void update(Ricetta ricetta); //Update
-	public void delete(Ricetta ricetta); //Delete	
-
+	
+	public void update(Ricetta ricetta);
+	
+	public void delete(Ricetta ricetta); 
+	
+	////////////////////////////////////
+	////////////////////////////////////
+	////////////////////////////////////
+	
+	public List<Ricetta> findByTitolo(String titolo); /* substring del titolo */
+	
 }
