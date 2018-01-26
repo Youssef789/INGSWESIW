@@ -6,11 +6,6 @@ public class Ingrediente {
 	private String ingredienteQuantita;
 	
 	public Ingrediente() { }
-	
-	public Ingrediente(String ingredienteNome, String ingredienteQuantita) {
-		this.ingredienteNome = ingredienteNome;
-		this.ingredienteQuantita = ingredienteQuantita;
-	}
 
 	public String getIngredienteNome() {
 		return ingredienteNome;

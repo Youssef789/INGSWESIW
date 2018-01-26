@@ -43,7 +43,7 @@ public abstract class DAOFactory {
 
 	// --- Factory specification: concrete factories implementing this spec must provide this methods! ---
 
-	public abstract raw.UtilDao getUtilDAO();
+	public abstract persistence.UtilDao getUtilDAO();
 	
 	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////

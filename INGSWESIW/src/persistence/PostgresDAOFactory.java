@@ -8,7 +8,6 @@ import persistence.dao.jdbc.CommentoDaoJDBC;
 import persistence.dao.jdbc.RicettaDaoJDBC;
 import persistence.dao.jdbc.UtenteDaoJDBC;
 import persistence.dao.jdbc.VotoDaoJDBC;
-import raw.UtilDao;
 
 public class PostgresDAOFactory extends DAOFactory {
 	

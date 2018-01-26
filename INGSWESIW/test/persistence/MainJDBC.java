@@ -2,7 +2,6 @@ package persistence;
 
 import model.Utente;
 import persistence.dao.UtenteDao;
-import raw.UtilDao;
 
 public class MainJDBC {
 	
