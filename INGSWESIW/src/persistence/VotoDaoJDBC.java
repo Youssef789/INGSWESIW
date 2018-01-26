@@ -20,7 +20,7 @@ public class VotoDaoJDBC implements VotoDao{
 	public void save(Voto voto) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			Long id = IdBroker.getId(connection);
+			long id = IdBroker.getId(connection);
 			voto.setId(id);
 			String insert = "insert into voto(id,voto,utente_id,ricetta_id) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);

@@ -1,0 +1,68 @@
+h1,h2,h3,h4,h5{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin-top: 50px;
+}
+#category{
+      color: #f6973c;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+
+#title{
+    
+    margin-top: 5px;
+    font: 700 40px/44px 'Roboto Slab';
+    color: #54437e;
+    order: 2;
+}
+
+
+#image{
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+
+#information{
+    height: 60px;
+    font: 18px 'Lato';
+    color: darkgoldenrod;
+}
+
+
+#ingredient{
+   
+    margin-bottom: 20px;
+    padding:  3.33% 0 1.6%;
+    width: 100%;
+    color: #3d3257;
+    line-height: 14px;
+}
+
+
+#description{
+     color: #3d3257;
+}
+
+#preparation{
+     color: #3d3257;
+}
+
+#how{
+      color: #f6973c;
+    text-align: center;
+}
+p{
+    display: block;
+    color:rgb(36, 30, 53);
+    font-family:Lato;
+    font-size: 17px;
+    line-height: 26px;
+}

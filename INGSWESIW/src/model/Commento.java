@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Commento {
 	
-	private Long id;
+	private long id;
 	private String text;
 	private Date date;
 	private Utente utente;
 	private Ricetta ricetta;
 
 	
-	public Commento(Long id, String text) {
+	public Commento(long id, String text) {
 		this.id=id;
 		this.text=text;
 	}
@@ -27,12 +27,12 @@ public class Commento {
 		this.utente = utente;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(long id2) {
+		this.id = id2;
 	}
 
 	public String getText() {

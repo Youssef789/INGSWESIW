@@ -11,7 +11,7 @@ public class IdBroker {
 		// postgresql
 		private static final String query = "SELECT nextval('sequenza_id') AS id";
 
-		public static Long getId(Connection connection) {
+		public static long getId(Connection connection) {
 			Long id = null;
 			try {
 				PreparedStatement statement = connection.prepareStatement(query);

@@ -14,19 +14,17 @@ import model.Ricetta;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
-/**
- * Servlet implementation class GetRecipeSecondPiatto
- */
-@WebServlet("/GetRecipeSecondPiatto")
-public class GetRecipeSecondPiatto extends HttpServlet {
+
+public class GetRecipeContorni extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		List<Ricetta> ricette=ricettaDao.findByCategory("secondo");
-		request.setAttribute("ricette", ricette);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/INGSWESIW/web/secondi.jsp");
+		List<Ricetta> contorni=ricettaDao.findByCategory("contorno");
+		request.setAttribute("contorni", contorni);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/contorni.jsp");
 		dispatcher.forward(request,response);
 	}
 
 	
+
 }

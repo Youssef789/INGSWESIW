@@ -58,7 +58,7 @@ public class CreateRecipe extends HttpServlet {
 		out.println("<html>");
 		out.println("<head><title>ricetta</title></head>");
 		out.println("<body>");
-		out.println("<h1>hai creato la tua ricetta:</h1>");
+		out.println("<h1>hai creato la tua ricetta</h1>");
 		out.println("</body>");
 		out.println("</html>");	
 	}

@@ -34,7 +34,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 		try {
 			Long id = IdBroker.getId(connection);
 			ricetta.setId(id);
-			String insert = "insert into ricetta(id,title,category,image_name,image_path,difficulty,preparationTime,ingredient,description,preparation) values (?,?,?,?,?,?,?,?,?,?)";
+			String insert = "insert into ricetta(id,title,category,imageName,imagePath,difficulty,preparationTime,ingredient,description,preparation) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, ricetta.getId());
 			statement.setString(2, ricetta.getTitle());
@@ -88,7 +88,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 		Ricetta ricetta=null;
 		try {
 			PreparedStatement statement;
-			String query="select * from ricetta where id=?";
+			String query="select * from ricetta where id = ?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1,id);
 			ResultSet result=statement.executeQuery();
@@ -127,7 +127,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 		try {
 			Ricetta ricetta;
 			PreparedStatement statement;
-			String query="SELECT * FROM ricetta";
+			String query="select * from ricetta";
 			statement = connection.prepareStatement(query);
 			ResultSet result=statement.executeQuery();
 			while (result.next())
@@ -136,8 +136,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 				ricetta.setId(result.getLong("id"));
 				ricetta.setTitle(result.getString("title"));
 				ricetta.setCategory(result.getString("category"));
-				//ricetta.setImageName(result.getString("imageName"));
-				//ricetta.setImagePath(result.getString("imagePath"));
+				ricetta.setImageName(result.getString("imageName"));
+				ricetta.setImagePath(result.getString("imagePath"));
 				ricetta.setDifficulty(result.getString("difficulty"));
 				ricetta.setPreparationTime(result.getString("preparationTime"));
 				ricetta.setIngredient(result.getString("ingredient"));
@@ -216,6 +216,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 			PreparedStatement statement;
 			String query="select * from ricetta where category=?";
 			statement = connection.prepareStatement(query);
+			statement.setString(1,category);
 			ResultSet result=statement.executeQuery();
 			while (result.next())
 			{
@@ -223,7 +224,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 				ricetta.setId(result.getLong("id"));
 				ricetta.setTitle(result.getString("title"));
 				ricetta.setCategory(result.getString("category"));
-				//ricetta.setImage(result.getString("photo"));
+				ricetta.setImageName(result.getString("imageName"));
+				ricetta.setImagePath(result.getString("imagePath"));
 				ricetta.setDifficulty(result.getString("difficulty"));
 				ricetta.setPreparationTime(result.getString("preparationTime"));
 				ricetta.setIngredient(result.getString("ingredient"));
@@ -267,7 +269,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 					ricetta.setId(result.getLong("r_id"));				
 					ricetta.setTitle(result.getString("title"));
 					ricetta.setCategory(result.getString("category"));
-					//ricetta.setImage(result.getString("image"));
+					ricetta.setImageName(result.getString("imageName"));
+					ricetta.setImagePath(result.getString("imagePath"));
 					ricetta.setDifficulty(result.getString("difficulty"));
 					ricetta.setPreparationTime(result.getString("preparationTime"));				
 					ricetta.setIngredient(result.getString("ingredient"));
@@ -320,7 +323,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 					ricetta.setId(result.getLong("r_id"));				
 					ricetta.setTitle(result.getString("title"));
 					ricetta.setCategory(result.getString("category"));
-					//ricetta.setImage(result.getString("image"));
+					ricetta.setImageName(result.getString("imageName"));
+					ricetta.setImagePath(result.getString("imagePath"));
 					ricetta.setDifficulty(result.getString("difficulty"));
 					ricetta.setPreparationTime(result.getString("preparationTime"));				
 					ricetta.setIngredient(result.getString("ingredient"));

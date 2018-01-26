@@ -2,7 +2,7 @@ package model;
 
 public class Voto {
 	
-	private Long id;
+	private long id;
 	private Long voto;
 	private Utente utente;
 	private Ricetta ricetta;
@@ -10,16 +10,16 @@ public class Voto {
 	public Voto() {
 	}
 	
-	public Voto(Long id,Long voto,Utente utente) {
+	public Voto(long id,Long voto,Utente utente) {
 		this.id=id;
 		this.voto=voto;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

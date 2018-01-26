@@ -1,13 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><html>
+<html>
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="INGSWESIW/../css/recipeCommon.css">
-<title>Piatti Unici</title>
+<title>Insert title here</title>
 </head>
 <body>
-
 <nav class="navbar navbar-default navbar-fixed-top" id=nav>
 		<div class="container">
 			<div class="navbar-header">
@@ -21,7 +21,7 @@
 				</form>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right">
 					<li><a id="home" href="GetRecipes">Home</a></li>
 					<li><a id="yourprofile" href="Profile">Profile</a></li>
 				<li class="dropdown"><a id="user" class="dropdown-toggle"data-toggle="dropdown" href="#">welcome : ${username}<span class="caret"></span></a>
@@ -61,17 +61,15 @@
 			</div>
 
 			<div class="col-xs-9" id="right">
-				<section class="recipe">
-        		
-        		 	
-        		 	<c:forEach var="uniqueDishe" items="${uniqueDishes}">
+				<section class="recipe">	 	
+        		 	<c:forEach var="dessert" items="${desserts}">
         		 	<ul class="recipe-showcase">
         		 		<li>
         		 		<figure class="recipe-photo">
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}"><img src="image/image/${uniqueDishe.imageName}" width="214" height="138"></a>
+        		 		<a href="GetRecipe?idRecipe=${recipe.id}"><img src="image/image/${dessert.imageName}" width="214" height="138"></a>
         		 		
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="title">${uniqueDishe.title}</a>
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${uniqueDishe.category}</a>  
+        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="title">${dessert.title}</a>
+        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${dessert.category}</a>  
         		 		<a href="" id="star">****</a>  
         		 		</figure>
         		 		
@@ -79,11 +77,12 @@
         		 		
         		 	</ul>
         		 	</c:forEach>
+        		 	
         		 </section>	
 			</div>
 		</div>
 	</div>
 
-
+			
 </body>
 </html>

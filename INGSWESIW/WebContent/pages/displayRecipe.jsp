@@ -1,14 +1,36 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="INGSWESIW/../css/recipeCommon.css">
-<title>Piatti Unici</title>
-</head>
+      <link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="INGSWESIW/../css/displayRecipe.css">
+<style>
+#mainNav{
+	  position: fixed;
+	  left: 0px;
+	  width: 200px;
+	  top: 100px;
+	  }
+	  #right{
+	  position: absolute;
+	  top:100px;
+	  left: 200px;
+	  width: 750px;
+	 
+	  }
+	  
+	  #search{ width: 500px;}
+	  #home,#yourprofile{display:block;}
+	  #user{
+	  display:none;
+	  }
+
+</style>		
+    
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top" id=nav>
+	<nav class="navbar navbar-default navbar-fixed-top" id=nav>
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="GetRecipes">SocialCook</a>
@@ -61,29 +83,55 @@
 			</div>
 
 			<div class="col-xs-9" id="right">
-				<section class="recipe">
-        		
-        		 	
-        		 	<c:forEach var="uniqueDishe" items="${uniqueDishes}">
-        		 	<ul class="recipe-showcase">
-        		 		<li>
-        		 		<figure class="recipe-photo">
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}"><img src="image/image/${uniqueDishe.imageName}" width="214" height="138"></a>
-        		 		
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="title">${uniqueDishe.title}</a>
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${uniqueDishe.category}</a>  
-        		 		<a href="" id="star">****</a>  
-        		 		</figure>
-        		 		
-        		 		</li>
-        		 		
-        		 	</ul>
-        		 	</c:forEach>
-        		 </section>	
+				<div class="col-md-9">
+					<p>${recipeId}</p>
+					<h3 id="category">${recipe.category}</h3>
+					<h1 id="title">${recipe.title}</h1>
+					<!--image--->
+					<figure id="image">
+						<img src="image/image/${recipe.imageName}">
+					</figure>
+					<br>
+
+					<div>
+						<ul id="information">
+							<li class="difficolta">Difficoltà: <strong>${recipe.difficulty}</strong>
+							</li>
+
+							<li class="preptime">Timpo Di Preparazione: <strong>${recipe.preparationTime}</strong>
+							</li>
+						</ul>
+					</div>
+
+					<div id="ingredient">
+						<h2>
+							<span>Ingredienti</span>
+						</h2>
+						<p>${recipe.ingredient}</p>
+
+					</div>
+
+					<div id="description">
+						<h2>
+							<span>descrizione</span>
+						</h2>
+						<p>${recipe.description}</p>
+					</div>
+
+					<div>
+						<h2 id="preparation">
+							<span>Preparazione</span>
+						</h2>
+						<h3 id="how">Come preparare la ricetta</h3>
+						<br>
+						<p>${recipe.preparation}</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
-
-</body>
+	
+   
+</body>    
+</head>
 </html>

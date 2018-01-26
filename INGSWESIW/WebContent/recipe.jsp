@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="ricetta" class="model.Ricetta" scope="request" />
 
 <html>
 <head>
@@ -27,8 +26,9 @@
 				<option value="primo">Primi Piatti</option>
 				<option value="secondo">Secondi Piatti</option>
 				<option value="contorno">Contorni</option>
-				<option value="lievito">Lievitati</option>
-				<option value="piatto_unico">Piatti unici</option>
+				<option value="lievitato">Lievitati</option>
+				<option value="piattoUnico">Piatti unici</option>
+				<option value="dolce">Dolce</option>
 				</optgroup>
 				</select>
 			

@@ -17,14 +17,14 @@ import persistence.dao.RicettaDao;
 /**
  * Servlet implementation class GetRecipeUniqDishes
  */
-@WebServlet("/GetRecipeUniqDishes")
+
 public class GetRecipeUniqDishes extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		List<Ricetta> ricette=ricettaDao.findByCategory("piatto_unico");
-		request.setAttribute("ricette", ricette);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/INGSWESIW/web/piattiUnici.jsp");
+		List<Ricetta> uniqueDishes=ricettaDao.findByCategory("piattoUnico");
+		request.setAttribute("uniqueDishes", uniqueDishes);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/piattiUnici.jsp");
 		dispatcher.forward(request,response);
 	}
 

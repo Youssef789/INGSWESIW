@@ -15,19 +15,17 @@ import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
 /**
- * Servlet implementation class GetRecipeLeavened
+ * Servlet implementation class GetRecipeSecondPiatto
  */
-@WebServlet("/GetRecipeLeavened")
-public class GetRecipeLeavened extends HttpServlet {
+public class GetRecipeSecondPiatti extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		List<Ricetta> ricette=ricettaDao.findByCategory("lievito");
-		request.setAttribute("ricette", ricette);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/INGSWESIW/web/lievitati.jsp");
+		List<Ricetta> seconds=ricettaDao.findByCategory("secondo");
+		request.setAttribute("seconds", seconds);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/secondi.jsp");
 		dispatcher.forward(request,response);
 	}
 
 	
-
 }

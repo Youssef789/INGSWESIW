@@ -6,7 +6,7 @@ import persistence.UtenteCredenziali;
 
 public interface UtenteDao {
 	public void save(Utente utente); // Create
-	public Utente findByPrimaryKey(Long id); // Retrieve
+	public Utente findByPrimaryKey(long id); // Retrieve
 	public Utente findByPrimaryKeyJoinRecipe(Long id);
 	public Utente findByPrimaryKeyJoinComment(Long id);
 	public Utente findByPrimaryKeyJoinVote(Long id);

@@ -66,7 +66,7 @@ public class CommentoDaoJDBC implements CommentoDao {
 			while (result.next())
 			{
 				commento=new Commento();
-				commento.setId(result.getLong("id"));
+				commento.setId(result.getInt("id"));
 				commento.setText(result.getString("category"));
 				
 			}
@@ -96,7 +96,7 @@ public class CommentoDaoJDBC implements CommentoDao {
 			while (result.next())
 			{
 				commento=new Commento();
-				commento.setId(result.getLong("id"));
+				commento.setId(result.getInt("id"));
 				commento.setText(result.getString("category"));
 				commenti.add(commento);
 			}

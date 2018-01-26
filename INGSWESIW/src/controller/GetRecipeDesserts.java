@@ -15,15 +15,15 @@ import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
 /**
- * Servlet implementation class GetRecipes
+ * Servlet implementation class GetRecipeDessert
  */
-public class GetRecipes extends HttpServlet {
+public class GetRecipeDesserts extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetRecipes() {
+    public GetRecipeDesserts() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +33,9 @@ public class GetRecipes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		List<Ricetta> recipes=ricettaDao.findAll();
-		request.setAttribute("recipes", recipes);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/index.jsp");
+		List<Ricetta> desserts=ricettaDao.findByCategory("dolce");
+		request.setAttribute("desserts", desserts);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/dolci.jsp");
 		dispatcher.forward(request,response);
 	}
 
@@ -43,9 +43,8 @@ public class GetRecipes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
