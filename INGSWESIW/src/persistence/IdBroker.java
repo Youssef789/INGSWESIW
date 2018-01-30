@@ -4,19 +4,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import model.Commento;
+import model.Ricetta;
+import model.Voto;
 
 public class IdBroker {
 	
-	// Standard SQL (queste stringhe andrebbero scritte in un file di configurazione
+	// Standard SQL (queste stringhe andrebbero scritte in un file di configurazione)
 	// private static final String query = "SELECT NEXT VALUE FOR SEQ_ID AS id";
 	// postgresql
+	
+	private static Map<String, String> queries_nextval;
+	
+	static {
+		queries_nextval = new HashMap<String, String>();
+		queries_nextval.put(Ricetta.class.getSimpleName(), "select nextval('sequenza_id_ricetta') as id");
+		queries_nextval.put(Commento.class.getSimpleName(), "select nextval('sequenza_id_commento') as id");
+		queries_nextval.put(Voto.class.getSimpleName(), "select nextval('sequenza_id_voto') as id");
+	}
 
-	private static final String query = "select nextval('sequenza_id') as id";
-
-	public static Long getId(Connection connection) {
+	public static Long getId(Connection connection, Object object) {
 		Long id = null;
 		try {
-			PreparedStatement statement = connection.prepareStatement(query);
+			String current_query_nextval = queries_nextval.get(object.getClass().getSimpleName());
+			PreparedStatement statement = connection.prepareStatement(current_query_nextval);
 			ResultSet result = statement.executeQuery();
 			result.next();
 			id = result.getLong("id");

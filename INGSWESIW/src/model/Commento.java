@@ -1,15 +1,16 @@
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Commento {
 	
-	private Long id;
-	private Date data;
-	private String testo;
+	private Long id; /* id del commento */
+	private Timestamp dataPubblicazione; /* gli viene assegnato nel jdbc in save */
+	private Timestamp dataUltimaModifica; /* fino a quando il commento non sarà modificato, sarà null, altrimenti gli viene assegnato nel jdbc in update */
+	private String contenuto; /* contenuto del commento */
 	
-	private Ricetta ricetta;
-	private Utente utente;
+	private Ricetta ricetta; /* ricetta associata al commento */
+	private Utente utente; /* utente proprietario del commento */ 
 	
 	public Commento() { }
 
@@ -17,12 +18,16 @@ public class Commento {
 		return id;
 	}
 
-	public Date getData() {
-		return data;
+	public Timestamp getDataPubblicazione() {
+		return dataPubblicazione;
+	}
+	
+	public Timestamp getDataUltimaModifica() {
+		return dataUltimaModifica;
 	}
 
-	public String getTesto() {
-		return testo;
+	public String getContenuto() {
+		return contenuto;
 	}
 
 	public Ricetta getRicetta() {
@@ -37,12 +42,16 @@ public class Commento {
 		this.id = id;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataPubblicazione(Timestamp dataPubblicazione) {
+		this.dataPubblicazione = dataPubblicazione;
+	}
+	
+	public void setDataUltimaModifica(Timestamp dataUltimaModifica) {
+		this.dataUltimaModifica = dataUltimaModifica;
 	}
 
-	public void setTesto(String testo) {
-		this.testo = testo;
+	public void setContenuto(String contenuto) {
+		this.contenuto = contenuto;
 	}
 
 	public void setRicetta(Ricetta ricetta) {
@@ -80,7 +89,7 @@ public class Commento {
 
 	@Override
 	public String toString() {
-		return "Commento [id = " + id + ", data = " + data + ", testo = " + testo + ", ricetta.id = " + ricetta.getId() + ", utente.username = " + utente.getUsername() + "]";
+		return "Commento [id = " + id + ", dataPubblicazione = " + dataPubblicazione + ", dataUltimaModifica = " + dataUltimaModifica + ", contenuto = " + contenuto + ", ricetta.id = " + ricetta.getId() + ", utente.username = " + utente.getUsername() + "]";
 	}
 	
 }

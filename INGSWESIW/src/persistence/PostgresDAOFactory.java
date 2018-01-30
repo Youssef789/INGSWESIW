@@ -8,6 +8,7 @@ import persistence.dao.jdbc.CommentoDaoJDBC;
 import persistence.dao.jdbc.RicettaDaoJDBC;
 import persistence.dao.jdbc.UtenteDaoJDBC;
 import persistence.dao.jdbc.VotoDaoJDBC;
+import persistence.util.dao.UtilDao;
 
 public class PostgresDAOFactory extends DAOFactory {
 	
@@ -30,13 +31,13 @@ public class PostgresDAOFactory extends DAOFactory {
 		return new UtilDao(dataSource);
 	}
 	
-	/////////////////////////////////////
-	/////////////////////////////////////
-	/////////////////////////////////////
+	/////////////////////////////////
+	/////////////////////////////////
+	/////////////////////////////////
 	
 	@Override
-	public CommentoDao getCommentoDAO() {
-		return new CommentoDaoJDBC(dataSource);
+	public UtenteDao getUtenteDAO() {
+		return new UtenteDaoJDBC(dataSource);
 	}
 	
 	@Override
@@ -45,8 +46,8 @@ public class PostgresDAOFactory extends DAOFactory {
 	}
 	
 	@Override
-	public UtenteDao getUtenteDAO() {
-		return new UtenteDaoJDBC(dataSource);
+	public CommentoDao getCommentoDAO() {
+		return new CommentoDaoJDBC(dataSource);
 	}
 
 	@Override

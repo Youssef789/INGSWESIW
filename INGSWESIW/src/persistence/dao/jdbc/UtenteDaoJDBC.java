@@ -21,14 +21,14 @@ public class UtenteDaoJDBC implements UtenteDao {
 	}
 
 	@Override
-	public void save(Utente utente) {
+	public void save(Utente utente, String password) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			String insert = "insert into utente (username, email, password) values (?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getUsername());
 			statement.setString(2, utente.getEmail());
-			statement.setString(3, utente.getPassword());
+			statement.setString(3, password);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -52,10 +52,9 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
-				utente = new Utente();
+				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));		
-				utente.setPassword(result.getString("password"));	
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -80,10 +79,9 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement = connection.prepareStatement(query);
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				utente = new Utente();
+				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));		
-				utente.setPassword(result.getString("password"));
 				utenti.add(utente);
 			}
 		} catch (SQLException e) {
@@ -102,12 +100,12 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update utente set email = ?, password = ? where username = ?";
+			String update = "update utente set email = ? where username = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setString(1, utente.getUsername());
-			statement.setString(2, utente.getEmail());
-			statement.setString(3, utente.getPassword());
+			statement.setString(1, utente.getEmail());
+			statement.setString(2, utente.getUsername());
 			statement.executeUpdate();
+			
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -123,7 +121,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void delete(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String delete = "delete from utente where username = ? ";
+			String delete = "delete from utente where username = ?";
 			PreparedStatement statement = connection.prepareStatement(delete);
 			statement.setString(1, utente.getUsername());
 			statement.executeUpdate();
@@ -138,26 +136,34 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
 	}
 
-	//////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////
-
 	@Override
-	public boolean checkLogin(String email, String password) {
-		boolean status = false;
+	public UtenteCredenziali findByPrimaryKeyCredential(String username) {
+		Utente utente = findByPrimaryKey(username);
+		UtenteCredenziali utenteCredenziali = null;
+		if (utente != null) {
+			utenteCredenziali = new UtenteCredenziali(dataSource);
+			utenteCredenziali.setUsername(utente.getUsername());
+		}
+		return utenteCredenziali;
+	}
+			
+	@Override
+	public void setPassword(Utente utente, String password) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			PreparedStatement statement;
-			String query = "select * from utente where username = ? and password = ?";
-			statement = connection.prepareStatement(query);
-			statement.setString(1, email);
-			statement.setString(2, password);
-			ResultSet result = statement.executeQuery();
-			status = result.next();
+			String update = "update utente set password = ? where username = ?";
+			PreparedStatement statement = connection.prepareStatement(update);
+			statement.setString(1, password);
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
 		}
-		return status;
 	}
-
+	
 }

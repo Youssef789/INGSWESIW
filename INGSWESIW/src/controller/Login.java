@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import persistence.DatabaseManager;
 import persistence.dao.UtenteDao;
-import persistence.dao.jdbc.UtenteConPassword;
+import persistence.dao.jdbc.UtenteCredenziali;
 
 public class Login extends HttpServlet {
 	

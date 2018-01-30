@@ -1,30 +1,30 @@
 package model;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
-
-import raw.Immagine;
 
 public class Utente {
 	
 	private String username;
 	private String email;
-	private String password;
 	
-	private Immagine immagineProfilo;
-	
+	private Set<Ricetta> ricetteInBozza = new HashSet<Ricetta>();
 	private Set<Ricetta> ricettePubblicate = new HashSet<Ricetta>();
 	private Set<Ricetta> ricettePreferite = new HashSet<Ricetta>();
 	 
-	private Set<Commento> commentiPubblicati = new HashSet<Commento>();
+	private List<Commento> commentiPubblicati = new LinkedList<Commento>();
 
-	private Set<Voto> votiEspressi = new HashSet<Voto>();
+	private List<Voto> votiEspressi = new LinkedList<Voto>();
 
-	private Set<Utente> followings = new HashSet<Utente>();
-	private Set<Utente> followers = new HashSet<Utente>();
+	/* Da implementare: followings */
+	/* Da implementare: followers */
 	
 	/* Da implementare: notifiche ricevute */
+	
 	/* Da implementare: segnalazioni effettuate */
+	/* Da implementare: segnalazioni ricevute (amministratore) */
 	
 	public Utente() { }
 	
@@ -36,12 +36,8 @@ public class Utente {
 		return email;
 	}
 	
-	public String getPassword() {
-		return password;
-	}
-	
-	public Immagine getImmagineProfilo() {
-		return immagineProfilo;
+	public Set<Ricetta> getRicetteInBozza() {
+		return ricetteInBozza;
 	}
 	
 	public Set<Ricetta> getRicettePubblicate() {
@@ -52,20 +48,12 @@ public class Utente {
 		return ricettePreferite;
 	}
 	
-	public Set<Commento> getCommentiPubblicati() {
+	public List<Commento> getCommentiPubblicati() {
 		return commentiPubblicati;
 	}
 
-	public Set<Voto> getVotiEspressi() {
+	public List<Voto> getVotiEspressi() {
 		return votiEspressi;
-	}
-	
-	public Set<Utente> getFollowings() {
-		return followings;
-	}
-	
-	public Set<Utente> getFollowers() {
-		return followers;
 	}
 	
 	public void setUsername(String username) {
@@ -76,14 +64,14 @@ public class Utente {
 		this.email = email;
 	}
 	
-	public void setPassword(String password) {
-		this.password = password;
+	public void setCommentiPubblicati(List<Commento> commentiPubblicati) {
+		this.commentiPubblicati = commentiPubblicati;
 	}
-	
-	public void setImmagineProfilo(Immagine immagine) {
-		this.immagineProfilo = immagine;
+
+	public void setVotiEspressi(List<Voto> votiEspressi) {
+		this.votiEspressi = votiEspressi;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,12 +99,20 @@ public class Utente {
 	
 	@Override
 	public String toString() {
-		return "Utente [username = " + username + ", email = " + email + ", password = " + password + "]";
+		return "Utente [username = " + username + ", email = " + email + "]";
 	}
 	
-	///////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////
+	
+	public boolean aggiungiRicettaInBozza(Ricetta ricetta) {
+		return ricetteInBozza.add(ricetta);
+	}
+	
+	public boolean rimuoviRicettaInBozza(Ricetta ricetta) {
+		return ricetteInBozza.remove(ricetta);
+	}
 	
 	public boolean aggiungiRicettaPubblicata(Ricetta ricetta) {
 		return ricettePubblicate.add(ricetta);
@@ -148,22 +144,6 @@ public class Utente {
 	
 	public boolean rimuoviVotoEspresso(Voto voto) {
 		return votiEspressi.remove(voto);
-	}
-	
-	public boolean aggiungiFollowing(Utente following) {
-		return followings.add(following);
-	}
-	
-	public boolean rimuoviFollowing(Utente following) {
-		return followings.remove(following);
-	}
-	
-	public boolean aggiungiFollower(Utente follower) {
-		return followers.add(follower);
-	}
-	
-	public boolean rimuoviFollower(Utente follower) {
-		return followers.remove(follower);
 	}
 
 }

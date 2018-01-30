@@ -1,27 +1,22 @@
-package raw;
+package model.media;
 
 public class File {
-	
-	protected String nome;
+
+	protected Long id;
 	protected String path;
 	
 	public File() { }
 	
-	public File(String nome, String path) {
-		this.nome = nome;
-		this.path = path;
-	}
-	
-	public String getNome() {
-		return nome;
+	public Long getId() {
+		return id;
 	}
 
 	public String getPath() {
 		return path;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setPath(String path) {
@@ -32,7 +27,7 @@ public class File {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -45,17 +40,12 @@ public class File {
 		if (getClass() != obj.getClass())
 			return false;
 		File other = (File) obj;
-		if (nome == null) {
-			if (other.nome != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "File [nome = " + nome + ", path = " + path + "]";
-	}
-		
+	
 }

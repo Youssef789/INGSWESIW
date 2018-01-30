@@ -2,10 +2,11 @@ package persistence.dao;
 
 import java.util.List;
 import model.Utente;
+import persistence.dao.jdbc.UtenteCredenziali;
 
 public interface UtenteDao {
 	
-	public void save(Utente utente);
+	public void save(Utente utente, String password);
 	
 	public Utente findByPrimaryKey(String username);
 	
@@ -15,10 +16,8 @@ public interface UtenteDao {
 	
 	public void delete(Utente utente); 
 	
-	////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////
+	public UtenteCredenziali findByPrimaryKeyCredential(String username);
 	
-	public boolean checkLogin(String username, String password);
-	
+	public void setPassword(Utente utente, String password);
+
 }

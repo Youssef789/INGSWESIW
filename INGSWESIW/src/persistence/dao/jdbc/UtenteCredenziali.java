@@ -8,11 +8,11 @@ import model.Utente;
 import persistence.DataSource;
 import persistence.PersistenceException;
 
-public class UtenteConPassword extends Utente {
+public class UtenteCredenziali extends Utente {
 	
 	private DataSource dataSource;
 	
-	public UtenteConPassword(DataSource dataSource) {
+	public UtenteCredenziali(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
@@ -20,9 +20,9 @@ public class UtenteConPassword extends Utente {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			PreparedStatement statement;
-			String query = "select * from utente where email = ?";
+			String query = "select password from utente where username = ?";
 			statement = connection.prepareStatement(query);
-			statement.setString(1, this.getEmail());
+			statement.setString(1, getUsername());
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				return result.getString("password");

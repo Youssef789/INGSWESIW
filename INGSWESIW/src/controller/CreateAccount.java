@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.Utente;
 import persistence.DAOFactory;
 import persistence.DatabaseManager;
-import persistence.UtilDao;
 import persistence.dao.UtenteDao;
+import persistence.util.dao.UtilDao;
 
 
 public class CreateAccount extends HttpServlet {

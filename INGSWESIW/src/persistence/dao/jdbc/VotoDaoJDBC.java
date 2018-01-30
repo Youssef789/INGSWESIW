@@ -13,8 +13,6 @@ import model.Voto;
 import persistence.DataSource;
 import persistence.IdBroker;
 import persistence.PersistenceException;
-import persistence.dao.RicettaDao;
-import persistence.dao.UtenteDao;
 import persistence.dao.VotoDao;
 
 public class VotoDaoJDBC implements VotoDao {
@@ -29,7 +27,7 @@ public class VotoDaoJDBC implements VotoDao {
 	public void save(Voto voto) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			Long id = IdBroker.getId(connection);
+			Long id = IdBroker.getId(connection, voto); /* assegnamento tramite idbroker per voto */
 			voto.setId(id);
 			String insert = "insert into voto (id, valore, ricetta_id, utente_username) values (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
@@ -69,12 +67,8 @@ public class VotoDaoJDBC implements VotoDao {
 				voto = new Voto();
 				voto.setId(result.getLong("id"));
 				voto.setValore(result.getInt("valore"));
-				RicettaDao ricettaDao = new RicettaDaoJDBC(dataSource);
-				Ricetta ricetta = ricettaDao.findByPrimaryKey(result.getLong("ricetta_id"));
-				voto.setRicetta(ricetta);
-				UtenteDao utenteDao = new UtenteDaoJDBC(dataSource);
-				Utente utente = utenteDao.findByPrimaryKey(result.getString("utente_username"));
-				voto.setUtente(utente);
+				voto.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
+				voto.setUtente( new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));				
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -100,15 +94,10 @@ public class VotoDaoJDBC implements VotoDao {
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				voto = new Voto();
-				voto = new Voto();
 				voto.setId(result.getLong("id"));
 				voto.setValore(result.getInt("valore"));
-				RicettaDao ricettaDao = new RicettaDaoJDBC(dataSource);
-				Ricetta ricetta = ricettaDao.findByPrimaryKey(result.getLong("ricetta_id"));
-				voto.setRicetta(ricetta);
-				UtenteDao utenteDao = new UtenteDaoJDBC(dataSource);
-				Utente utente = utenteDao.findByPrimaryKey(result.getString("utente_username"));
-				voto.setUtente(utente);
+				voto.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
+				voto.setUtente( new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
 				voti.add(voto);
 			}
 		} catch (SQLException e) {
@@ -161,6 +150,71 @@ public class VotoDaoJDBC implements VotoDao {
 			}
 		}
 	}
+	
+	//////////////////////////////////////////////////
+	//////////////////////////////////////////////////
+	//////////////////////////////////////////////////
 
+	@Override
+	public List<Voto> findByRicetta(Ricetta ricetta) {
+		Connection connection = this.dataSource.getConnection();
+		List<Voto> voti = new LinkedList<Voto>();
+		try {
+			Voto voto = null;
+			PreparedStatement statement;
+			String query = "select * from voto where ricetta_id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, ricetta.getId());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				voto = new Voto();
+				voto.setId(result.getLong("id"));
+				voto.setValore(result.getInt("valore"));
+				voto.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
+				voto.setUtente( new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
+				voti.add(voto);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return voti;
+	}
+	
+	@Override
+	public List<Voto> findByUtente(Utente utente) {
+		Connection connection = this.dataSource.getConnection();
+		List<Voto> voti = new LinkedList<Voto>();
+		try {
+			Voto voto = null;
+			PreparedStatement statement;
+			String query = "select * from voto where utente_username = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, utente.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				voto = new Voto();
+				voto.setId(result.getLong("id"));
+				voto.setValore(result.getInt("valore"));
+				voto.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
+				voto.setUtente( new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
+				voti.add(voto);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return voti;
+	}
+	
 }
-

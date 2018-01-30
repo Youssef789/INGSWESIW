@@ -5,27 +5,19 @@ public class Voto {
 	private static final int MIN_VOTO = 1;
 	private static final int MAX_VOTO = 5;
 	
-	private Long id;
-	private int valore;
+	private Long id; /* id del commento */
+	private Integer valore; /* valore del voto */
 	
-	private Ricetta ricetta;
-	private Utente utente;
+	private Ricetta ricetta; /* ricetta associata al voto */
+	private Utente utente; /* utente proprietario del voto */ 
 	
 	public Voto() { }
-	
-	public Voto(Long id, int valore, Ricetta ricetta, Utente utente) {
-		this.id = id;
-		this.valore = valore;
-		this.ricetta = ricetta;
-		this.utente = utente;
-		checkValore();
-	}
 
 	public Long getId() {
 		return id;
 	}
 	
-	public int getValore() {
+	public Integer getValore() {
 		return valore;
 	}
 	
@@ -41,7 +33,7 @@ public class Voto {
 		this.id = id;
 	}
 	
-	public void setValore(int valore) {
+	public void setValore(Integer valore) {
 		this.valore = valore;
 		checkValore();
 	}
@@ -84,9 +76,9 @@ public class Voto {
 		return "Voto [id = " + id + ", valore = " + valore + ", ricetta.id = " + ricetta.getId() + ", utente.username = " + utente.getUsername() + "]";
 	}
 	
-	//////////////////////////
-	//////////////////////////
-	//////////////////////////
+	////////////////////////////
+	////////////////////////////
+	////////////////////////////
 	
 	private void checkValore() {
 		if ( (valore < MIN_VOTO) || (valore > MAX_VOTO) ) {
