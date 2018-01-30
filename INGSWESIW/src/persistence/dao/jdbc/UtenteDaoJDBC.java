@@ -24,11 +24,12 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void save(Utente utente, String password) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into utente (username, email, password) values (?, ?, ?)";
+			String insert = "insert into utente (username, email, password, pathImmagineProfilo) values (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getUsername());
 			statement.setString(2, utente.getEmail());
 			statement.setString(3, password);
+			statement.setString(4, utente.getPathImmagineProfilo());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -54,7 +55,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 			if (result.next()) {
 				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
-				utente.setEmail(result.getString("email"));		
+				utente.setEmail(result.getString("email"));
+				utente.setPathImmagineProfilo(result.getString("pathImmagineProfilo"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
@@ -81,7 +83,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 			while (result.next()) {
 				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
-				utente.setEmail(result.getString("email"));		
+				utente.setEmail(result.getString("email"));
+				utente.setPathImmagineProfilo(result.getString("pathImmagineProfilo"));
 				utenti.add(utente);
 			}
 		} catch (SQLException e) {
@@ -100,10 +103,11 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update utente set email = ? where username = ?";
+			String update = "update utente set email = ?, pathImmagineProfilo = ? where username = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getEmail());
-			statement.setString(2, utente.getUsername());
+			statement.setString(2, utente.getPathImmagineProfilo());
+			statement.setString(3, utente.getUsername());
 			statement.executeUpdate();
 			
 		} catch (SQLException e) {

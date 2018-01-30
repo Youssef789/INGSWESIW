@@ -42,7 +42,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setLong(7, ricetta.getImmaginePrincipale().getId());
 			statement.setString(8, ricetta.getIngredienti());
 			statement.setString(9, ricetta.getDescrizione());
-			statement.set
 			statement.setString(10, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
 		} catch (SQLException e1) {

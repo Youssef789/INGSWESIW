@@ -1,30 +1,29 @@
 package model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-
-import model.media.ImmagineRicetta;
-import model.media.VideoRicetta;
+import java.util.Set;
 
 public class Ricetta {
 	
-	private Long id;
+	private Long id; /* id della ricetta */
 	private Timestamp dataPubblicazione; /* se la ricetta non è stata ancora pubblicata (è in bozza), sarà null, altrimenti gli viene assegnato nel jdbc in save */
 	private Timestamp dataUltimaModifica; /* fino a quando la ricetta non sarà modificata, sarà null, altrimenti gli viene assegnato nel jdbc in update */
 	private String titolo;
 	private Categoria categoria;
 	private Difficolta difficolta;
 	private String tempoPreparazione;
-	private ImmagineRicetta immaginePrincipale;
+	private String pathImmaginePrincipale;
 	private String ingredienti; 
 	private String descrizione;
 	private String preparazione;
-	private List<ImmagineRicetta> immaginiPreparazione = new ArrayList<ImmagineRicetta>(); 
-	private List<VideoRicetta> videoPreparazione = new ArrayList<VideoRicetta>(); 
+	private Set<String> pathsImmaginiPreparazione = new HashSet<String>(); 
+	private Set<String> pathsVideoPreparazione = new HashSet<String>(); 
 	
-	private List<Commento> commenti = new ArrayList<Commento>();
-	private List<Voto> voti = new ArrayList<Voto>();
+	private List<Commento> commenti = new LinkedList<Commento>();
+	private List<Voto> voti = new LinkedList<Voto>();
 	
 	private Utente utente;
 		
@@ -54,8 +53,8 @@ public class Ricetta {
 		return difficolta;
 	}
 
-	public ImmagineRicetta getImmaginePrincipale() {
-		return immaginePrincipale;
+	public String getPathImmaginePrincipale() {
+		return pathImmaginePrincipale;
 	}
 
 	public String getTempoPreparazione() {
@@ -74,12 +73,12 @@ public class Ricetta {
 		return preparazione;
 	}
 
-	public List<ImmagineRicetta> getImmaginiPreparazione() {
-		return immaginiPreparazione;
+	public Set<String> getPathsImmaginiPreparazione() {
+		return pathsImmaginiPreparazione;
 	}
 
-	public List<VideoRicetta> getVideoPreparazione() {
-		return videoPreparazione;
+	public Set<String> getPathsVideoPreparazione() {
+		return pathsVideoPreparazione;
 	}
 	
 	public List<Commento> getCommenti() {
@@ -118,8 +117,8 @@ public class Ricetta {
 		this.difficolta = difficolta;
 	}
 
-	public void setImmaginePrincipale(ImmagineRicetta immagine) {
-		this.immaginePrincipale = immagine;
+	public void setPathImmaginePrincipale(String pathImmagine) {
+		this.pathImmaginePrincipale = pathImmagine;
 	}
 
 	public void setTempoPreparazione(String tempoPreparazione) {
@@ -138,12 +137,12 @@ public class Ricetta {
 		this.preparazione = preparazione;
 	}
 
-	public void setImmaginiPreparazione(List<ImmagineRicetta> immaginiPreparazione) {
-		this.immaginiPreparazione = immaginiPreparazione;
+	public void setPathsImmaginiPreparazione(Set<String> pathsImmaginiPreparazione) {
+		this.pathsImmaginiPreparazione = pathsImmaginiPreparazione;
 	}
 
-	public void setVideoPreparazione(List<VideoRicetta> videoPreparazione) {
-		this.videoPreparazione = videoPreparazione;
+	public void setVideoPreparazione(Set<String> pathsVideoPreparazione) {
+		this.pathsVideoPreparazione = pathsVideoPreparazione;
 	}
 
 	public void setCommenti(List<Commento> commenti) {
@@ -188,24 +187,24 @@ public class Ricetta {
 		return "Ricetta [id = " + id + ", titolo = " + titolo + ", categoria = " + categoria.toString() + ", difficolta = " + difficolta.toString() + ", username.id = " + utente.getUsername() + "]";
 	}
 		
-	///////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////
 
-	public boolean aggiungiImmaginePreparazione(ImmagineRicetta immagine) {
-		return immaginiPreparazione.add(immagine);
+	public boolean aggiungiImmaginePreparazione(String pathImmagine) {
+		return pathsImmaginiPreparazione.add(pathImmagine);
 	}
 	
-	public boolean rimuoviImmaginePrepazione(ImmagineRicetta immagine) {
-		return immaginiPreparazione.remove(immagine);
+	public boolean rimuoviImmaginePrepazione(String pathImmagine) {
+		return pathsImmaginiPreparazione.remove(pathImmagine);
 	}
 	
-	public boolean aggiungiVideoPreparazione(VideoRicetta video) {
-		return videoPreparazione.add(video);
+	public boolean aggiungiVideoPreparazione(String pathVideo) {
+		return pathsVideoPreparazione.add(pathVideo);
 	}
 	
-	public boolean rimuoviVideoPrepazione(VideoRicetta video) {
-		return videoPreparazione.remove(video);
+	public boolean rimuoviVideoPrepazione(String pathVideo) {
+		return pathsVideoPreparazione.remove(pathVideo);
 	}
 
 	public boolean aggiungiCommento(Commento commento) {
@@ -223,6 +222,10 @@ public class Ricetta {
 	public boolean rimuoviVoto(Voto voto) {
 		return voti.add(voto);
 	}
+	
+	//////////////////////////////////
+	//////////////////////////////////
+	//////////////////////////////////
 	
 	public Long getVotoComplessivo() {
 		Long votoComplessivo = new Long(0);

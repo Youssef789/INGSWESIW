@@ -1,18 +1,17 @@
 package model;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class Utente {
 	
 	private String username;
 	private String email;
+	private String pathImmagineProfilo;
 	
-	private Set<Ricetta> ricetteInBozza = new HashSet<Ricetta>();
-	private Set<Ricetta> ricettePubblicate = new HashSet<Ricetta>();
-	private Set<Ricetta> ricettePreferite = new HashSet<Ricetta>();
+	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>();
+	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>();
+	private List<Ricetta> ricettePreferite = new LinkedList<Ricetta>();
 	 
 	private List<Commento> commentiPubblicati = new LinkedList<Commento>();
 
@@ -36,15 +35,19 @@ public class Utente {
 		return email;
 	}
 	
-	public Set<Ricetta> getRicetteInBozza() {
+	public String getPathImmagineProfilo() {
+		return pathImmagineProfilo;
+	}
+	
+	public List<Ricetta> getRicetteInBozza() {
 		return ricetteInBozza;
 	}
 	
-	public Set<Ricetta> getRicettePubblicate() {
+	public List<Ricetta> getRicettePubblicate() {
 		return ricettePubblicate;
 	}
 	
-	public Set<Ricetta> getRicettePreferite() {
+	public List<Ricetta> getRicettePreferite() {
 		return ricettePreferite;
 	}
 	
@@ -64,6 +67,22 @@ public class Utente {
 		this.email = email;
 	}
 	
+	public void setPathImmagineProfilo(String pathImmagineProfilo) {
+		this.pathImmagineProfilo = pathImmagineProfilo;
+	}
+		
+	public void setRicetteInBozza(List<Ricetta> ricetteInBozza) {
+		this.ricetteInBozza = ricetteInBozza;
+	}
+
+	public void setRicettePubblicate(List<Ricetta> ricettePubblicate) {
+		this.ricettePubblicate = ricettePubblicate;
+	}
+
+	public void setRicettePreferite(List<Ricetta> ricettePreferite) {
+		this.ricettePreferite = ricettePreferite;
+	}
+
 	public void setCommentiPubblicati(List<Commento> commentiPubblicati) {
 		this.commentiPubblicati = commentiPubblicati;
 	}
