@@ -1,90 +1,44 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="navbar.jsp" />
 <html>
-<head>
+<head lang="it">
+<title>${recipe.title}</title>
 <meta charset="utf-8">
+	<style>
+	#btnfavorite{
+	float: right;
+	margin-top: 20px;
+	}
+	</style>
       <link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-      <link rel="stylesheet" href="INGSWESIW/../css/displayRecipe.css">
-<style>
-#mainNav{
-	  position: fixed;
-	  left: 0px;
-	  width: 200px;
-	  top: 100px;
-	  }
-	  #right{
-	  position: absolute;
-	  top:100px;
-	  left: 200px;
-	  width: 750px;
-	 
-	  }
-	  
-	  #search{ width: 500px;}
-	  #home,#yourprofile{display:block;}
-	  #user{
-	  display:none;
-	  }
+      <link rel="stylesheet" href="/INGSWESIWPROJ/fonts/font-awesome.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></head>
+      <link rel="stylesheet" href="/INGSWESIWPROJ/css/displayRecipe.css">
 
-</style>		
-    
 <body>
-
-	<nav class="navbar navbar-default navbar-fixed-top" id=nav>
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="GetRecipes">SocialCook</a>
-				<form class="navbar-form navbar-left" action="/action_page.php">
-					<div class="form-group">
-						<input id="search" type="text" class="form-control"
-							placeholder="Search">
-					</div>
-					<button id="btnsearch" type="submit" class="btn btn-primary ">Search</button>
-				</form>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a id="home" href="GetRecipes">Home</a></li>
-					<li><a id="yourprofile" href="Profile">Profile</a></li>
-				<li class="dropdown"><a id="user" class="dropdown-toggle"data-toggle="dropdown" href="#">welcome : ${username}<span class="caret"></span></a>
-					<ul class="dropdown-menu ">
-						<li><a href="/web/recipe">Create Recipe</a></li>
-						<li><a href="">Edit Recipe</a></li>
-						<li><a href="">Logout</a></li>
-					</ul>	
-				</li>				
-				</ul>
-
-
-
-
-			</div>
-
-		</div>
-	</nav>
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-3">
-				<nav id=mainNav>
-					<ul class="nav nav-pills nav-stacked">
-						<li><a href="GetRecipeAppetizers">Antipasti</a></li>
-						<li><a href="GetRecipefirstPiatti">Primi Piatti</a></li>
-						<li><a href="GetRecipeSecondPiatti">Secondi Piatti</a></li>
-						<li><a href="GetRecipeContorni">Contorni</a></li>
-						<li><a href="GetRecipeLievitati">Lievitati</a></li>
-						<li><a href="GetRecipeUniqDishes">Piatti unici</a></li>
-						<li><a href="GetRecipeDesserts">Dolci</a></li>
-					</ul>
-
-				</nav>
-
-			</div>
-
 			<div class="col-xs-9" id="right">
 				<div class="col-md-9">
-					<p>${recipeId}</p>
+				<form action="Vote?idRecipe=${recipe.id}" method="post">
+						<div class="star-rating">
+							<h3 id="voti">${votoComplessivo}</h3>
+							<input type="radio" name="rating" id="star-5" value="1"/>
+							<label for="star-5" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
+							<input type="radio" name="rating" id="star-4" value="2"/>
+							<label for="star-4" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
+							<input type="radio" name="rating" id="star-3" value="3"/>
+							<label for="star-3" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
+							<input type="radio" name="rating" id="star-2" value="4"/>
+							<label for="star-2" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
+							<input type="radio" name="rating" id="star-1" value="5"/>
+							<label for="star-1" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
+						</div>
+					</form>
+					<form action="AddFavourite?idRecipe=${recipe.id}" method="post">
+						<div class="button">
+						<button id="btnfavorite" type="submit" class="btn btn-warning">Favourite <span id="heart" class="glyphicon glyphicon-heart"></span></button>
+						</div>
+					</form>
 					<h3 id="category">${recipe.category}</h3>
 					<h1 id="title">${recipe.title}</h1>
 					<!--image--->
@@ -126,12 +80,30 @@
 						<br>
 						<p>${recipe.preparation}</p>
 					</div>
+					</div>
+		<c:forEach var="comment" items="${comments}">
+			<div class="media">
+				<div class="media-left">
+					<img src="image/unknown-user.png" class="media-object" style="width: 60px">
+				</div>
+				<div class="media-body">
+					<h4 class="media-heading"></h4>
+					 <h4 class="media-heading">${username}<small><i>Posted on ${comment.dataPubblicazione}</i></small></h4>
+					<p>${comment.contenuto}</p>
 				</div>
 			</div>
-		</div>
-	</div>
+		</c:forEach>
+		<form action="Comment?idRecipe=${recipe.id}" method="post">
+				<div class="form-group col-md-9">
+					<textarea name="comment" class="form-control" rows="5" id="comment" placeholder="scrivi il tuo commento "></textarea>
+					<button id="commbtn" type="submit" class="btn btn-primary">comment</button>
+				</div>
+			</form>	
+			</div>
 	
-   
+	
+    <script src="js/jquery-3.2.1.min.js"></script>
+	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>    
 </head>
 </html>

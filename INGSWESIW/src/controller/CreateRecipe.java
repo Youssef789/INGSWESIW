@@ -15,6 +15,7 @@ import javax.servlet.http.Part;
 import com.sun.org.apache.regexp.internal.recompile;
 
 import model.Ricetta;
+import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 @MultipartConfig
@@ -28,8 +29,9 @@ public class CreateRecipe extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        
-        String imagePath="C:/Users/my/git/INGSWESIW/INGSWESIW/WebContent/image/" + File.separator + SAVE_DIR ;
+		request.setCharacterEncoding("UTF-8");
+		Utente utente = (Utente) request.getSession().getAttribute("username");
+        String imagePath="C:/Users/my/git/INGSWESIW/INGSWESIW/WebContent/image" + File.separator + SAVE_DIR ;
         Part filePart = request.getPart("photo");
         String imageName=extracFilename(filePart);
         filePart.write(imagePath + File.separator + imageName);
@@ -42,6 +44,7 @@ public class CreateRecipe extends HttpServlet {
 		String preparation=request.getParameter("preparation");
 		imagePath=imagePath + File.separator + imageName;
 		Ricetta ricetta=new Ricetta();
+		ricetta.setUtente(utente);
 		ricetta.setTitle(title);
 		ricetta.setImageName(imageName);
 		ricetta.setImagePath(imagePath);

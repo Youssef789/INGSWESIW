@@ -32,7 +32,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 		
 		Connection connection = this.dataSource.getConnection();
 		try {
-			Long id = IdBroker.getId(connection);
+			Long id = IdBroker.getId(connection,ricetta);
 			ricetta.setId(id);
 			String insert = "insert into ricetta(id,title,category,imageName,imagePath,difficulty,preparationTime,ingredient,description,preparation) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
@@ -164,7 +164,6 @@ public class RicettaDaoJDBC implements RicettaDao{
 		try {
 			String update = "update ricetta SET title =?,category =?,imageName =?,imagePath =?,difficulty=?,preparationTime=?,ingredient=?,description=?,preparation=? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setLong(1, ricetta.getId());
 			statement.setString(2, ricetta.getTitle());
 			statement.setString(3, ricetta.getCategory());
 			statement.setString(4, ricetta.getImageName());
@@ -283,7 +282,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 				if(c_id != null){
 					Commento comment =new Commento();
 					comment.setId(result.getLong("c_id"));
-					comment.setText(result.getString("c_text"));
+					comment.setContenuto(result.getString("c_text"));
 
 					ricetta.addComment(comment);
 				}
@@ -337,7 +336,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 				if(v_id != null){
 					Voto voto=new Voto();
 					voto.setId(result.getLong("v_id"));
-					voto.setVoto(result.getLong("v_voto"));
+					voto.setValore(result.getInt("v_voto"));
 					ricetta.addvote(voto);
 				}
 			}	

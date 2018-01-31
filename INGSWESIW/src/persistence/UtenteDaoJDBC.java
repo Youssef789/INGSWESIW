@@ -27,7 +27,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			long id = IdBroker.getId(connection);
+			long id = IdBroker.getId(connection,utente);
 			utente.setId(id);
 			String insert = "insert into utente(id,name,username,email) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
@@ -70,15 +70,15 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public Utente findByPrimaryKey(long id) {
+	public Utente findByPrimaryKey(String username) {
 		
 		Connection connection = this.dataSource.getConnection();
 		Utente utente = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from utente where id = ?";
+			String query = "select * from utente where username = ?";
 			statement = connection.prepareStatement(query);
-			statement.setLong(1, id);
+			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				utente = new Utente();
@@ -251,8 +251,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public UtenteCredenziali findByPrimaryKeyCredential(Long id) {
-		Utente utente = findByPrimaryKey(id);
+	public UtenteCredenziali findByPrimaryKeyCredential(String username) {
+		Utente utente = findByPrimaryKey(username);
 		UtenteCredenziali utenteCredenziali = null;
 		if (utente != null){
 			utenteCredenziali = new UtenteCredenziali(dataSource);
@@ -375,8 +375,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 				Long c_id=result.getLong("c_id");
 				if(c_id != null){
 					Commento commento = new Commento();
-					commento.setId(result.getInt("c_id"));
-					commento.setText(result.getString("text"));
+					commento.setId(result.getLong("c_id"));
+					commento.setContenuto(result.getString("text"));
 					
 					utente.addComment(commento);
 				}
@@ -422,8 +422,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 				Integer v_id=result.getInt("v_id");
 				if(v_id != null){
 					Voto voto=new Voto();
-					voto.setId(result.getInt("v_id"));
-					voto.setVoto(result.getLong("v_voto"));
+					voto.setId(result.getLong("v_id"));
+					voto.setValore(result.getInt("v_voto"));
 					utente.addvote(voto);
 				}
 			}	

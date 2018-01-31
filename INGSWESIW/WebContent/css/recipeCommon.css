@@ -14,7 +14,7 @@
  
   }
   
-  #search{ width: 500px;}
+  #search{ width: 400px;}
   #home,#yourprofile{display:block;}
   #user{
   display:block;
@@ -52,7 +52,7 @@
   {
   width: 100%;
   margin: 0;
-   padding:10px;
+  padding:10px;
   }
   .recipe-photo img
   {

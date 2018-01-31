@@ -9,56 +9,13 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-   <servlet>
-    <servlet-name>GetRecipefirstPiatti</servlet-name>
-    <servlet-class>controller.GetRecipefirstPiatti</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetRecipefirstPiatti</servlet-name>
-    <url-pattern>/GetRecipefirstPiatti</url-pattern>
-  </servlet-mapping> <servlet>
-    <servlet-name>GetRecipeLievitati</servlet-name>
-    <servlet-class>controller.GetRecipeLievitati</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetRecipeLievitati</servlet-name>
-    <url-pattern>/GetRecipeLievitati</url-pattern>
-  </servlet-mapping> <servlet>
-    <servlet-name>GetRecipeSecondPiatti</servlet-name>
-    <servlet-class>controller.GetRecipeSecondPiatti</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetRecipeSecondPiatti</servlet-name>
-    <url-pattern>/GetRecipeSecondPiatti</url-pattern>
-  </servlet-mapping> <servlet>
-    <servlet-name>GetRecipeUniqDishes</servlet-name>
-    <servlet-class>controller.GetRecipeUniqDishes</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetRecipeUniqDishes</servlet-name>
-    <url-pattern>/GetRecipeUniqDishes</url-pattern>
-  </servlet-mapping> <servlet>
-    <servlet-name>GetRecipeContorni</servlet-name>
-    <servlet-class>controller.GetRecipeContorni</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetRecipeContorni</servlet-name>
-    <url-pattern>/GetRecipeContorni</url-pattern>
-  </servlet-mapping> <servlet>
-    <servlet-name>GetRecipeDesserts</servlet-name>
-    <servlet-class>controller.GetRecipeDesserts</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetRecipeDesserts</servlet-name>
-    <url-pattern>/GetRecipeDesserts</url-pattern>
-  </servlet-mapping>
   <servlet>
-    <servlet-name>GetRecipeAppetizers</servlet-name>
-    <servlet-class>controller.GetRecipeAppetizers</servlet-class>
+    <servlet-name>GetRecipeByCategory</servlet-name>
+    <servlet-class>controller.GetRecipeByCategory</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetRecipeAppetizers</servlet-name>
-    <url-pattern>/GetRecipeAppetizers</url-pattern>
+    <servlet-name>GetRecipeByCategory</servlet-name>
+    <url-pattern>/GetRecipeByCategory</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CreateRecipe</servlet-name>
@@ -85,15 +42,15 @@
     <url-pattern>/GetRecipe</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetRecipes</servlet-name>
-    <servlet-class>controller.GetRecipes</servlet-class>
+    <servlet-name>AllRecipes</servlet-name>
+    <servlet-class>controller.AllRecipes</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetRecipes</servlet-name>
-    <url-pattern>/GetRecipes</url-pattern>
+    <servlet-name>AllRecipes</servlet-name>
+    <url-pattern>/AllRecipes</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>GetRecipes</servlet-name>
+    <servlet-name>AllRecipes</servlet-name>
     <url-pattern></url-pattern>
   </servlet-mapping>
   <welcome-file-list>

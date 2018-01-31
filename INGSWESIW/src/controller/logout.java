@@ -15,10 +15,10 @@ import javax.servlet.http.HttpSession;
 public class logout extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
-		session.removeAttribute("username");
-		session.invalidate();
-		response.sendRedirect("login.html");
+		//HttpSession session= request.getSession();
+		//session.removeAttribute("username");
+		request.getSession().invalidate();
+		response.sendRedirect("ingsw.jsp");
 	}
 
 
