@@ -217,4 +217,34 @@ public class VotoDaoJDBC implements VotoDao {
 		return voti;
 	}
 	
+	public Voto findByRicettaAndUtente(Ricetta ricetta, Utente utente) {
+		Connection connection = this.dataSource.getConnection();
+		Voto voto = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from voto where ricetta_id = ? and utente_username = ?";
+			statement = connection.prepareStatement(query);
+			statement.setLong(1, ricetta.getId());
+			statement.setString(2, utente.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				voto = new Voto();
+				voto.setId(result.getLong("id"));
+				voto.setValore(result.getInt("valore"));
+				voto.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
+				voto.setUtente( new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return voto;
+
+	}
+	
 }

@@ -7,7 +7,7 @@ public class Utente {
 	
 	private String username; /* username dell'utente */
 	private String email; /* email dell'utente */
-	private String pathImmagineProfilo; /* immagine del profilo dell'utente */
+	private String immagineProfilo; /* immagine del profilo dell'utente */
 	
 	/* Da implementare: nome e cognome */
 	/* Da implementare: data di nascita */
@@ -38,8 +38,8 @@ public class Utente {
 		return email;
 	}
 	
-	public String getPathImmagineProfilo() {
-		return pathImmagineProfilo;
+	public String getImmagineProfilo() {
+		return immagineProfilo;
 	}
 	
 	public List<Ricetta> getRicetteInBozza() {
@@ -70,8 +70,8 @@ public class Utente {
 		this.email = email;
 	}
 	
-	public void setPathImmagineProfilo(String pathImmagineProfilo) {
-		this.pathImmagineProfilo = pathImmagineProfilo;
+	public void setImmagineProfilo(String pathImmagineProfilo) {
+		this.immagineProfilo = pathImmagineProfilo;
 	}
 		
 	public void setRicetteInBozza(List<Ricetta> ricetteInBozza) {
@@ -121,7 +121,7 @@ public class Utente {
 	
 	@Override
 	public String toString() {
-		return "Utente [username = " + username + ", email = " + email + "]";
+		return "Utente [username = " + username + ", email = " + email + ", immagineProfilo = " + immagineProfilo + "]";
 	}
 	
 	////////////////////////////////////////////////////////

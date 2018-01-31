@@ -38,5 +38,10 @@ public class UtenteCredenziali extends Utente {
 		}	
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "UtenteCredenziali [username = " + this.getUsername() + ", password = " + this.getPassword() + "]";
+	}
 
 }

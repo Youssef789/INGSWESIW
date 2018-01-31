@@ -1,4 +1,4 @@
-package persistence.test;
+package test;
 
 import model.Categoria;
 import model.Commento;
@@ -14,7 +14,7 @@ import persistence.dao.UtenteDao;
 import persistence.dao.VotoDao;
 import persistence.dao.jdbc.UtenteCredenziali;
 
-public class MainJDBC {
+public class Test {
 	
 	public static void main(String args[]) {
 		
@@ -52,9 +52,39 @@ public class MainJDBC {
 		utente3.setEmail("cpasticcio@gmail.com");
 		
 		utenteDao.save(utente1, "123");
-		utenteDao.save(utente2, "123");
-		utenteDao.save(utente3, "123");
+		utenteDao.save(utente2, "456");
+		utenteDao.save(utente3, "789");
 		
+		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+		
+		for (Utente utente : utenteDao.findAll()) {
+			System.out.println(utente); /* stampo utente */
+			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+			System.out.println();
+		}
+		
+		System.out.println("Cerco \"CiccioPasticcio\"... " + utenteDao.findByPrimaryKey("CiccioPasticcio"));
+		System.out.println("Cerco \"RenataLimbranata\"... " + utenteDao.findByPrimaryKey("RenataLimbranata"));
+		System.out.println("Cerco \"mmazza@gmail.com\"... " + utenteDao.findByEmail("mmazza@gmail.com"));
+	
+		utente1.setImmagineProfilo("immagineProfilo");
+		utente2.setEmail("ammazza@gmail.com");
+		utenteDao.setPassword(utente3, "987");
+		
+		utenteDao.update(utente1);
+		utenteDao.update(utente2);
+		utenteDao.update(utente3);
+		
+		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+		
+		for (Utente utente : utenteDao.findAll()) {
+			System.out.println(utente); /* stampo utente */
+			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+			System.out.println();
+		}
+
 		////////////////////////////
 		// Inserimento ricette... //
 		////////////////////////////
@@ -79,34 +109,85 @@ public class MainJDBC {
 		ricetta3.setDifficolta(Difficolta.FACILE);
 		ricetta3.setUtente(utente3);
 		
-		ricettaDao.saveAsBozza(ricetta1);
-		ricettaDao.saveAsBozza(ricetta2);
-		ricettaDao.saveAsBozza(ricetta3);
-//		
-//		/////////////////////////////
-//		// Inserimento commenti... //
-//		/////////////////////////////
-//		
-//		CommentoDao commentoDao = factory.getCommentoDAO();
-//		
-//		Commento commento1 = new Commento();
-//		commento1.setContenuto("Che bella ricetta!");
-//		commento1.setRicetta(ricetta2);
-//		commento1.setUtente(utente1);
-//		
-//		Commento commento2 = new Commento();
-//		commento2.setContenuto("La voglio fare anch'io prossimamente!");
-//		commento2.setRicetta(ricetta1);
-//		commento2.setUtente(utente2);
-//		
-//		Commento commento3 = new Commento();
-//		commento3.setContenuto("Mi piace!");
-//		commento3.setRicetta(ricetta3);
-//		commento3.setUtente(utente3);
-//		
-//		commentoDao.save(commento1);
-//		commentoDao.save(commento2);
-//		commentoDao.save(commento3);
+		ricettaDao.saveAsPubblicata(ricetta1);
+		ricettaDao.saveAsPubblicata(ricetta2);
+		ricettaDao.saveAsPubblicata(ricetta3);
+		
+		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
+		
+		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
+			System.out.println(ricetta);
+		}
+		
+		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+		
+		for (Utente utente : utenteDao.findAll()) {
+			System.out.println(utente); /* stampo utente */
+			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+			System.out.println();
+		}
+		
+		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
+		
+		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
+			System.out.println(ricetta);
+		}
+		
+		/////////////////////////////
+		// Inserimento commenti... //
+		/////////////////////////////
+		
+		CommentoDao commentoDao = factory.getCommentoDAO();
+		
+		Commento commento1 = new Commento();
+		commento1.setContenuto("Che bella ricetta!");
+		commento1.setRicetta(ricetta2);
+		commento1.setUtente(utente1);
+		
+		Commento commento2 = new Commento();
+		commento2.setContenuto("La voglio fare anch'io prossimamente!");
+		commento2.setRicetta(ricetta1);
+		commento2.setUtente(utente2);
+		
+		Commento commento3 = new Commento();
+		commento3.setContenuto("Mi piace!");
+		commento3.setRicetta(ricetta3);
+		commento3.setUtente(utente3);
+		
+		commentoDao.save(commento1);
+		commentoDao.save(commento2);
+		commentoDao.save(commento3);
+		
+		System.out.println("\n" + "Elenco commenti presenti..." + "\n");
+		
+		for (Commento commento : commentoDao.findAll()) {
+			System.out.println(commento);
+		}
+		
+		utenteDao.delete(utente1);
+		
+		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+		
+		for (Utente utente : utenteDao.findAll()) {
+			System.out.println(utente); /* stampo utente */
+			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+			System.out.println();
+		}
+		
+		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
+		
+		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
+			System.out.println(ricetta);
+		}
+		
+		System.out.println("\n" + "Elenco commenti presenti..." + "\n");
+		
+		for (Commento commento : commentoDao.findAll()) {
+			System.out.println(commento);
+		}
+		
 //		
 //		/////////////////////////
 //		// Inserimento voti... //
@@ -140,11 +221,7 @@ public class MainJDBC {
 //		
 
 //
-//		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
-//		
-//		for (Utente utente : utenteDao.findAll()) {
-//			System.out.println(utente);
-//		}
+
 //		
 //		for (Utente utente : utenteDao.findAll()) {
 //			System.out.println(utente);

@@ -16,8 +16,10 @@ public interface UtenteDao {
 	
 	public void delete(Utente utente); 
 	
+	public Utente findByEmail(String email);
+	
 	public UtenteCredenziali findByPrimaryKeyCredential(String username);
 	
 	public void setPassword(Utente utente, String password);
-
+	
 }

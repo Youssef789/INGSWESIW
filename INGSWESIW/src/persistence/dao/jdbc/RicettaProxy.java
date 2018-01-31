@@ -17,7 +17,7 @@ public class RicettaProxy extends Ricetta {
 	
 	@Override
 	public List<Commento> getCommenti() { 
-		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByRicetta(this);
+		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByRecipe(this);
 		this.setCommenti(commenti);
 		return super.getCommenti(); 
 	}

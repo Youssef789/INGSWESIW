@@ -26,7 +26,7 @@ public class UtenteProxy extends Utente {
 	
 	@Override
 	public List<Commento> getCommentiPubblicati() { 
-		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUtente(this);
+		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUser(this);
 		this.setCommentiPubblicati(commenti);
 		return super.getCommentiPubblicati(); 
 	}
@@ -88,7 +88,8 @@ public class UtenteProxy extends Utente {
 				throw new PersistenceException(e.getMessage());
 			}
 		}
-		return ricette;
+		this.setRicettePreferite(ricette);
+		return super.getRicettePreferite();
 	}
 	
 }
