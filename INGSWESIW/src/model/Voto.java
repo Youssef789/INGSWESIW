@@ -2,8 +2,8 @@ package model;
 
 public class Voto {
 	
-	private static final int MIN_VOTO = 1;
-	private static final int MAX_VOTO = 5;
+	private static final int MIN_VOTO = 1; /* valore voto minimo assegnabile */
+	private static final int MAX_VOTO = 5; /* valore voto massimo assegnabile */
 	
 	private Long id; /* id del commento */
 	private Integer valore; /* valore del voto */

@@ -7,12 +7,12 @@ import model.Ricetta;
 import model.Utente;
 import model.Voto;
 import persistence.DAOFactory;
+import persistence.UtilDao;
 import persistence.dao.CommentoDao;
 import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
 import persistence.dao.VotoDao;
 import persistence.dao.jdbc.UtenteCredenziali;
-import persistence.util.dao.UtilDao;
 
 public class MainJDBC {
 	
@@ -21,8 +21,17 @@ public class MainJDBC {
 		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
 		UtilDao util = factory.getUtilDAO();
 		
-		util.dropDatabase();
-		util.createDatabase();
+		util.dropDatabase(); /* reset database... */
+		util.createDatabase(); /* creazione database */
+		
+		////////////////////////
+		// Stampe di debug... //
+		////////////////////////
+		
+		System.out.println();
+		System.out.println("/////////////////////////");
+		System.out.println("/////////////////////////");
+		System.out.println("/////////////////////////");
 	
 		///////////////////////////
 		// Inserimento utenti... //
@@ -70,9 +79,9 @@ public class MainJDBC {
 		ricetta3.setDifficolta(Difficolta.FACILE);
 		ricetta3.setUtente(utente3);
 		
-		ricettaDao.save(ricetta1);
-		ricettaDao.save(ricetta2);
-		ricettaDao.save(ricetta3);
+		ricettaDao.saveAsBozza(ricetta1);
+		ricettaDao.saveAsBozza(ricetta2);
+		ricettaDao.saveAsBozza(ricetta3);
 //		
 //		/////////////////////////////
 //		// Inserimento commenti... //
@@ -127,14 +136,9 @@ public class MainJDBC {
 //		votoDao.save(voto2);
 //		votoDao.save(voto3);
 //		
-//		////////////////////////
-//		// Stampe di debug... //
-//		////////////////////////
+
 //		
-//		System.out.println();
-//		System.out.println("/////////////////////////");
-//		System.out.println("/////////////////////////");
-//		System.out.println("/////////////////////////");
+
 //
 //		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
 //		

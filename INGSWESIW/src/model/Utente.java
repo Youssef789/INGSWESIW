@@ -5,17 +5,20 @@ import java.util.List;
 
 public class Utente {
 	
-	private String username;
-	private String email;
-	private String pathImmagineProfilo;
+	private String username; /* username dell'utente */
+	private String email; /* email dell'utente */
+	private String pathImmagineProfilo; /* immagine del profilo dell'utente */
 	
-	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>();
-	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>();
-	private List<Ricetta> ricettePreferite = new LinkedList<Ricetta>();
-	 
-	private List<Commento> commentiPubblicati = new LinkedList<Commento>();
-
-	private List<Voto> votiEspressi = new LinkedList<Voto>();
+	/* Da implementare: nome e cognome */
+	/* Da implementare: data di nascita */
+	/* Da implementare: luogo (forse...) */
+	
+	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
+	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>(); /* elenco delle ricette pubblicate dall'utente  */
+	private List<Ricetta> ricettePreferite = new LinkedList<Ricetta>(); /* elenco delle ricette preferite dall'utente  */
+	  
+	private List<Commento> commentiPubblicati = new LinkedList<Commento>(); /* elenco dei commenti pubblicati dall'utente */
+	private List<Voto> votiEspressi = new LinkedList<Voto>(); /* elenco dei voti espressi dall'utente */
 
 	/* Da implementare: followings */
 	/* Da implementare: followers */

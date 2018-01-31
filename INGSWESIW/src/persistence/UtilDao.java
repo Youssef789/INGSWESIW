@@ -1,11 +1,8 @@
-package persistence.util.dao;
+package persistence;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import persistence.DataSource;
-import persistence.PersistenceException;
 
 public class UtilDao {
 	
@@ -24,8 +21,8 @@ public class UtilDao {
 		                    "create type categoria_type as enum ('ANTIPASTI', 'PRIMI_PIATTI', 'SECONDI_PIATTI', 'PIATTI_UNICI', 'CONTORNI', 'DOLCI', 'LIEVITATI', 'SALSE_E_SUGHI', 'MARMELLATE_E_CONSERVE', 'BEVANDE', 'ALTRO');" +
 					        "create type difficolta_type as enum ('FACILE', 'MEDIA', 'DIFFICILE');" +
 					        "create table utente (username VARCHAR(255) primary key not null, email VARCHAR(255) not null unique, password VARCHAR(255) not null, pathImmagineProfilo VARCHAR(255));" +
-			                "create table ricetta (id BIGINT primary key not null, dataPubblicazione date, dataUltimaModifica date, titolo VARCHAR(255), categoria categoria_type, difficolta difficolta_type, tempoPreparazione VARCHAR(255), descrizione VARCHAR(255), utente_username VARCHAR(255) references utente (username) not null);" +
-					        "create table ricetta_preferita (id BIGINT primary key not null, ricetta_id BIGINT references ricetta (id) on delete restrict not null, utente_username VARCHAR(255) references utente (username) on delete restrict not null);" +
+			                "create table ricetta (id BIGINT primary key not null, dataPubblicazione date, dataUltimaModifica date, titolo VARCHAR(255), categoria categoria_type, difficolta difficolta_type, tempoPreparazione VARCHAR(255), pathImmaginePrincipale VARCHAR(255), ingredienti VARCHAR(255), descrizione VARCHAR(255), preparazione VARCHAR(255), utente_username VARCHAR(255) references utente (username) not null);" +
+					        "create table ricetta_preferita (ricetta_id BIGINT references ricetta (id) on delete restrict not null, utente_username VARCHAR(255) references utente (username) on delete restrict not null, primary key (ricetta_id, utente_username));" +
 			                "create table commento (id BIGINT primary key not null, dataPubblicazione timestamp not null, dataUltimaModifica timestamp, testo VARCHAR(255) not null, ricetta_id BIGINT references ricetta (id) on delete restrict not null, utente_username VARCHAR(255) references utente (username) on delete restrict not null);" + 
 			                "create table voto (id BIGINT primary key not null, valore SMALLINT not null, ricetta_id BIGINT references ricetta (id) on delete restrict not null, utente_username VARCHAR(255) references utente (username) on delete restrict not null);";
 			PreparedStatement statement = connection.prepareStatement(create);
@@ -49,7 +46,8 @@ public class UtilDao {
 	  				      "drop sequence if exists sequenza_id_commento;" +
  	  				      "drop sequence if exists sequenza_id_voto;" +
   	  				      "drop table if exists utente cascade;" +
-    	  				  "drop table if exists ricetta cascade;" + 
+    	  				  "drop table if exists ricetta cascade;" +
+     	  				  "drop table if exists ricetta_preferita cascade;" +
 					      "drop table if exists commento cascade;" +
 					      "drop table if exists voto cascade;" +	              
 			              "drop type if exists categoria_type;" +

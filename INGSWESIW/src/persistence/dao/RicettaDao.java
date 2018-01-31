@@ -8,30 +8,26 @@ import model.Utente;
 
 public interface RicettaDao {
 	
-	public void save(Ricetta ricetta);
-	
+	public void saveAsBozza(Ricetta ricetta);
+
+	public void saveAsPubblicata(Ricetta ricetta);
+		
 	public Ricetta findByPrimaryKey(Long id);
 	
-	public List<Ricetta> findAll();       
-	
-	public void update(Ricetta ricetta);
-	
-	public void delete(Ricetta ricetta); 
-	
-	/////////////////////////////////////////////////
-	/////////////////////////////////////////////////
-	/////////////////////////////////////////////////
-	
-	public List<Ricetta> findByTitolo(String titolo); /* substring del titolo */
-	
-	public List<Ricetta> findByCategoria(Categoria categoria);
-	
-	/////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
-	public List<Ricetta> findByUtente(Utente utente);
-	
-	public List<Ricetta> findRicettePubblicateByUtente(Utente utente);
+	public List<Ricetta> findAllPubblicate();
 
+	public List<Ricetta> findAllBozzeByUtente(Utente utente);
 	
+	public List<Ricetta> findAllPubblicateByUtente(Utente utente);
+	
+	public List<Ricetta> findAllPubblicateByCategoria(Categoria categoria);
+	
+	public List<Ricetta> findAllPubblicateByTitolo(String titolo);
+	
+	public void updateAsBozza(Ricetta ricetta);
+	
+	public void updateAsPubblicata(Ricetta ricetta);
+	
+	public void delete(Ricetta ricetta);
+
 }

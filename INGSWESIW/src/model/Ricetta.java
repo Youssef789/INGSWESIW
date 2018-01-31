@@ -11,21 +11,21 @@ public class Ricetta {
 	private Long id; /* id della ricetta */
 	private Timestamp dataPubblicazione; /* se la ricetta non è stata ancora pubblicata (è in bozza), sarà null, altrimenti gli viene assegnato nel jdbc in save */
 	private Timestamp dataUltimaModifica; /* fino a quando la ricetta non sarà modificata, sarà null, altrimenti gli viene assegnato nel jdbc in update */
-	private String titolo;
-	private Categoria categoria;
-	private Difficolta difficolta;
-	private String tempoPreparazione;
-	private String pathImmaginePrincipale;
-	private String ingredienti; 
-	private String descrizione;
-	private String preparazione;
-	private Set<String> pathsImmaginiPreparazione = new HashSet<String>(); 
-	private Set<String> pathsVideoPreparazione = new HashSet<String>(); 
+	private String titolo; /* titolo della ricetta */
+	private Categoria categoria; /* categoria della ricetta */
+	private Difficolta difficolta; /* difficoltà della ricetta */
+	private String tempoPreparazione; /* tempo di preparazione della ricetta */
+	private String pathImmaginePrincipale; /* immagine principale della ricetta */
+	private String ingredienti; /* ingredienti e quantità della ricetta */
+	private String descrizione; /* descrizione della ricetta */
+	private String preparazione; /* spiegazione sulla preparazione della ricetta */
+	private Set<String> pathsImmaginiPreparazione = new HashSet<String>(); /* immagini a supporto alla spiegazione sulla preparazione della ricetta */
+	private Set<String> pathsVideoPreparazione = new HashSet<String>(); /* video a supporto alla spiegazione sulla preparazione della ricetta */
 	
-	private List<Commento> commenti = new LinkedList<Commento>();
-	private List<Voto> voti = new LinkedList<Voto>();
+	private List<Commento> commenti = new LinkedList<Commento>(); /* elenco dei commenti effettuati sulla ricetta */
+	private List<Voto> voti = new LinkedList<Voto>(); /* elenco dei voti espressi sulla ricetta */
 	
-	private Utente utente;
+	private Utente utente; /* utente proprietario della ricetta */
 		
 	public Ricetta() { }
 

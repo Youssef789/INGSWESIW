@@ -1,6 +1,6 @@
 package model;
 
-public enum Categoria {
+public enum Categoria { /* Categoria della ricetta */
 		
 	ANTIPASTI,      /* (es.) Sformatino di broccoli e salsiccia */
 	PRIMI_PIATTI,   /* (es.) Spaghetti alla carbonara */
@@ -15,5 +15,5 @@ public enum Categoria {
 	BEVANDE,               /* (es.) Limoncello */
 	
 	ALTRO; /* Varie ed eventuali */
-	
+		
 }

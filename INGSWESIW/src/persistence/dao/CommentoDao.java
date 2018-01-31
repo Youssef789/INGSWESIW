@@ -18,12 +18,8 @@ public interface CommentoDao {
 	
 	public void delete(Commento commento);
 	
-	/////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////
-
-	public List<Commento> findByRicetta(Ricetta ricetta);
+	/**/ public List<Commento> findByRicetta(Ricetta ricetta);
 	
-	public List<Commento> findByUtente(Utente utente);
+	/**/ public List<Commento> findByUtente(Utente utente);
 
 }

@@ -1,11 +1,20 @@
 package persistence.dao.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
+import model.Categoria;
 import model.Commento;
+import model.Difficolta;
+import model.Ricetta;
 import model.Utente;
 import model.Voto;
 import persistence.DataSource;
+import persistence.PersistenceException;
 
 public class UtenteProxy extends Utente {
 	
@@ -29,70 +38,57 @@ public class UtenteProxy extends Utente {
 		return super.getVotiEspressi(); 
 	}
 	
-//	@Override
-//	public List<Commento> getCommentiPubblicati() { 
-//		Connection connection = this.dataSource.getConnection();
-//		List<Commento> commenti = new LinkedList<Commento>();
-//		try {
-//			Commento commento = null;
-//			PreparedStatement statement;
-//			String query = "select * from commento where utente_username = ?";
-//			statement = connection.prepareStatement(query);
-//			statement.setString(1, this.getUsername());
-//			ResultSet result = statement.executeQuery();
-//			while (result.next()) {
-//				commento = new Commento();
-//				commento.setId(result.getLong("id"));
-//				commento.setDataPubblicazione(result.getTimestamp("dataPubblicazione"));
-//				commento.setDataUltimaModifica(result.getTimestamp("dataUltimaModifica"));
-//				commento.setContenuto(result.getString("contenuto"));
-//				commento.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
-//				commento.setUtente(new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));
-//				commenti.add(commento);
-//			}
-//		} catch (SQLException e) {
-//			throw new PersistenceException(e.getMessage());
-//		} finally {
-//			try {
-//				connection.close();
-//			} catch (SQLException e) {
-//				throw new PersistenceException(e.getMessage());
-//			}
-//		}
-//		this.setCommentiPubblicati(commenti);
-//		return super.getCommentiPubblicati(); 
-//	}
+	@Override
+	public List<Ricetta> getRicetteInBozza() {
+		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllBozzeByUtente(this);
+		this.setRicetteInBozza(ricette);
+		return super.getRicetteInBozza(); 
+	}
 	
-//	@Override
-//	public List<Voto> getVotiEspressi() { 
-//		Connection connection = this.dataSource.getConnection();
-//		List<Voto> voti = new LinkedList<Voto>();
-//		try {
-//			Voto voto = null;
-//			PreparedStatement statement;
-//			String query = "select * from voto where utente_username = ?";
-//			statement = connection.prepareStatement(query);
-//			statement.setString(1, this.getUsername());
-//			ResultSet result = statement.executeQuery();
-//			while (result.next()) {
-//				voto = new Voto();
-//				voto.setId(result.getLong("id"));
-//				voto.setValore(result.getInt("valore"));
-//				voto.setRicetta(new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id")));
-//				voto.setUtente( new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
-//				voti.add(voto);
-//			}
-//		} catch (SQLException e) {
-//			throw new PersistenceException(e.getMessage());
-//		} finally {
-//			try {
-//				connection.close();
-//			} catch (SQLException e) {
-//				throw new PersistenceException(e.getMessage());
-//			}
-//		}
-//		this.setVotiEspressi(voti);
-//		return super.getVotiEspressi(); 
-//	}
-
+	@Override
+	public List<Ricetta> getRicettePubblicate() {
+		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllPubblicateByUtente(this);
+		this.setRicetteInBozza(ricette);
+		return super.getRicettePubblicate(); 
+	}
+		
+	@Override
+	public List<Ricetta> getRicettePreferite() {
+		Connection connection = this.dataSource.getConnection();
+		List<Ricetta> ricette = new LinkedList<Ricetta>();
+		try {
+			Ricetta ricetta = null;
+			PreparedStatement statement;
+			String query = "select * from ricetta_preferita where utente_id = ?;";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, this.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				ricetta = new RicettaProxy(dataSource);
+				ricetta.setId(result.getLong("id"));
+				ricetta.setDataPubblicazione(result.getTimestamp("dataPubblicazione"));
+				ricetta.setDataUltimaModifica(result.getTimestamp("dataUltimaModifica"));
+				ricetta.setTitolo(result.getString("titolo"));
+				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
+				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
+				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
+				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
+				ricetta.setIngredienti(result.getString("ingredienti"));
+				ricetta.setDescrizione((result.getString("descrizione")));
+				ricetta.setPreparazione(result.getString("preparazione"));
+				ricetta.setUtente(new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
+				ricette.add(ricetta);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		return ricette;
+	}
+	
 }
