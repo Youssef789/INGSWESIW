@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,17 +13,16 @@ import model.Ricetta;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
-/**
- * Servlet implementation class GetRecipeSecondPiatto
- */
-@WebServlet("/GetRecipeSecondPiatto")
-public class GetRecipeSecondPiatto extends HttpServlet {
+
+public class GetRecipeByCategory extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		List<Ricetta> ricette=ricettaDao.findByCategory("secondo");
-		request.setAttribute("ricette", ricette);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/INGSWESIW/web/secondi.jsp");
+		String type=request.getParameter("category");
+		List<Ricetta> recipes=ricettaDao.findByCategory(type);
+		request.setAttribute("recipes", recipes);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/category.jsp");
 		dispatcher.forward(request,response);
 	}
 

@@ -1,7 +1,9 @@
 package persistence;
 
+import persistence.dao.CommentoDao;
 import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
+import persistence.dao.VotoDao;
 
 public abstract class DAOFactory {
 		
@@ -43,5 +45,7 @@ public abstract class DAOFactory {
 		
 		public abstract UtenteDao getUtenteDAO();
 		public abstract RicettaDao getRicrttaDAO();
+		public abstract CommentoDao getCommentoDAO();
+		public abstract VotoDao getVotoDAO();
 		public abstract persistence.UtilDao getUtilDAO();
 }

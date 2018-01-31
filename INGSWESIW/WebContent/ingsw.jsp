@@ -5,39 +5,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
 <title>Social Cook</title>
-
- <link rel="stylesheet" href="https://bootswatch.com/3/cosmo/bootstrap.min.css">
- <link rel="stylesheet" href="../css/styleingsw.css" >
+<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+ <link rel="stylesheet" href="css/styleingsw.css" >
 </head>
 <body>
-
-<nav class="navbar navbar-default navbar-fixed-top" id=nav>
+<nav class="navbar navbar-inverse navbar-fixed-top" id=nav>
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">SocialCook</a>
-				<form class="navbar-form navbar-left" action="/action_page.php">
-					<div class="form-group">
-						<input id="search" type="text" class="form-control" placeholder="Search">
-					</div>
-					<button id="btnsearch" type="submit" class="btn btn-primary ">Search</button>
-				</form>
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+
+				<a class="navbar-brand" href="AllRecipes">SocialCook</a>
 			</div>
-			<div id="navbar" class="collapse navbar-collapse">
+			<div class="collapse navbar-collapse" id="navbar">
+			
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="signup" href="account.jsp">Sign Up</a></li>
 					<li><a id="signin" href="login.jsp">Login</a></li>
 					<li><a id="aboutus" href="">About Us</a></li>
-					<li><a id="aboutus" href="">${name}</a></li>
+					<fb:login-button id="fb-btn"
+						scope="public_profile,email,user_birthday"
+						onlogin="checkLoginState();">
+					</fb:login-button>
 				</ul>
-
-				
-
-				
 			</div>
 
 		</div>
 	</nav>
-
 	<header>
 		<div class="welcome">
 		<h1>WELCOME TO SOCIAL COOK</h1>
@@ -45,15 +43,6 @@
 		<div class="button">
 		<a href="account.jsp" class="btn btn-half">Sign Up</a>
 		<a href="login.jsp" class="btn btn-full">Login</a>
-			<c:forEach items="${utenti}" var="utente" >
-        		 		<li>
-        		 		<img src="image/table.jpg"<a href=""></a>>
-        		 		<h3>${utente.name}</h3>
-        		 		<h3>${utente.username}</h3>
-        		 		</figure>
-        		 		</li>
-        		 			
-        		 		</c:forEach>
 		</div>
 		</div>
 

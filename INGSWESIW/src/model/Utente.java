@@ -6,7 +6,7 @@ public class Utente {
 	
 	
 
-	private Long id;
+	private long id;
 	private String name;
 	private String username;
 	private String email;
@@ -32,11 +32,11 @@ public class Utente {
 		
 	}
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

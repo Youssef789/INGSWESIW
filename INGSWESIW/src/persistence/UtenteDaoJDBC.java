@@ -27,7 +27,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 	public void save(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			Long id = IdBroker.getId(connection);
+			long id = IdBroker.getId(connection,utente);
 			utente.setId(id);
 			String insert = "insert into utente(id,name,username,email) values (?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
@@ -70,19 +70,19 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public Utente findByPrimaryKey(Long id) {
+	public Utente findByPrimaryKey(String username) {
 		
 		Connection connection = this.dataSource.getConnection();
 		Utente utente = null;
 		try {
 			PreparedStatement statement;
-			String query = "select * from utente where id = ?";
+			String query = "select * from utente where username = ?";
 			statement = connection.prepareStatement(query);
-			statement.setLong(1, id);
+			statement.setString(1, username);
 			ResultSet result = statement.executeQuery();
 			if (result.next()) {
 				utente = new Utente();
-				utente.setId(result.getLong("id"));
+				utente.setId(result.getInt("id"));
 				utente.setName(result.getString("name"));
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));				
@@ -114,7 +114,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				utente = new Utente();
-				utente.setId(result.getLong("id"));
+				utente.setId(result.getInt("id"));
 				utente.setName(result.getString("name"));
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));		
@@ -251,8 +251,8 @@ public class UtenteDaoJDBC implements UtenteDao{
 	}
 
 	@Override
-	public UtenteCredenziali findByPrimaryKeyCredential(Long id) {
-		Utente utente = findByPrimaryKey(id);
+	public UtenteCredenziali findByPrimaryKeyCredential(String username) {
+		Utente utente = findByPrimaryKey(username);
 		UtenteCredenziali utenteCredenziali = null;
 		if (utente != null){
 			utenteCredenziali = new UtenteCredenziali(dataSource);
@@ -311,7 +311,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			while (result.next()) {
 				if (primaRiga) {
 					utente = new Utente();
-					utente.setId(result.getLong("u_id"));				
+					utente.setId(result.getInt("u_id"));				
 					utente.setName(result.getString("u_name"));
 					utente.setUsername(result.getString("u_username"));
 					utente.setEmail(result.getString("u_email"));
@@ -321,7 +321,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 				Long r_id=result.getLong("r_id");
 				if(r_id != null){
 					Ricetta ricetta = new Ricetta();
-					ricetta.setId(result.getLong("r_id"));
+					ricetta.setId(result.getInt("r_id"));
 					ricetta.setTitle(result.getString("title"));
 					ricetta.setCategory(result.getString("category"));
 					//ricetta.setImage(result.getString("image"));
@@ -364,7 +364,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			while (result.next()) {
 				if (primaRiga) {
 					utente = new Utente();
-					utente.setId(result.getLong("u_id"));				
+					utente.setId(result.getInt("u_id"));				
 					utente.setName(result.getString("u_name"));
 					utente.setUsername(result.getString("u_username"));
 					utente.setEmail(result.getString("u_email"));
@@ -376,7 +376,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 				if(c_id != null){
 					Commento commento = new Commento();
 					commento.setId(result.getLong("c_id"));
-					commento.setText(result.getString("text"));
+					commento.setContenuto(result.getString("text"));
 					
 					utente.addComment(commento);
 				}
@@ -411,7 +411,7 @@ public class UtenteDaoJDBC implements UtenteDao{
 			while (result.next()) {
 				if (primaRiga) {
 					utente = new Utente();
-					utente.setId(result.getLong("u_id"));				
+					utente.setId(result.getInt("u_id"));				
 					utente.setName(result.getString("u_name"));
 					utente.setUsername(result.getString("u_username"));
 					utente.setEmail(result.getString("u_email"));
@@ -419,11 +419,11 @@ public class UtenteDaoJDBC implements UtenteDao{
 					primaRiga = false;
 				}
 				
-				Long v_id=result.getLong("v_id");
+				Integer v_id=result.getInt("v_id");
 				if(v_id != null){
 					Voto voto=new Voto();
 					voto.setId(result.getLong("v_id"));
-					voto.setVoto(result.getLong("v_voto"));
+					voto.setValore(result.getInt("v_voto"));
 					utente.addvote(voto);
 				}
 			}	

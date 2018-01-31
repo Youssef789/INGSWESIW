@@ -1,7 +1,9 @@
 package persistence;
 
+import persistence.dao.CommentoDao;
 import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
+import persistence.dao.VotoDao;
 
 public class PostgresDAOFactory extends DAOFactory {
 	
@@ -33,6 +35,16 @@ public class PostgresDAOFactory extends DAOFactory {
 	@Override
 	public UtilDao getUtilDAO() {
 		return new UtilDao(dataSource);
+	}
+
+	@Override
+	public CommentoDao getCommentoDAO() {
+		return new CommentoDaoJDBC(dataSource);
+	}
+
+	@Override
+	public VotoDao getVotoDAO() {
+		return new VotoDaoJDBC(dataSource);
 	}
 
 }

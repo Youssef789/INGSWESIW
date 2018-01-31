@@ -32,9 +32,9 @@ public class RicettaDaoJDBC implements RicettaDao{
 		
 		Connection connection = this.dataSource.getConnection();
 		try {
-			Long id = IdBroker.getId(connection);
+			Long id = IdBroker.getId(connection,ricetta);
 			ricetta.setId(id);
-			String insert = "insert into ricetta(id,title,category,image_name,image_path,difficulty,preparationTime,ingredient,description,preparation) values (?,?,?,?,?,?,?,?,?,?)";
+			String insert = "insert into ricetta(id,title,category,imageName,imagePath,difficulty,preparationTime,ingredient,description,preparation) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, ricetta.getId());
 			statement.setString(2, ricetta.getTitle());
@@ -88,7 +88,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 		Ricetta ricetta=null;
 		try {
 			PreparedStatement statement;
-			String query="select * from ricetta where id=?";
+			String query="select * from ricetta where id = ?";
 			statement = connection.prepareStatement(query);
 			statement.setLong(1,id);
 			ResultSet result=statement.executeQuery();
@@ -127,7 +127,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 		try {
 			Ricetta ricetta;
 			PreparedStatement statement;
-			String query="SELECT * FROM ricetta";
+			String query="select * from ricetta";
 			statement = connection.prepareStatement(query);
 			ResultSet result=statement.executeQuery();
 			while (result.next())
@@ -136,8 +136,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 				ricetta.setId(result.getLong("id"));
 				ricetta.setTitle(result.getString("title"));
 				ricetta.setCategory(result.getString("category"));
-				//ricetta.setImageName(result.getString("imageName"));
-				//ricetta.setImagePath(result.getString("imagePath"));
+				ricetta.setImageName(result.getString("imageName"));
+				ricetta.setImagePath(result.getString("imagePath"));
 				ricetta.setDifficulty(result.getString("difficulty"));
 				ricetta.setPreparationTime(result.getString("preparationTime"));
 				ricetta.setIngredient(result.getString("ingredient"));
@@ -164,7 +164,6 @@ public class RicettaDaoJDBC implements RicettaDao{
 		try {
 			String update = "update ricetta SET title =?,category =?,imageName =?,imagePath =?,difficulty=?,preparationTime=?,ingredient=?,description=?,preparation=? WHERE id=?";
 			PreparedStatement statement = connection.prepareStatement(update);
-			statement.setLong(1, ricetta.getId());
 			statement.setString(2, ricetta.getTitle());
 			statement.setString(3, ricetta.getCategory());
 			statement.setString(4, ricetta.getImageName());
@@ -216,6 +215,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 			PreparedStatement statement;
 			String query="select * from ricetta where category=?";
 			statement = connection.prepareStatement(query);
+			statement.setString(1,category);
 			ResultSet result=statement.executeQuery();
 			while (result.next())
 			{
@@ -223,7 +223,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 				ricetta.setId(result.getLong("id"));
 				ricetta.setTitle(result.getString("title"));
 				ricetta.setCategory(result.getString("category"));
-				//ricetta.setImage(result.getString("photo"));
+				ricetta.setImageName(result.getString("imageName"));
+				ricetta.setImagePath(result.getString("imagePath"));
 				ricetta.setDifficulty(result.getString("difficulty"));
 				ricetta.setPreparationTime(result.getString("preparationTime"));
 				ricetta.setIngredient(result.getString("ingredient"));
@@ -267,7 +268,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 					ricetta.setId(result.getLong("r_id"));				
 					ricetta.setTitle(result.getString("title"));
 					ricetta.setCategory(result.getString("category"));
-					//ricetta.setImage(result.getString("image"));
+					ricetta.setImageName(result.getString("imageName"));
+					ricetta.setImagePath(result.getString("imagePath"));
 					ricetta.setDifficulty(result.getString("difficulty"));
 					ricetta.setPreparationTime(result.getString("preparationTime"));				
 					ricetta.setIngredient(result.getString("ingredient"));
@@ -280,7 +282,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 				if(c_id != null){
 					Commento comment =new Commento();
 					comment.setId(result.getLong("c_id"));
-					comment.setText(result.getString("c_text"));
+					comment.setContenuto(result.getString("c_text"));
 
 					ricetta.addComment(comment);
 				}
@@ -320,7 +322,8 @@ public class RicettaDaoJDBC implements RicettaDao{
 					ricetta.setId(result.getLong("r_id"));				
 					ricetta.setTitle(result.getString("title"));
 					ricetta.setCategory(result.getString("category"));
-					//ricetta.setImage(result.getString("image"));
+					ricetta.setImageName(result.getString("imageName"));
+					ricetta.setImagePath(result.getString("imagePath"));
 					ricetta.setDifficulty(result.getString("difficulty"));
 					ricetta.setPreparationTime(result.getString("preparationTime"));				
 					ricetta.setIngredient(result.getString("ingredient"));
@@ -333,7 +336,7 @@ public class RicettaDaoJDBC implements RicettaDao{
 				if(v_id != null){
 					Voto voto=new Voto();
 					voto.setId(result.getLong("v_id"));
-					voto.setVoto(result.getLong("v_voto"));
+					voto.setValore(result.getInt("v_voto"));
 					ricetta.addvote(voto);
 				}
 			}	

@@ -1,12 +1,13 @@
 package model;
 
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Ricetta {
 	
-	private Long id;
+	private long  id;
 	private String title;
 	private String category;
 	private String imageName;
@@ -39,10 +40,10 @@ public class Ricetta {
 	}
 	
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getTitle() {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>Social cook</display-name>
-
-     <servlet>
+  <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>controller.Login</servlet-class>
   </servlet>
@@ -10,7 +9,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>GetRecipeByCategory</servlet-name>
+    <servlet-class>controller.GetRecipeByCategory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetRecipeByCategory</servlet-name>
+    <url-pattern>/GetRecipeByCategory</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>CreateRecipe</servlet-name>
     <servlet-class>controller.CreateRecipe</servlet-class>
@@ -27,7 +33,6 @@
     <servlet-name>CreateAccount</servlet-name>
     <url-pattern>/CreateAccount</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>GetRecipe</servlet-name>
     <servlet-class>controller.GetRecipe</servlet-class>
@@ -36,13 +41,19 @@
     <servlet-name>GetRecipe</servlet-name>
     <url-pattern>/GetRecipe</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>AllRecipes</servlet-name>
+    <servlet-class>controller.AllRecipes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllRecipes</servlet-name>
+    <url-pattern>/AllRecipes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AllRecipes</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>recipe.jsp</welcome-file>
   </welcome-file-list>
-  </web-app>
+</web-app>
