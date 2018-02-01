@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Commento;
 import model.Ricetta;
+import persistence.CommentoDao;
 import persistence.DatabaseManager;
-import persistence.dao.CommentoDao;
-import persistence.dao.RicettaDao;
+import persistence.RicettaDao;
 
 /**
  * Servlet implementation class DeleteComment

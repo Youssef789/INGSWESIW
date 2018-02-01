@@ -12,9 +12,12 @@ import model.Ricetta;
 import model.Voto;
 
 public class IdBroker {
-
-		
-private static Map<String, String> queries_nextval;
+	
+	// Standard SQL (queste stringhe andrebbero scritte in un file di configurazione)
+	// private static final String query = "SELECT NEXT VALUE FOR SEQ_ID AS id";
+	// postgresql
+	
+	private static Map<String, String> queries_nextval;
 	
 	static {
 		queries_nextval = new HashMap<String, String>();
@@ -36,4 +39,5 @@ private static Map<String, String> queries_nextval;
 		}
 		return id;
 	}
+		
 }

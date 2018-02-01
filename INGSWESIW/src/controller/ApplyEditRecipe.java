@@ -13,7 +13,7 @@ import javax.servlet.http.Part;
 
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.dao.RicettaDao;
+import persistence.RicettaDao;
 
 /**
  * Servlet implementation class ApplyEditRecipe

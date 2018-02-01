@@ -7,8 +7,8 @@ import model.Ricetta;
 import model.Utente;
 
 public interface CommentoDao {
-	
-public void save(Commento commento);  
+		
+	public void save(Commento commento);  
 	
 	public Commento findByPrimaryKey(Long id);
 	
@@ -18,13 +18,8 @@ public void save(Commento commento);
 	
 	public void delete(Commento commento);
 	
-	/////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////
-
-	public List<Commento> findByRicetta(Ricetta ricetta);
+	public List<Commento> findByRecipe(Ricetta ricetta); 
 	
-	public List<Commento> findByUtente(Utente utente);
-
+	public List<Commento> findByUser(Utente utente);
 
 }

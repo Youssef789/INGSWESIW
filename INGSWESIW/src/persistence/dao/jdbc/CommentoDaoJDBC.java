@@ -1,4 +1,4 @@
-package persistence;
+package persistence.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +10,14 @@ import java.util.List;
 import model.Commento;
 import model.Ricetta;
 import model.Utente;
+import persistence.DataSource;
+import persistence.IdBroker;
+import persistence.PersistenceException;
 import persistence.dao.CommentoDao;
 
 public class CommentoDaoJDBC implements CommentoDao {
 
-private DataSource dataSource;
+	private DataSource dataSource;
 	
 	public CommentoDaoJDBC(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -159,7 +162,7 @@ private DataSource dataSource;
 	//////////////////////////////////////////////////////
 	
 	@Override
-	public List<Commento> findByRicetta(Ricetta ricetta) {
+	public List<Commento> findByRecipe(Ricetta ricetta) {
 		Connection connection = this.dataSource.getConnection();
 		List<Commento> commenti = new LinkedList<Commento>();
 		try {
@@ -192,7 +195,7 @@ private DataSource dataSource;
 	}
 
 	@Override
-	public List<Commento> findByUtente(Utente utente) {
+	public List<Commento> findByUser(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		List<Commento> commenti = new LinkedList<Commento>();
 		try {
@@ -223,4 +226,5 @@ private DataSource dataSource;
 		}
 		return commenti;
 	}
+
 }

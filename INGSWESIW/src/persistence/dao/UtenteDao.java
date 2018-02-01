@@ -2,20 +2,24 @@ package persistence.dao;
 
 import java.util.List;
 import model.Utente;
-import persistence.UtenteCredenziali;
+import persistence.dao.jdbc.UtenteCredenziali;
 
 public interface UtenteDao {
-	public void save(Utente utente); // Create
-	public Utente findByPrimaryKey(String username); // Retrieve
-	public Utente findByPrimaryKeyJoinRecipe(Long id);
-	public Utente findByPrimaryKeyJoinComment(Long id);
-	public Utente findByPrimaryKeyJoinVote(Long id);
+	
+	public void save(Utente utente, String password);
+	
+	public Utente findByPrimaryKey(String username);
+	
 	public List<Utente> findAll();       
-	public void update(Utente utente); //Update
-	public void delete(Utente utente); //Delete	
-	public boolean checkLogin(String email,String password);
-	public void setFollower(Utente utente,Utente utente2);
-	public void setFollowing(Utente utente,Utente utente2);
+	
+	public void update(Utente utente); 
+	
+	public void delete(Utente utente); 
+	
+	public Utente findByEmail(String email);
+	
+	public UtenteCredenziali findByPrimaryKeyCredential(String username);
+	
 	public void setPassword(Utente utente, String password);
-	public UtenteCredenziali findByPrimaryKeyCredential(String username); 
+	
 }

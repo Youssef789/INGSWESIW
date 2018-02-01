@@ -17,7 +17,7 @@ import com.sun.org.apache.regexp.internal.recompile;
 import model.Ricetta;
 import model.Utente;
 import persistence.DatabaseManager;
-import persistence.dao.RicettaDao;
+import persistence.RicettaDao;
 @MultipartConfig
 public class CreateRecipe extends HttpServlet {
 	private static final String SAVE_DIR="image";

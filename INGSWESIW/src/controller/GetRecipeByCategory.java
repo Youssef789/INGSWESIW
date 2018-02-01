@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.dao.RicettaDao;
+import persistence.RicettaDao;
 
 
 public class GetRecipeByCategory extends HttpServlet {

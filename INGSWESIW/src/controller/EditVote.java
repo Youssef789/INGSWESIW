@@ -11,10 +11,10 @@ import model.Commento;
 import model.Ricetta;
 import model.Utente;
 import model.Voto;
+import persistence.CommentoDao;
 import persistence.DatabaseManager;
-import persistence.dao.CommentoDao;
-import persistence.dao.RicettaDao;
-import persistence.dao.VotoDao;
+import persistence.RicettaDao;
+import persistence.VotoDao;
 
 /**
  * Servlet implementation class EditVote

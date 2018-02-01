@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Commento {
 	
@@ -92,5 +91,5 @@ public class Commento {
 	public String toString() {
 		return "Commento [id = " + id + ", dataPubblicazione = " + dataPubblicazione + ", dataUltimaModifica = " + dataUltimaModifica + ", contenuto = " + contenuto + ", ricetta.id = " + ricetta.getId() + ", utente.username = " + utente.getUsername() + "]";
 	}
-
+	
 }
