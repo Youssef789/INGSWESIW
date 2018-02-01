@@ -136,9 +136,9 @@
         		 		</li>
         		 		<li>
         		 		<figure class="recipe-photo">
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}"><img src="image/image/${recipe.imageName}" width="214" height="138"></a>
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="title" >${recipe.title}</a>
-        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${recipe.category}</a>  
+
+        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="title" >${recipe.titolo}</a>
+        		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${recipe.categoria}</a>  
         		 		<a id="star">****</a> 
         		 		</figure>
         		 		</li>
