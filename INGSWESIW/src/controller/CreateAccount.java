@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Utente;
 import persistence.DAOFactory;
 import persistence.DatabaseManager;
-import persistence.UtenteDao;
+import persistence.dao.UtenteDao;
 import persistence.UtilDao;
 
 
@@ -34,11 +34,12 @@ public class CreateAccount extends HttpServlet {
 		try {
 
 		
-			Utente utente = new Utente(name,username,email);
+			Utente utente = new Utente();
+			utente.setUsername(username);
+			utente.setEmail(email);
 
 			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-			utenteDao.save(utente);
-			utenteDao.setPassword(utente, password);
+			utenteDao.save(utente, password);
 			
 			request.setAttribute("utente", utente);
 			

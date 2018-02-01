@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
 
 public class GetRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class GetRecipe extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String recipeId=request.getParameter("idRecipe");
 		Long id=Long.parseLong(recipeId);
 		Ricetta recipe= ricettaDao.findByPrimaryKey(id);

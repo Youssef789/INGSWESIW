@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
 
 /**
  * Servlet implementation class GetRecipes
@@ -32,8 +32,8 @@ public class AllRecipes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		List<Ricetta> recipes=ricettaDao.findAll();
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		List<Ricetta> recipes=ricettaDao.findAllPubblicate();
 		request.setAttribute("recipes", recipes);
 		RequestDispatcher dispatcher=request.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(request,response);

@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import model.Categoria;
+import model.Difficolta;
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
 
 /**
  * Servlet implementation class ApplyEditRecipe
@@ -62,17 +64,16 @@ public class ApplyEditRecipe extends HttpServlet {
 			
 			Ricetta ricetta=new Ricetta();
 			ricetta.setId(id);
-			ricetta.setTitle(title);
-			ricetta.setImageName(imageName);
-			ricetta.setImagePath(imagePath);
-			ricetta.setCategory(category);
-			ricetta.setDifficulty(difficulty);
-			ricetta.setPreparationTime(preparationTime);
-			ricetta.setIngredient(ingredient);
-			ricetta.setDescription(description);
-			ricetta.setPreparation(preparation);
-			RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-			ricettaDao.update(ricetta);
+			ricetta.setTitolo(title);
+			ricetta.setPathImmaginePrincipale(imageName);
+			ricetta.setCategoria(Categoria.valueOf(category));
+			ricetta.setDifficolta(Difficolta.valueOf(difficulty));
+			ricetta.setTempoPreparazione(preparationTime);
+			ricetta.setIngredienti(ingredient);
+			ricetta.setDescrizione(description);
+			ricetta.setPreparazione(preparation);
+			RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+			ricettaDao.updateAsPubblicata(ricetta);
 			request.setAttribute("ricetta", ricetta);
 			PrintWriter out = response.getWriter();
 			out.println("<html>");

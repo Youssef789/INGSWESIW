@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
 
 /**
  * Servlet implementation class DeleteRecipe
@@ -32,7 +32,7 @@ public class DeleteRecipe extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
+		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String recipeId=request.getParameter("idRecipe");
 		Long id=Long.parseLong(recipeId);
 		Ricetta recipe= ricettaDao.findByPrimaryKey(id);

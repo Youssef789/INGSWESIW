@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import model.Commento;
 import model.Ricetta;
 import model.Utente;
-import persistence.CommentoDao;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
+import persistence.dao.CommentoDao;
 
 /**
  * Servlet implementation class EditComment
@@ -43,7 +43,7 @@ public class EditComment extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		Utente utente = (Utente) request.getSession().getAttribute("username");
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String recipeId=request.getParameter("idRecipe");
 		Long id=Long.parseLong(recipeId);
 		Ricetta recipe= ricettaDao.findByPrimaryKey(id);

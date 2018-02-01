@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
 
 /**
  * Servlet implementation class MyProfile

@@ -162,7 +162,7 @@ public class CommentoDaoJDBC implements CommentoDao {
 	//////////////////////////////////////////////////////
 	
 	@Override
-	public List<Commento> findByRecipe(Ricetta ricetta) {
+	public List<Commento> findByRicetta(Ricetta ricetta) {
 		Connection connection = this.dataSource.getConnection();
 		List<Commento> commenti = new LinkedList<Commento>();
 		try {
@@ -195,7 +195,7 @@ public class CommentoDaoJDBC implements CommentoDao {
 	}
 
 	@Override
-	public List<Commento> findByUser(Utente utente) {
+	public List<Commento> findByUtente(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		List<Commento> commenti = new LinkedList<Commento>();
 		try {

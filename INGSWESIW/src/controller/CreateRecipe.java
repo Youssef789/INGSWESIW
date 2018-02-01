@@ -14,10 +14,12 @@ import javax.servlet.http.Part;
 
 import com.sun.org.apache.regexp.internal.recompile;
 
+import model.Categoria;
+import model.Difficolta;
 import model.Ricetta;
 import model.Utente;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
+import persistence.dao.RicettaDao;
 @MultipartConfig
 public class CreateRecipe extends HttpServlet {
 	private static final String SAVE_DIR="image";
@@ -45,17 +47,16 @@ public class CreateRecipe extends HttpServlet {
 		imagePath=imagePath + File.separator + imageName;
 		Ricetta ricetta=new Ricetta();
 		ricetta.setUtente(utente);
-		ricetta.setTitle(title);
-		ricetta.setImageName(imageName);
-		ricetta.setImagePath(imagePath);
-		ricetta.setCategory(category);
-		ricetta.setDifficulty(difficulty);
-		ricetta.setPreparationTime(preparationTime);
-		ricetta.setIngredient(ingredient);
-		ricetta.setDescription(description);
-		ricetta.setPreparation(preparation);
-		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-		ricettaDao.save(ricetta);
+		ricetta.setTitolo(title);
+		ricetta.setPathImmaginePrincipale(imageName);
+		ricetta.setCategoria(Categoria.valueOf(category));
+		ricetta.setDifficolta(Difficolta.valueOf(difficulty));
+		ricetta.setTempoPreparazione(preparationTime);
+		ricetta.setIngredienti(ingredient);
+		ricetta.setDescrizione(description);
+		ricetta.setPreparazione(preparation);
+		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		ricettaDao.saveAsPubblicata(ricetta);
 		request.setAttribute("ricetta", ricetta);
 		PrintWriter out = response.getWriter();
 		out.println("<html>");

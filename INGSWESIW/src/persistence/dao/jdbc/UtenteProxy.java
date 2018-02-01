@@ -26,7 +26,7 @@ public class UtenteProxy extends Utente {
 	
 	@Override
 	public List<Commento> getCommentiPubblicati() { 
-		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUser(this);
+		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUtente(this);
 		this.setCommentiPubblicati(commenti);
 		return super.getCommentiPubblicati(); 
 	}

@@ -11,10 +11,10 @@ import model.Commento;
 import model.Ricetta;
 import model.Utente;
 import model.Voto;
-import persistence.CommentoDao;
 import persistence.DatabaseManager;
-import persistence.RicettaDao;
-import persistence.VotoDao;
+import persistence.dao.RicettaDao;
+import persistence.dao.VotoDao;
+import persistence.dao.CommentoDao;
 
 /**
  * Servlet implementation class EditVote
@@ -44,7 +44,7 @@ public class EditVote extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Utente utente = (Utente) request.getSession().getAttribute("username");
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String recipeId=request.getParameter("idRecipe");
 		Long id=Long.parseLong(recipeId);
 		Ricetta recipe= ricettaDao.findByPrimaryKey(id);

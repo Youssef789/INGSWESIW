@@ -4,7 +4,6 @@ import persistence.dao.CommentoDao;
 import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
 import persistence.dao.VotoDao;
-import persistence.dao.jdbc.UtenteCredenziali;
 
 public abstract class DAOFactory {
 		
