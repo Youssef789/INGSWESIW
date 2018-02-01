@@ -48,7 +48,7 @@ public class Vote extends HttpServlet {
 		String recipeId=request.getParameter("idRecipe");
 		Long id=Long.parseLong(recipeId);
 		Ricetta recipe= ricettaDao.findByPrimaryKey(id);
-		String votoInserito=request.getParameter("rating");
+		String votoInserito=request.getParameter("valueVote");
 		Integer valore=Integer.parseInt(votoInserito);
 	    Voto vote=new Voto();
 	    vote.setRicetta(recipe);

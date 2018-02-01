@@ -12,9 +12,9 @@
 	}
 	</style>
       <link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/INGSWESIWPROJ/fonts/font-awesome.min.css">
+      <link rel="stylesheet" href="/INGSWESIW/fonts/font-awesome.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></head>
-      <link rel="stylesheet" href="/INGSWESIWPROJ/css/displayRecipe.css">
+      <link rel="stylesheet" href="/INGSWESIW/css/displayRecipe.css">
 
 <body>
 			<div class="col-xs-9" id="right">
@@ -93,12 +93,17 @@
 				</div>
 			</div>
 		</c:forEach>
+		<div>
+			
+		</div>
 		<form action="Comment?idRecipe=${recipe.id}" method="post">
 				<div class="form-group col-md-9">
 					<textarea name="comment" class="form-control" rows="5" id="comment" placeholder="scrivi il tuo commento "></textarea>
 					<button id="commbtn" type="submit" class="btn btn-primary">comment</button>
 				</div>
 			</form>	
+			
+			
 			</div>
 	
 	
