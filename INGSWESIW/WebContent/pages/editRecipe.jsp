@@ -15,59 +15,58 @@
 			<form action="EditRecipe" method="get" enctype='multipart/form-data'>
 				<div class="form-group">
 					<label for="title">Titolo:</label><input name="title" type="text"
-						value="${recipe.title}" class="form-control" />
+						value="${recipe.titolo}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label for="photo">sceglie la foto principale:</label><input
-						type="file" name="photo" value="${recipe.imagePath}" id="file">
+						type="file" name="photo" value="${recipe.pathImmaginePrincipale}" id="file">
 				</div>
 				<div class="form-group">
 					<label for="category">Categoria:</label> <select name="category"
 						class="form-control">
 						<optgroup>
-							<option value="${recipe.category}">${recipe.category}</option>
-							<option value="antipasto">Antipasti</option>
-							<option value="primo">Primi Piatti</option>
-							<option value="secondo">Secondi Piatti</option>
-							<option value="contorno">Contorni</option>
-							<option value="lievitato">Lievitati</option>
-							<option value="piattoUnico">Piatti unici</option>
-							<option value="dolce">Dolce</option>
+							<option value="${recipe.categoria}">${recipe.categoria}</option>
+							<option value="ANTIPASTI">Antipasti</option>
+							<option value="PRIMI_PIATTI">Primi piatti</option>
+							<option value="SECONDI_PIATTI">Secondi piatti</option>
+							<option value="PIATTI_UNICI">Piatti unici</option>
+							<option value="CONTORNI">Contorni</option>
+							<option value="DOLCI">Dolci</option>
+							<option value="LIEVITATI">Lievitati</option>
+							<option value="SALSE_E_SUGHI">Salse e sughi</option>
+							<option value="MARMELLATE_E_CONSERVE">Marmellate e conserve</option>
+							<option value="BEVANDE">Bevande</option>
+							<option value="ALTRO">Altro</option>
 						</optgroup>
 					</select>
 
 				</div>
 				<div class="form-group">
-					<label for="preparationTime">Tempo Di Preparazione:</label><input
-						value="${recipe.preparationTime}" name="preparationTime"
-						type="text" class="form-control" />
+					<label for="preparationTime">Tempo Di Preparazione:</label>
+					<input value="${recipe.tempoPreparazione}" name="preparationTime" type="text" class="form-control" />
 				</div>
 
-				<label for="difficulty">Difficoltà: ${recipe.difficulty}</label>
+				<label for="difficulty">Difficoltà: ${recipe.difficolta}</label>
 				<div class="radio">
-					<label><input type="radio" name="difficulty" value="facile">Facile</label>
-					<label><input type="radio" name="difficulty" value="medio">Medio</label>
-					<label><input type="radio" name="difficulty"
-						value="difficile">Difficile</label>
+					<label><input type="radio" name="difficulty" value="FACILE">Facile</label>
+					<label><input type="radio" name="difficulty" value="MEDIO">Medio</label>
+					<label><input type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
 				</div>
 
 				<div class="form-group">
 					<br> <label for="ingredient">Ingredienti:</label>
 					<textarea name="ingredient" class="form-control" rows="5"
-						id="ingredient">${recipe.ingredient}</textarea>
-					<br> <label for="description">Discrezione:</label>
+						id="ingredient">${recipe.ingredienti}</textarea>
+					<br> <label for="description">Descrizione:</label>
 					<textarea name="description" class="form-control" rows="10"
-						id="description">${recipe.description}</textarea>
+						id="description">${recipe.descrizione}</textarea>
 					<br> <label for="preparation">Preparazione:</label>
 					<textarea name="preparation" class="form-control" rows="10"
-						id="preparazione">${recipe.preparation}</textarea>
+						id="preparazione">${recipe.preparazione}</textarea>
 				</div>
 				<div class="form-group">
-					<input name="edit" type="submit" value="Edit"
-						class="btn btn-success" />
+					<input name="edit" type="submit" value="Edit" class="btn btn-success" />
 				</div>
-
-
 			</form>
 		</div>
 	</div>

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,7 +22,9 @@ import model.Ricetta;
 import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
+
 @MultipartConfig
+
 public class CreateRecipe extends HttpServlet {
 	private static final String SAVE_DIR="image";
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,11 +36,32 @@ public class CreateRecipe extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
 		request.setCharacterEncoding("UTF-8");
-		Utente utente = (Utente) request.getSession().getAttribute("username");
-        String imagePath="C:/Users/my/git/INGSWESIW/INGSWESIW/WebContent/image" + File.separator + SAVE_DIR ;
+		
+		String utenteS = (String) request.getSession().getAttribute("username");
+	
+		Utente utente = new Utente();
+		utente.setUsername(utenteS);
+		
+		String appPath = request.getServletContext().getRealPath("");
+        
         Part filePart = request.getPart("photo");
-        String imageName=extracFilename(filePart);
-        filePart.write(imagePath + File.separator + imageName);
+        
+        String savePath = appPath  + File.separator + SAVE_DIR;
+        
+        // String imageName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        
+        
+        
+        String imageName = extracFilename(filePart);
+
+     
+        
+       
+        
+        filePart.write(savePath + imageName);
+        
+        System.out.println(savePath + imageName);
+
 		String title =request.getParameter("title");
 		String category=request.getParameter("category");
 		String difficulty=request.getParameter("difficulty");
@@ -44,11 +69,13 @@ public class CreateRecipe extends HttpServlet {
 		String ingredient=request.getParameter("ingredient");
 		String description=request.getParameter("description");
 		String preparation=request.getParameter("preparation");
-		imagePath=imagePath + File.separator + imageName;
+		
+		String imagePath=savePath + imageName;
+		
 		Ricetta ricetta=new Ricetta();
 		ricetta.setUtente(utente);
 		ricetta.setTitolo(title);
-		ricetta.setPathImmaginePrincipale(imageName);
+		ricetta.setPathImmaginePrincipale(imagePath);
 		ricetta.setCategoria(Categoria.valueOf(category));
 		ricetta.setDifficolta(Difficolta.valueOf(difficulty));
 		ricetta.setTempoPreparazione(preparationTime);
@@ -66,17 +93,34 @@ public class CreateRecipe extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");	
 	}
-
-
+	
 	private String extracFilename(Part filePart) {
 		String contentDisp = filePart.getHeader("content-disposition");
 		String [] items =contentDisp.split(";");
 		for (String string : items) {
 			if(string.trim().startsWith("filename")) {
-				return string.substring(string.indexOf("=")+2, string.length() -1);
+				String s = string.substring(string.indexOf("=")+2, string.length() -1);
+				System.out.println(s);
+				Path p = Paths.get(s);
+				String file = p.getFileName().toString();
+				System.out.println(file);
+				return file;
+				
 			}
 		}
 		return " ";
 	}
+	
+//	private String extracFilename(Part filePart) {
+//		String contentDisp = filePart.getHeader("content-disposition");
+//		String [] items =contentDisp.split(";");
+//		for (String string : items) {
+//			if(string.trim().startsWith("filename")) {
+//				return string.substring(string.indexOf("=")+2, string.length() -1);
+//			}
+//		}
+//		return " ";
+//	}
+//
 
 }

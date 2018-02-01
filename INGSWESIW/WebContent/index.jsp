@@ -139,6 +139,7 @@
 
         		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="title" >${recipe.titolo}</a>
         		 		<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${recipe.categoria}</a>  
+        		 		<a href="GetRecipe?idRecipe=${recipe.id}"><img src="${recipe.pathImmaginePrincipale}" width="214" height="138"></a>
         		 		<a id="star">****</a> 
         		 		</figure>
         		 		</li>

@@ -32,13 +32,13 @@ public class EditRecipe extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId=request.getParameter("idRecipe");
-		Long id=Long.parseLong(recipeId);
-		Ricetta recipe= ricettaDao.findByPrimaryKey(id);
+		RicettaDao ricettaDao = DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		String recipeId = request.getParameter("idRecipe");
+		Long id = Long.parseLong(recipeId);
+		Ricetta recipe = ricettaDao.findByPrimaryKey(id);
 		request.setAttribute("recipe", recipe);
 		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/editRecipe.jsp");
-		dispatcher.forward(request,response);
+		dispatcher.forward(request, response);
 	}
 
 	/**

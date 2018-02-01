@@ -27,7 +27,6 @@ public class CreateAccount extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -45,19 +44,8 @@ public class CreateAccount extends HttpServlet {
 			
 			//RequestDispatcher dispacher = request.getRequestDispatcher("account.jsp");
 			//dispacher.forward(request, response);
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			out.println("<html>");
-			out.println("<head><title>create account</title></head>");
-			out.println("<body>");
-			out.println("<h1>hai creato account utente:</h1>");
-			out.println("full name: "+name);
-			out.println("username: "+username);
-			out.println("Email: "+email);
-			out.println("<a href=\"login.jsp\">click qui per effettuare il login</a>");
-			out.println("</body>");
-			out.println("</html>");	
-			//response.sendRedirect("login.jsp");
+
+			response.sendRedirect("login.jsp");
 			
 		}
 		catch (Exception e) {

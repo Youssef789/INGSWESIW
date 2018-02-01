@@ -3,13 +3,14 @@
 <jsp:include page="pages/navbar.jsp" />
 
 <html>
+
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="INGSWESIW/../css/recipeCommon.css">
-
 <title>Create your recipe</title>
 </head>
+
 <body>
 
 	<!-- 	<div class="col-md-8 col-md-offset-2" id="recipe" >  -->
@@ -32,13 +33,17 @@
 					<label for="category">Categoria:</label> <select name="category"
 						class="form-control">
 						<optgroup>
-							<option value="antipasto">Antipasti</option>
-							<option value="primo">Primi Piatti</option>
-							<option value="secondo">Secondi Piatti</option>
-							<option value="contorno">Contorni</option>
-							<option value="lievitato">Lievitati</option>
-							<option value="piattoUnico">Piatti unici</option>
-							<option value="dolce">Dolce</option>
+							<option value="ANTIPASTI">Antipasti</option>
+							<option value="PRIMI_PIATTI">Primi piatti</option>
+							<option value="SECONDI_PIATTI">Secondi piatti</option>
+							<option value="PIATTI_UNICI">Piatti unici</option>
+							<option value="CONTORNI">Contorni</option>
+							<option value="DOLCI">Dolci</option>
+							<option value="LIEVITATI">Lievitati</option>
+							<option value="SALSE_E_SUGHI">Salse e sughi</option>
+							<option value="MARMELLATE_E_CONSERVE">Marmellate e conserve</option>
+							<option value="BEVANDE">Bevande</option>
+							<option value="ALTRO">Altro</option>
 						</optgroup>
 					</select>
 
@@ -51,10 +56,9 @@
 
 				<label for="difficulty">Difficoltà:</label>
 				<div class="radio">
-					<label><input type="radio" name="difficulty" value="facile">Facile</label>
-					<label><input type="radio" name="difficulty" value="medio">Medio</label>
-					<label><input type="radio" name="difficulty"
-						value="difficile">Difficile</label>
+					<label><input type="radio" name="difficulty" value="FACILE">Facile</label>
+					<label><input type="radio" name="difficulty" value="MEDIO">Medio</label>
+					<label><input type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
 				</div>
 
 				<div class="form-group">
@@ -69,15 +73,13 @@
 						id="preparazione"></textarea>
 				</div>
 				<div class="form-group">
-					<input name="create" type="submit" value="Create"
-						class="btn btn-success" />
+					<input name="create" type="submit" value="Create" class="btn btn-success"/>
 				</div>
-
 			</form>
 		</div>
 	</div>
 	<script src="js/jquery-3.2.1.min.js"></script>
-<script>
+	<script>
 function filePreview(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

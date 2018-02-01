@@ -16,8 +16,8 @@
 			<h2>Login</h2>
 				<form method="post" action="Login">
 				  <div class="form-group">
-				    <label for="email">Email address:</label>
-				     <input name="username" type="username" class="form-control" >
+				    <label for="email">Username</label>
+				     <input name="username" type = "text" class="form-control" >
 				  </div>
 				  <div class="form-group">
 				    <label for="pwd">Password:</label>

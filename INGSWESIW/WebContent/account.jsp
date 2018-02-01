@@ -16,7 +16,6 @@
 	
 <div class="col-md-4 col-md-offset-4" id="fm" >
 	<form action="CreateAccount" method="post" >
-		<div class="form-group"><label for="name">Full Name:</label><input name="name" type="text" placeholder="full name" class="form-control" /> </div> 
 		<div class="form-group"><label for="username">Username:</label> <input name="username" type="text" placeholder="Username" class="form-control" /> </div> 
 		<div class="form-group"><label for="email">Email:</label><input name="email" type="email" placeholder="Email" class="form-control" /></div> 
 		<div class="form-group"><label for="password">Password:</label> <input name="password" type="password" placeholder="Password" class="form-control" /> </div> 

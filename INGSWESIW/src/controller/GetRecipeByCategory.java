@@ -14,18 +14,15 @@ import model.Ricetta;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
-
 public class GetRecipeByCategory extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String type=request.getParameter("category");
-		List<Ricetta> recipes=ricettaDao.findAllPubblicateByCategoria(Categoria.valueOf(type));
+		RicettaDao ricettaDao = DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		String type = request.getParameter("category");
+		List<Ricetta> recipes = ricettaDao.findAllPubblicateByCategoria(Categoria.valueOf(type));
 		request.setAttribute("recipes", recipes);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/category.jsp");
-		dispatcher.forward(request,response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/category.jsp");
+		dispatcher.forward(request, response);
 	}
-
 	
 }

@@ -89,104 +89,104 @@ public class Test {
 		// Inserimento ricette... //
 		////////////////////////////
 		
-		RicettaDao ricettaDao = factory.getRicettaDAO();
-		
-		Ricetta ricetta1 = new Ricetta();
-		ricetta1.setTitolo("Impepata di cozze");
-		ricetta1.setCategoria(Categoria.ANTIPASTI);
-		ricetta1.setDifficolta(Difficolta.MEDIA);
-		ricetta1.setUtente(utente1);
-		
-		Ricetta ricetta2 = new Ricetta();
-		ricetta2.setTitolo("Sformatino di broccoli e salsiccia");
-		ricetta2.setCategoria(Categoria.ANTIPASTI);
-		ricetta2.setDifficolta(Difficolta.FACILE);
-		ricetta2.setUtente(utente2);
-		
-		Ricetta ricetta3 = new Ricetta();
-		ricetta3.setTitolo("Pasta alla carbonara");
-		ricetta3.setCategoria(Categoria.PRIMI_PIATTI);
-		ricetta3.setDifficolta(Difficolta.FACILE);
-		ricetta3.setUtente(utente3);
-		
-		ricettaDao.saveAsPubblicata(ricetta1);
-		ricettaDao.saveAsPubblicata(ricetta2);
-		ricettaDao.saveAsPubblicata(ricetta3);
-		
-		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
-		
-		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
-			System.out.println(ricetta);
-		}
-		
-		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
-		
-		for (Utente utente : utenteDao.findAll()) {
-			System.out.println(utente); /* stampo utente */
-			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
-			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
-			System.out.println();
-		}
-		
-		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
-		
-		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
-			System.out.println(ricetta);
-		}
-		
-		/////////////////////////////
-		// Inserimento commenti... //
-		/////////////////////////////
-		
-		CommentoDao commentoDao = factory.getCommentoDAO();
-		
-		Commento commento1 = new Commento();
-		commento1.setContenuto("Che bella ricetta!");
-		commento1.setRicetta(ricetta2);
-		commento1.setUtente(utente1);
-		
-		Commento commento2 = new Commento();
-		commento2.setContenuto("La voglio fare anch'io prossimamente!");
-		commento2.setRicetta(ricetta1);
-		commento2.setUtente(utente2);
-		
-		Commento commento3 = new Commento();
-		commento3.setContenuto("Mi piace!");
-		commento3.setRicetta(ricetta3);
-		commento3.setUtente(utente3);
-		
-		commentoDao.save(commento1);
-		commentoDao.save(commento2);
-		commentoDao.save(commento3);
-		
-		System.out.println("\n" + "Elenco commenti presenti..." + "\n");
-		
-		for (Commento commento : commentoDao.findAll()) {
-			System.out.println(commento);
-		}
-		
-		utenteDao.delete(utente1);
-		
-		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
-		
-		for (Utente utente : utenteDao.findAll()) {
-			System.out.println(utente); /* stampo utente */
-			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
-			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
-			System.out.println();
-		}
-		
-		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
-		
-		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
-			System.out.println(ricetta);
-		}
-		
-		System.out.println("\n" + "Elenco commenti presenti..." + "\n");
-		
-		for (Commento commento : commentoDao.findAll()) {
-			System.out.println(commento);
-		}
+//		RicettaDao ricettaDao = factory.getRicettaDAO();
+//		
+//		Ricetta ricetta1 = new Ricetta();
+//		ricetta1.setTitolo("Impepata di cozze");
+//		ricetta1.setCategoria(Categoria.ANTIPASTI);
+//		ricetta1.setDifficolta(Difficolta.MEDIA);
+//		ricetta1.setUtente(utente1);
+//		
+//		Ricetta ricetta2 = new Ricetta();
+//		ricetta2.setTitolo("Sformatino di broccoli e salsiccia");
+//		ricetta2.setCategoria(Categoria.ANTIPASTI);
+//		ricetta2.setDifficolta(Difficolta.FACILE);
+//		ricetta2.setUtente(utente2);
+//		
+//		Ricetta ricetta3 = new Ricetta();
+//		ricetta3.setTitolo("Pasta alla carbonara");
+//		ricetta3.setCategoria(Categoria.PRIMI_PIATTI);
+//		ricetta3.setDifficolta(Difficolta.FACILE);
+//		ricetta3.setUtente(utente3);
+//		
+//		ricettaDao.saveAsPubblicata(ricetta1);
+//		ricettaDao.saveAsPubblicata(ricetta2);
+//		ricettaDao.saveAsPubblicata(ricetta3);
+//		
+//		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
+//		
+//		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
+//			System.out.println(ricetta);
+//		}
+//		
+//		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+//		
+//		for (Utente utente : utenteDao.findAll()) {
+//			System.out.println(utente); /* stampo utente */
+//			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+//			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+//			System.out.println();
+//		}
+//		
+//		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
+//		
+//		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
+//			System.out.println(ricetta);
+//		}
+//		
+//		/////////////////////////////
+//		// Inserimento commenti... //
+//		/////////////////////////////
+//		
+//		CommentoDao commentoDao = factory.getCommentoDAO();
+//		
+//		Commento commento1 = new Commento();
+//		commento1.setContenuto("Che bella ricetta!");
+//		commento1.setRicetta(ricetta2);
+//		commento1.setUtente(utente1);
+//		
+//		Commento commento2 = new Commento();
+//		commento2.setContenuto("La voglio fare anch'io prossimamente!");
+//		commento2.setRicetta(ricetta1);
+//		commento2.setUtente(utente2);
+//		
+//		Commento commento3 = new Commento();
+//		commento3.setContenuto("Mi piace!");
+//		commento3.setRicetta(ricetta3);
+//		commento3.setUtente(utente3);
+//		
+//		commentoDao.save(commento1);
+//		commentoDao.save(commento2);
+//		commentoDao.save(commento3);
+//		
+//		System.out.println("\n" + "Elenco commenti presenti..." + "\n");
+//		
+//		for (Commento commento : commentoDao.findAll()) {
+//			System.out.println(commento);
+//		}
+//		
+//		utenteDao.delete(utente1);
+//		
+//		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+//		
+//		for (Utente utente : utenteDao.findAll()) {
+//			System.out.println(utente); /* stampo utente */
+//			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+//			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+//			System.out.println();
+//		}
+//		
+//		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
+//		
+//		for (Ricetta ricetta : ricettaDao.findAllPubblicate()) {
+//			System.out.println(ricetta);
+//		}
+//		
+//		System.out.println("\n" + "Elenco commenti presenti..." + "\n");
+//		
+//		for (Commento commento : commentoDao.findAll()) {
+//			System.out.println(commento);
+//		}
 		
 //		
 //		/////////////////////////

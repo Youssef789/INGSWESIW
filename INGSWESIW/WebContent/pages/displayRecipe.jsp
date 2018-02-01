@@ -3,7 +3,7 @@
 <jsp:include page="navbar.jsp" />
 <html>
 <head lang="it">
-<title>${recipe.title}</title>
+<title>${recipe.titolo}</title>
 <meta charset="utf-8">
 	<style>
 	#btnfavorite{
@@ -12,9 +12,9 @@
 	}
 	</style>
       <link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-      <link rel="stylesheet" href="/INGSWESIWPROJ/fonts/font-awesome.min.css">
+      <link rel="stylesheet" href="/INGSWESIW/fonts/font-awesome.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></head>
-      <link rel="stylesheet" href="/INGSWESIWPROJ/css/displayRecipe.css">
+      <link rel="stylesheet" href="/INGSWESIW/css/displayRecipe.css">
 
 <body>
 			<div class="col-xs-9" id="right">
@@ -39,20 +39,20 @@
 						<button id="btnfavorite" type="submit" class="btn btn-warning">Favourite <span id="heart" class="glyphicon glyphicon-heart"></span></button>
 						</div>
 					</form>
-					<h3 id="category">${recipe.category}</h3>
-					<h1 id="title">${recipe.title}</h1>
+					<h3 id="category">${recipe.categoria}</h3>
+					<h1 id="title">${recipe.titolo}</h1>
 					<!--image--->
 					<figure id="image">
-						<img src="image/image/${recipe.imageName}">
+						<img src="${recipe.pathImmaginePrincipale}">
 					</figure>
 					<br>
 
 					<div>
 						<ul id="information">
-							<li class="difficolta">Difficoltà: <strong>${recipe.difficulty}</strong>
+							<li class="difficolta">Difficoltà: <strong>${recipe.difficolta}</strong>
 							</li>
 
-							<li class="preptime">Timpo Di Preparazione: <strong>${recipe.preparationTime}</strong>
+							<li class="preptime">Timpo Di Preparazione: <strong>${recipe.tempoPreparazione}</strong>
 							</li>
 						</ul>
 					</div>
@@ -61,7 +61,7 @@
 						<h2>
 							<span>Ingredienti</span>
 						</h2>
-						<p>${recipe.ingredient}</p>
+						<p>${recipe.ingredienti}</p>
 
 					</div>
 
@@ -69,7 +69,7 @@
 						<h2>
 							<span>descrizione</span>
 						</h2>
-						<p>${recipe.description}</p>
+						<p>${recipe.descrizione}</p>
 					</div>
 
 					<div>
@@ -78,7 +78,7 @@
 						</h2>
 						<h3 id="how">Come preparare la ricetta</h3>
 						<br>
-						<p>${recipe.preparation}</p>
+						<p>${recipe.preparazione}</p>
 					</div>
 					</div>
 		<c:forEach var="comment" items="${comments}">
