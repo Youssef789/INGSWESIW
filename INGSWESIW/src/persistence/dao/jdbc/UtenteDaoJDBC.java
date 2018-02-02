@@ -1,11 +1,19 @@
 package persistence.dao.jdbc;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 import model.Ricetta;
 import model.Utente;
@@ -25,15 +33,29 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void save(Utente utente, String password) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String insert = "insert into utente (username, email, password, immagineProfilo) values (?, ?, ?, ?)";
+			String insert = "insert into utente (username, email, password) values (?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setString(1, utente.getUsername());
 			statement.setString(2, utente.getEmail());
 			statement.setString(3, password);
-			statement.setString(4, utente.getImmagineProfilo());
 			statement.executeUpdate();
+			File file = utente.getImmagineProfilo();
+			if (file != null) {
+				FileInputStream fis = new FileInputStream(file);
+				insert = "insert into immagineProfilo (immagine_nome, immagine, utente_username) values (?, ?, ?)";
+				statement = connection.prepareStatement(insert);
+				statement.setString(1, file.getName());
+				statement.setBinaryStream(2, fis, file.length());
+				statement.setString(3, utente.getUsername());
+				statement.executeUpdate();
+				fis.close();
+			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				connection.close();
@@ -57,10 +79,34 @@ public class UtenteDaoJDBC implements UtenteDao {
 				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));
-				utente.setImmagineProfilo(result.getString("immagineProfilo"));
+				query = "select * from immagineProfilo where utente_username = ?";
+				statement = connection.prepareStatement(query);
+				statement.setString(1, username);
+				result = statement.executeQuery(); 
+				if (result.next()) {
+					File file = new File(result.getString("immagine_nome"));
+					byte[] immagine = result.getBytes("immagine");
+				    FileOutputStream fos = new FileOutputStream(file);
+				    fos.write(immagine);
+				    utente.setImmagineProfilo(file);
+				    fos.close();
+				}
+
+			
+				
+
+				
+				
+			
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			try {
 				connection.close();
@@ -85,7 +131,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));
-				utente.setImmagineProfilo(result.getString("immagineProfilo"));
+				// utente.setImmagineProfilo(result.getString("immagineProfilo"));
 				utenti.add(utente);
 			}
 		} catch (SQLException e) {
@@ -107,7 +153,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			String update = "update utente set email = ?, immagineProfilo = ? where username = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getEmail());
-			statement.setString(2, utente.getImmagineProfilo());
+			// statement.setString(2, utente.getImmagineProfilo());
 			statement.setString(3, utente.getUsername());
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -154,7 +200,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 				utente = new UtenteProxy(dataSource);
 				utente.setUsername(result.getString("username"));
 				utente.setEmail(result.getString("email"));
-				utente.setImmagineProfilo(result.getString("immagineProfilo"));
+				// utente.setImmagineProfilo(result.getString("immagineProfilo"));
 			}
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

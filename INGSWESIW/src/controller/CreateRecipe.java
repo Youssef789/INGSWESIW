@@ -61,6 +61,35 @@ public class CreateRecipe extends HttpServlet {
         filePart.write(savePath + imageName);
         
         System.out.println(savePath + imageName);
+		
+		
+//		String utenteS = (String) request.getSession().getAttribute("username");
+//	
+//		Utente utente = new Utente();
+//		utente.setUsername(utenteS);
+//		
+//		Part filePart = request.getPart("photo");
+//		
+//		String path = "/image";
+//		
+//		String imageName = extracFilename(filePart);
+//		
+//		System.out.println(path + "/" + imageName);
+//		
+//        File files = new File("/image");
+//        
+//        if (!files.exists()) {
+//            if (files.mkdir()) {
+//                System.out.println("Multiple directories are created!");
+//            } else {
+//                System.out.println("Failed to create multiple directories!");
+//            }
+//        }
+//		
+//		filePart.write(path + "/" + imageName);
+		
+		
+		
 
 		String title =request.getParameter("title");
 		String category=request.getParameter("category");
@@ -70,7 +99,7 @@ public class CreateRecipe extends HttpServlet {
 		String description=request.getParameter("description");
 		String preparation=request.getParameter("preparation");
 		
-		String imagePath=savePath + imageName;
+		String imagePath=path + "/" + imageName;
 		
 		Ricetta ricetta=new Ricetta();
 		ricetta.setUtente(utente);

@@ -37,7 +37,7 @@ public class EditRecipe extends HttpServlet {
 		Long id = Long.parseLong(recipeId);
 		Ricetta recipe = ricettaDao.findByPrimaryKey(id);
 		request.setAttribute("recipe", recipe);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/editRecipe.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/editRecipe.jsp");
 		dispatcher.forward(request, response);
 	}
 

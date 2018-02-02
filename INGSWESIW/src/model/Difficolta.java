@@ -6,4 +6,15 @@ public enum Difficolta { /* Difficoltà della ricetta */
 	MEDIA, 
 	DIFFICILE;
 	
+	///////////////////////////////////
+	///////////////////////////////////
+	///////////////////////////////////
+	
+	public String toStringFormatted() {
+		String stringFormatted = super.toString();
+		stringFormatted = stringFormatted.substring(0, 1).toUpperCase() + stringFormatted.substring(1).toLowerCase();
+		stringFormatted = stringFormatted.replace('_', ' ');
+		return stringFormatted;
+	}
+	
 }

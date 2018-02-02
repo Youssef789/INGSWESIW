@@ -1,10 +1,11 @@
 package model;
 
+import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class Ricetta {
 	
@@ -15,12 +16,12 @@ public class Ricetta {
 	private Categoria categoria; /* categoria della ricetta */
 	private Difficolta difficolta; /* difficoltà della ricetta */
 	private String tempoPreparazione; /* tempo di preparazione della ricetta */
-	private String pathImmaginePrincipale; /* immagine principale della ricetta */
+	private File immaginePrincipale; /* immagine principale della ricetta */
 	private String ingredienti; /* ingredienti e quantità della ricetta */
 	private String descrizione; /* descrizione della ricetta */
 	private String preparazione; /* spiegazione sulla preparazione della ricetta */
-	private Set<String> pathsImmaginiPreparazione = new HashSet<String>(); /* immagini a supporto alla spiegazione sulla preparazione della ricetta */
-	private Set<String> pathsVideoPreparazione = new HashSet<String>(); /* video a supporto alla spiegazione sulla preparazione della ricetta */
+	private List<File> immaginiPreparazione = new LinkedList<File>(); /* immagini a supporto alla spiegazione sulla preparazione della ricetta */
+	private List<File> videoPreparazione = new LinkedList<File>(); /* video a supporto alla spiegazione sulla preparazione della ricetta */
 	
 	private List<Commento> commenti = new LinkedList<Commento>(); /* elenco dei commenti effettuati sulla ricetta */
 	private List<Voto> voti = new LinkedList<Voto>(); /* elenco dei voti espressi sulla ricetta */
@@ -53,8 +54,8 @@ public class Ricetta {
 		return difficolta;
 	}
 
-	public String getPathImmaginePrincipale() {
-		return pathImmaginePrincipale;
+	public File getImmaginePrincipale() {
+		return immaginePrincipale;
 	}
 
 	public String getTempoPreparazione() {
@@ -73,12 +74,12 @@ public class Ricetta {
 		return preparazione;
 	}
 
-	public Set<String> getPathsImmaginiPreparazione() {
-		return pathsImmaginiPreparazione;
+	public List<File> getImmaginiPreparazione() {
+		return immaginiPreparazione;
 	}
 
-	public Set<String> getPathsVideoPreparazione() {
-		return pathsVideoPreparazione;
+	public List<File> getVideoPreparazione() {
+		return videoPreparazione;
 	}
 	
 	public List<Commento> getCommenti() {
@@ -117,8 +118,8 @@ public class Ricetta {
 		this.difficolta = difficolta;
 	}
 
-	public void setPathImmaginePrincipale(String pathImmagine) {
-		this.pathImmaginePrincipale = pathImmagine;
+	public void setPathImmaginePrincipale(File immagine) {
+		this.immaginePrincipale = immagine;
 	}
 
 	public void setTempoPreparazione(String tempoPreparazione) {
@@ -137,12 +138,12 @@ public class Ricetta {
 		this.preparazione = preparazione;
 	}
 
-	public void setPathsImmaginiPreparazione(Set<String> pathsImmaginiPreparazione) {
-		this.pathsImmaginiPreparazione = pathsImmaginiPreparazione;
+	public void setImmaginiPreparazione(List<File> immaginiPreparazione) {
+		this.immaginiPreparazione = immaginiPreparazione;
 	}
 
-	public void setVideoPreparazione(Set<String> pathsVideoPreparazione) {
-		this.pathsVideoPreparazione = pathsVideoPreparazione;
+	public void setVideoPreparazione(List<File> videoPreparazione) {
+		this.videoPreparazione = videoPreparazione;
 	}
 
 	public void setCommenti(List<Commento> commenti) {
@@ -187,24 +188,24 @@ public class Ricetta {
 		return "Ricetta [id = " + id + ", titolo = " + titolo + ", categoria = " + categoria.toString() + ", difficolta = " + difficolta.toString() + ", username.id = " + utente.getUsername() + "]";
 	}
 		
-	//////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////
 
-	public boolean aggiungiImmaginePreparazione(String pathImmagine) {
-		return pathsImmaginiPreparazione.add(pathImmagine);
+	public boolean aggiungiImmaginePreparazione(File immagine) {
+		return immaginiPreparazione.add(immagine);
 	}
 	
-	public boolean rimuoviImmaginePrepazione(String pathImmagine) {
-		return pathsImmaginiPreparazione.remove(pathImmagine);
+	public boolean rimuoviImmaginePrepazione(File immagine) {
+		return immaginiPreparazione.remove(immagine);
 	}
 	
-	public boolean aggiungiVideoPreparazione(String pathVideo) {
-		return pathsVideoPreparazione.add(pathVideo);
+	public boolean aggiungiVideoPreparazione(File video) {
+		return videoPreparazione.add(video);
 	}
 	
-	public boolean rimuoviVideoPrepazione(String pathVideo) {
-		return pathsVideoPreparazione.remove(pathVideo);
+	public boolean rimuoviVideoPrepazione(File video) {
+		return videoPreparazione.remove(video);
 	}
 
 	public boolean aggiungiCommento(Commento commento) {
@@ -227,12 +228,13 @@ public class Ricetta {
 	//////////////////////////////////
 	//////////////////////////////////
 	
-	public Long getVotoComplessivo() {
-		Long votoComplessivo = new Long(0);
+	public Double getVotoComplessivo() {
+		Double votoComplessivo = new Double(0.0);
 		for (Voto voto : voti) {
 			votoComplessivo += voto.getValore();
 		}
-		return (votoComplessivo / voti.size());
+		votoComplessivo /= voti.size();
+		return new BigDecimal(votoComplessivo).setScale(2, RoundingMode.HALF_UP).doubleValue(); /* arrotondamento double ad una cifra decimale */
 	} 
 
 }

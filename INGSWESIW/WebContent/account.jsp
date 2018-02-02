@@ -1,7 +1,9 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="utente" class="model.Utente" scope="request" />
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<jsp:useBean id="utente" class="model.Utente" scope="request"/>
 <jsp:setProperty name="utente" property="name" value="un Name"/>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -22,7 +24,6 @@
 		<div class="form-group"><label for="confermaPassword">Conferm password:</label>  <input name="confirmPassword" type="password" placeholder="Confirm Password" class="form-control" /> </div> 	
 		<div class="form-group"><input name="create" type="submit" value="Create"  class="btn btn-success"/></div>		
 	</form>
-
 </div>
 </section>
 	

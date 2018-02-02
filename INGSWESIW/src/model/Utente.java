@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class Utente {
 	
 	private String username; /* username dell'utente */
 	private String email; /* email dell'utente */
-	private String immagineProfilo; /* immagine del profilo dell'utente */
+	private File immagineProfilo; /* immagine profilo dell'utente */
 	
 	/* Da implementare: nome e cognome */
 	/* Da implementare: data di nascita */
@@ -38,7 +39,7 @@ public class Utente {
 		return email;
 	}
 	
-	public String getImmagineProfilo() {
+	public File getImmagineProfilo() {
 		return immagineProfilo;
 	}
 	
@@ -70,8 +71,8 @@ public class Utente {
 		this.email = email;
 	}
 	
-	public void setImmagineProfilo(String pathImmagineProfilo) {
-		this.immagineProfilo = pathImmagineProfilo;
+	public void setImmagineProfilo(File immagineProfilo) {
+		this.immagineProfilo = immagineProfilo;
 	}
 		
 	public void setRicetteInBozza(List<Ricetta> ricetteInBozza) {
