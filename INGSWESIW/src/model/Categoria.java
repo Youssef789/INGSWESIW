@@ -20,7 +20,7 @@ public enum Categoria { /* Categoria della ricetta */
 	///////////////////////////////////
 	///////////////////////////////////
 	
-	public String toStringFormatted() {
+	public String toStringFormatted() { // (es.) PRIMI_PIATTI ---> Primi piatti
 		String stringFormatted = super.toString();
 		stringFormatted = stringFormatted.substring(0, 1).toUpperCase() + stringFormatted.substring(1).toLowerCase();
 		stringFormatted = stringFormatted.replace('_', ' ');

@@ -1,8 +1,6 @@
-package controller;
+package controller.raw;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +8,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
+import model.Utente;
+import model.Voto;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
+import persistence.dao.VotoDao;
 
 /**
- * Servlet implementation class GetVotes
+ * Servlet implementation class Vote
  */
-@WebServlet("/GetVotes")
-public class GetVotes extends HttpServlet {
+@WebServlet("/Vote")
+public class Vote extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetVotes() {
+    public Vote() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,14 +41,20 @@ public class GetVotes extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId=request.getParameter("idRecipe");
-		Long id=Long.parseLong(recipeId);
-		//Ricetta recipe= ricettaDao.findByPrimaryKey(id);
-		//Long votoComplessivo= recipe.getVotoComplessivo();
-		//request.setAttribute("votoComplessivo", votoComplessivo);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/displayRecipe.jsp");
-		dispatcher.forward(request,response);
+		Utente utente = (Utente) request.getSession().getAttribute("username");
+		RicettaDao ricettaDao = DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		String recipeId = request.getParameter("idRecipe");
+		Long id = Long.parseLong(recipeId);
+		Ricetta recipe = ricettaDao.findByPrimaryKey(id);
+		String votoInserito = request.getParameter("rating");
+		Integer valore = Integer.parseInt(votoInserito);
+	    Voto vote = new Voto();
+	    vote.setRicetta(recipe);
+	    vote.setUtente(utente);
+	    vote.setValore(valore);
+	    VotoDao votoDao = DatabaseManager.getInstance().getDaoFactory().getVotoDAO();
+	    votoDao.save(vote);
+	    request.setAttribute("vote", vote);
 	}
 
 }

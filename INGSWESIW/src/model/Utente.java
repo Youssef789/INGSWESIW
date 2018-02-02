@@ -10,24 +10,12 @@ public class Utente {
 	private String email; /* email dell'utente */
 	private File immagineProfilo; /* immagine profilo dell'utente */
 	
-	/* Da implementare: nome e cognome */
-	/* Da implementare: data di nascita */
-	/* Da implementare: luogo (forse...) */
-	
 	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
 	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>(); /* elenco delle ricette pubblicate dall'utente  */
 	private List<Ricetta> ricettePreferite = new LinkedList<Ricetta>(); /* elenco delle ricette preferite dall'utente  */
 	  
 	private List<Commento> commentiPubblicati = new LinkedList<Commento>(); /* elenco dei commenti pubblicati dall'utente */
 	private List<Voto> votiEspressi = new LinkedList<Voto>(); /* elenco dei voti espressi dall'utente */
-
-	/* Da implementare: followings */
-	/* Da implementare: followers */
-	
-	/* Da implementare: notifiche ricevute */
-	
-	/* Da implementare: segnalazioni effettuate */
-	/* Da implementare: segnalazioni ricevute (amministratore) */
 	
 	public Utente() { }
 	
@@ -168,5 +156,5 @@ public class Utente {
 	public boolean rimuoviVotoEspresso(Voto voto) {
 		return votiEspressi.remove(voto);
 	}
-
+	
 }

@@ -1,7 +1,6 @@
-package controller;
+package controller.raw;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,16 +14,16 @@ import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
 /**
- * Servlet implementation class MyProfile
+ * Servlet implementation class DeleteRecipe
  */
-@WebServlet("/MyProfile")
-public class MyProfile extends HttpServlet {
+@WebServlet("/DeleteRecipe")
+public class DeleteRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyProfile() {
+    public DeleteRecipe() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +32,19 @@ public class MyProfile extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-//		List<Ricetta> recipes=ricettaDao.findByPrimaryKey(id);
-//		request.setAttribute("myrecipes", myrecipes);
-//		RequestDispatcher dispatcher=request.getRequestDispatcher("pages/profile/index.jsp");
-//		dispatcher.forward(request,response);
+		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		String recipeId=request.getParameter("idRecipe");
+		Long id=Long.parseLong(recipeId);
+		Ricetta recipe= ricettaDao.findByPrimaryKey(id);
+		ricettaDao.delete(recipe);
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

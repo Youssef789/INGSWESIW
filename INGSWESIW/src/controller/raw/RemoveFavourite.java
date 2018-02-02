@@ -1,29 +1,23 @@
-package controller;
+package controller.raw;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Ricetta;
-import persistence.DatabaseManager;
-import persistence.dao.RicettaDao;
-
 /**
- * Servlet implementation class EditRecipe
+ * Servlet implementation class RemoveFavourite
  */
-@WebServlet("/EditRecipe")
-public class EditRecipe extends HttpServlet {
+@WebServlet("/RemoveFavourite")
+public class RemoveFavourite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditRecipe() {
+    public RemoveFavourite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +26,8 @@ public class EditRecipe extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao = DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId = request.getParameter("idRecipe");
-		Long id = Long.parseLong(recipeId);
-		Ricetta recipe = ricettaDao.findByPrimaryKey(id);
-		request.setAttribute("recipe", recipe);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/editRecipe.jsp");
-		dispatcher.forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

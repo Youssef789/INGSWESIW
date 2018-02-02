@@ -1,5 +1,9 @@
 package persistence.dao.jdbc;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +26,40 @@ public class UtenteProxy extends Utente {
 
 	public UtenteProxy(DataSource dataSource) {
 		this.dataSource = dataSource;
+	}
+	
+	@Override
+	public File getImmagineProfilo() {
+		Connection connection = this.dataSource.getConnection();
+		File immagineProfilo = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from immagine_profilo where utente_username = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, this.getUsername());
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				immagineProfilo = new File(result.getString("immagine_nome"));
+				byte[] immagine = result.getBytes("immagine");
+			    FileOutputStream fos = new FileOutputStream(immagineProfilo);
+			    fos.write(immagine);
+			    fos.close();
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		this.setImmagineProfilo(immagineProfilo);
+		return super.getImmagineProfilo();
 	}
 	
 	@Override
@@ -72,7 +110,6 @@ public class UtenteProxy extends Utente {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));

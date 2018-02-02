@@ -1,4 +1,4 @@
-package controller;
+package controller.raw;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,23 +6,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import model.Commento;
 import model.Ricetta;
-import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 import persistence.dao.CommentoDao;
+
 /**
- * Servlet implementation class comment
+ * Servlet implementation class DeleteComment
  */
-@WebServlet("/Comment")
-public class Comment extends HttpServlet {
+@WebServlet("/DeleteComment")
+public class DeleteComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Comment() {
+    public DeleteComment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,21 +40,11 @@ public class Comment extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		Utente utente = (Utente) request.getSession().getAttribute("username");
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId=request.getParameter("idRecipe");
-		Long id=Long.parseLong(recipeId);
-		Ricetta recipe= ricettaDao.findByPrimaryKey(id);
-		String commento=request.getParameter("comment");
-	    Commento comment=new Commento();
-	    comment.setRicetta(recipe);
-	    comment.setUtente(utente);
-	    comment.setContenuto(commento);
-	    CommentoDao commentoDao=DatabaseManager.getInstance().getDaoFactory().getCommentoDAO();
-	    commentoDao.save(comment);
-	    request.setAttribute("comment", comment);
-		
+		CommentoDao commentoDao=DatabaseManager.getInstance().getDaoFactory().getCommentoDAO();
+		String commentId=request.getParameter("idComment");
+		Long id=Long.parseLong(commentId);
+		Commento comment= commentoDao.findByPrimaryKey(id);
+		commentoDao.delete(comment);
 	}
 
 }

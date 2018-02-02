@@ -24,7 +24,7 @@ public class Test {
 		DAOFactory factory = DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
 		UtilDao util = factory.getUtilDAO();
 		
-		util.dropDatabase(); /* reset database... */
+		util.dropDatabase(); /* reset database */
 		util.createDatabase(); /* creazione database */
 		
 		////////////////////////
@@ -42,12 +42,10 @@ public class Test {
 		 
 		UtenteDao utenteDao = factory.getUtenteDAO();
 		
-		File file = new File("C:/Users/Manuel/Desktop/1.jpg");
-		
 		Utente utente1 = new Utente();
 		utente1.setUsername("myousef");
 		utente1.setEmail("yousef@yahoo.com");
-		utente1.setImmagineProfilo(file);
+		utente1.setImmagineProfilo(new File("C:/Users/Manuel/Desktop/1.jpg"));
 		
 		Utente utente2 = new Utente();
 		utente2.setUsername("r0ckY909");
@@ -74,19 +72,11 @@ public class Test {
 		System.out.println("Cerco \"RenataLimbranata\"... " + utenteDao.findByPrimaryKey("RenataLimbranata"));
 		System.out.println("Cerco \"mmazza@gmail.com\"... " + utenteDao.findByEmail("mmazza@gmail.com"));
 		
-		System.out.println(utenteDao.findByPrimaryKey("myousef").getImmagineProfilo());
 		
-		File file2 = new File(utenteDao.findByPrimaryKey("myousef").getImmagineProfilo(), "C:/Users/Manuel/Desktop/My files/" + utenteDao.findByPrimaryKey("myousef").getImmagineProfilo().getName());
-		
-		if (!file2.exists()) {
-			try {
-				file2.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+
 	
+		
+		
 
 //		utente2.setEmail("ammazza@gmail.com");
 //		utenteDao.setPassword(utente3, "987");

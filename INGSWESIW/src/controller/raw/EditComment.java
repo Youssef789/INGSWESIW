@@ -1,4 +1,4 @@
-package controller;
+package controller.raw;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,24 +7,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Commento;
 import model.Ricetta;
 import model.Utente;
-import model.Voto;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
-import persistence.dao.VotoDao;
+import persistence.dao.CommentoDao;
 
 /**
- * Servlet implementation class Vote
+ * Servlet implementation class EditComment
  */
-@WebServlet("/Vote")
-public class Vote extends HttpServlet {
+@WebServlet("/EditComment")
+public class EditComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Vote() {
+    public EditComment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,20 +41,20 @@ public class Vote extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		Utente utente = (Utente) request.getSession().getAttribute("username");
-		RicettaDao ricettaDao = DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId = request.getParameter("idRecipe");
-		Long id = Long.parseLong(recipeId);
-		Ricetta recipe = ricettaDao.findByPrimaryKey(id);
-		String votoInserito = request.getParameter("rating");
-		Integer valore = Integer.parseInt(votoInserito);
-	    Voto vote = new Voto();
-	    vote.setRicetta(recipe);
-	    vote.setUtente(utente);
-	    vote.setValore(valore);
-	    VotoDao votoDao = DatabaseManager.getInstance().getDaoFactory().getVotoDAO();
-	    votoDao.save(vote);
-	    request.setAttribute("vote", vote);
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		String recipeId=request.getParameter("idRecipe");
+		Long id=Long.parseLong(recipeId);
+		Ricetta recipe= ricettaDao.findByPrimaryKey(id);
+		String commento=request.getParameter("Comment");
+	    Commento comment=new Commento();
+	    comment.setRicetta(recipe);
+	    comment.setUtente(utente);
+	    comment.setContenuto(commento);
+	    CommentoDao commentoDao=DatabaseManager.getInstance().getDaoFactory().getCommentoDAO();
+	    commentoDao.update(comment);
+	    request.setAttribute("comment", comment);
 	}
 
 }

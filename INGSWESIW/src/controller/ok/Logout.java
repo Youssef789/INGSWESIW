@@ -1,4 +1,4 @@
-package controller;
+package controller.ok;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class logout
  */
 @WebServlet("/logout")
-public class logout extends HttpServlet {
+public class Logout extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//HttpSession session= request.getSession();
