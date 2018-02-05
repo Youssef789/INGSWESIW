@@ -63,7 +63,6 @@ public class Utente {
 	
 	public void setImmagineProfilo(File immagineProfilo) {
 		String fileExtension = getFileExtension(immagineProfilo);
-		System.out.println(fileExtension);
 		for (int i = 0; i < imageFileExtensionsAccepted.length; i++) {
 			fileExtension = fileExtension.toLowerCase();
 			if (fileExtension.equals(imageFileExtensionsAccepted[i])) {
@@ -174,8 +173,8 @@ public class Utente {
 	
     private static String getFileExtension(File file) {
         String fileName = file.getName();
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+        	return fileName.substring(fileName.lastIndexOf(".") + 1);
         else return "";
     }
 	

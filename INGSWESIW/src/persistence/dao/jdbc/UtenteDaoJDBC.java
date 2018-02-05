@@ -62,6 +62,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
 	}
 	
+
 	@Override
 	public Utente findByPrimaryKey(String username) {
 		Connection connection = this.dataSource.getConnection();
@@ -89,6 +90,33 @@ public class UtenteDaoJDBC implements UtenteDao {
 		return utente;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public List<Utente> findAll() {		
 		Connection connection = this.dataSource.getConnection();
@@ -126,6 +154,8 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(1, utente.getEmail());
 			statement.setString(2, utente.getUsername());
 			statement.executeUpdate();
+			
+			
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -137,6 +167,21 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void delete(Utente utente) {
 		Connection connection = this.dataSource.getConnection();

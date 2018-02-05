@@ -206,7 +206,6 @@ public class Ricetta {
 
 	public boolean aggiungiImmaginePreparazione(File immagine) {
 		String fileExtension = getFileExtension(immagine);
-		System.out.println(fileExtension);
 		for (int i = 0; i < imageFileExtensionsAccepted.length; i++) {
 			fileExtension = fileExtension.toLowerCase();
 			if (fileExtension.equals(imageFileExtensionsAccepted[i])) {
@@ -222,7 +221,6 @@ public class Ricetta {
 	
 	public boolean aggiungiVideoPreparazione(File video) {
 		String fileExtension = getFileExtension(video);
-		System.out.println(fileExtension);
 		for (int i = 0; i < videoFileExtensionsAccepted.length; i++) {
 			fileExtension = fileExtension.toLowerCase();
 			if (fileExtension.equals(videoFileExtensionsAccepted[i])) {
@@ -271,8 +269,8 @@ public class Ricetta {
 	
     private static String getFileExtension(File file) {
         String fileName = file.getName();
-        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+        	return fileName.substring(fileName.lastIndexOf(".") + 1);
         else return "";
     }
 

@@ -35,6 +35,7 @@ public class Test {
 		System.out.println("/////////////////////////");
 		System.out.println("/////////////////////////");
 		System.out.println("/////////////////////////");
+		System.out.println();
 	
 		///////////////////////////
 		// Inserimento utenti... //
@@ -45,7 +46,6 @@ public class Test {
 		Utente utente1 = new Utente();
 		utente1.setUsername("myousef");
 		utente1.setEmail("yousef@yahoo.com");
-		utente1.setImmagineProfilo(new File("C:/Users/Manuel/Desktop/new 1.txt"));
 		
 		Utente utente2 = new Utente();
 		utente2.setUsername("r0ckY909");
@@ -54,6 +54,10 @@ public class Test {
 		Utente utente3 = new Utente();
 		utente3.setUsername("CiccioPasticcio");
 		utente3.setEmail("cpasticcio@gmail.com");
+		
+		System.out.println("Inserisco " + utente1 + " con password \"123\"");
+		System.out.println("Inserisco " + utente2 + " con password \"456\"");
+		System.out.println("Inserisco " + utente3 + " con password \"789\"");
 				
 		utenteDao.save(utente1, "123");
 		utenteDao.save(utente2, "456");
@@ -72,27 +76,27 @@ public class Test {
 		System.out.println("Cerco \"RenataLimbranata\"... " + utenteDao.findByPrimaryKey("RenataLimbranata"));
 		System.out.println("Cerco \"mmazza@gmail.com\"... " + utenteDao.findByEmail("mmazza@gmail.com"));
 		
-		
+		System.out.println();
+		System.out.println("Update immagine profilo di " + utente1 + " con " + utente1.getImmagineProfilo());
+		System.out.println("Update password di " + utente2 + " con password \"654\"");
+		System.out.println("Update email di " + utente3 + " con email \"cicciopasticcio@gmail.com\"");
 
-	
+		utente1.setImmagineProfilo(new File("WebContent/images/manuel-profile-picture.jpg"));
+		utenteDao.setPassword(utente2, "654");
+		utente3.setEmail("cicciopasticcio@gmail.com");
 		
+		utenteDao.update(utente1);
+		utenteDao.update(utente2);
+		utenteDao.update(utente3);
 		
-
-//		utente2.setEmail("ammazza@gmail.com");
-//		utenteDao.setPassword(utente3, "987");
-//		
-//		utenteDao.update(utente1);
-//		utenteDao.update(utente2);
-//		utenteDao.update(utente3);
-//		
-//		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
-//		
-//		for (Utente utente : utenteDao.findAll()) {
-//			System.out.println(utente); /* stampo utente */
-//			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
-//			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
-//			System.out.println();
-//		}
+		System.out.println("\n" + "Elenco utenti presenti..." + "\n");
+		
+		for (Utente utente : utenteDao.findAll()) {
+			System.out.println(utente); /* stampo utente */
+			UtenteCredenziali utenteCredenziali = utenteDao.findByPrimaryKeyCredential(utente.getUsername());
+			System.out.println(utenteCredenziali); /* stampo utenteCredenziali */
+			System.out.println();
+		}
 
 		////////////////////////////
 		// Inserimento ricette... //
