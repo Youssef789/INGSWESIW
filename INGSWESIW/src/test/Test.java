@@ -45,7 +45,7 @@ public class Test {
 		Utente utente1 = new Utente();
 		utente1.setUsername("myousef");
 		utente1.setEmail("yousef@yahoo.com");
-		utente1.setImmagineProfilo(new File("C:/Users/Manuel/Desktop/1.jpg"));
+		utente1.setImmagineProfilo(new File("C:/Users/Manuel/Desktop/new 1.txt"));
 		
 		Utente utente2 = new Utente();
 		utente2.setUsername("r0ckY909");

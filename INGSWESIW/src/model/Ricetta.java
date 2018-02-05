@@ -4,10 +4,13 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class Ricetta {
+public class Ricetta { 
+	
+	private static final String[] imageFileExtensionsAccepted = { "png", "jpg", "jpeg" }; /* estensioni immagini accettati */
+	private static final String[] videoFileExtensionsAccepted = { "avi", "mp4" }; /* estensioni video accettati */
 	
 	private Long id; /* id della ricetta */
 	private Timestamp dataPubblicazione; /* se la ricetta non è stata ancora pubblicata (è in bozza), sarà null, altrimenti gli viene assegnato nel jdbc in save */
@@ -20,11 +23,11 @@ public class Ricetta {
 	private String ingredienti; /* ingredienti e quantità della ricetta */
 	private String descrizione; /* descrizione della ricetta */
 	private String preparazione; /* spiegazione sulla preparazione della ricetta */
-	private List<File> immaginiPreparazione = new LinkedList<File>(); /* immagini a supporto alla spiegazione sulla preparazione della ricetta */
-	private List<File> videoPreparazione = new LinkedList<File>(); /* video a supporto alla spiegazione sulla preparazione della ricetta */
+	private Set<File> immaginiPreparazione = new LinkedHashSet<File>(); /* immagini a supporto alla spiegazione sulla preparazione della ricetta */
+	private Set<File> videoPreparazione = new LinkedHashSet<File>(); /* video a supporto alla spiegazione sulla preparazione della ricetta */
 	
-	private List<Commento> commenti = new LinkedList<Commento>(); /* elenco dei commenti effettuati sulla ricetta */
-	private List<Voto> voti = new LinkedList<Voto>(); /* elenco dei voti espressi sulla ricetta */
+	private Set<Commento> commenti = new LinkedHashSet<Commento>(); /* elenco dei commenti effettuati sulla ricetta */
+	private Set<Voto> voti = new LinkedHashSet<Voto>(); /* elenco dei voti espressi sulla ricetta */
 	
 	private Utente utente; /* utente proprietario della ricetta */
 		
@@ -53,13 +56,13 @@ public class Ricetta {
 	public Difficolta getDifficolta() {
 		return difficolta;
 	}
+	
+	public String getTempoPreparazione() {
+		return tempoPreparazione;
+	}
 
 	public File getImmaginePrincipale() {
 		return immaginePrincipale;
-	}
-
-	public String getTempoPreparazione() {
-		return tempoPreparazione;
 	}
 
 	public String getIngredienti() {
@@ -74,19 +77,19 @@ public class Ricetta {
 		return preparazione;
 	}
 
-	public List<File> getImmaginiPreparazione() {
+	public Set<File> getImmaginiPreparazione() {
 		return immaginiPreparazione;
 	}
 
-	public List<File> getVideoPreparazione() {
+	public Set<File> getVideoPreparazione() {
 		return videoPreparazione;
 	}
 	
-	public List<Commento> getCommenti() {
+	public Set<Commento> getCommenti() {
 		return commenti;
 	}
 
-	public List<Voto> getVoti() {
+	public Set<Voto> getVoti() {
 		return voti;
 	}
 	
@@ -117,13 +120,22 @@ public class Ricetta {
 	public void setDifficolta(Difficolta difficolta) {
 		this.difficolta = difficolta;
 	}
-
-	public void setPathImmaginePrincipale(File immagine) {
-		this.immaginePrincipale = immagine;
-	}
-
+	
 	public void setTempoPreparazione(String tempoPreparazione) {
 		this.tempoPreparazione = tempoPreparazione;
+	}
+
+	public void setImmaginePrincipale(File immagine) {
+		String fileExtension = getFileExtension(immagine);
+		System.out.println(fileExtension);
+		for (int i = 0; i < imageFileExtensionsAccepted.length; i++) {
+			fileExtension = fileExtension.toLowerCase();
+			if (fileExtension.equals(imageFileExtensionsAccepted[i])) {
+				this.immaginePrincipale = immagine;
+				return;
+			}
+		}
+		throw new ImageNotSupportedException();
 	}
 
 	public void setIngredienti(String ingredienti) {
@@ -138,19 +150,19 @@ public class Ricetta {
 		this.preparazione = preparazione;
 	}
 
-	public void setImmaginiPreparazione(List<File> immaginiPreparazione) {
+	public void setImmaginiPreparazione(Set<File> immaginiPreparazione) {
 		this.immaginiPreparazione = immaginiPreparazione;
 	}
 
-	public void setVideoPreparazione(List<File> videoPreparazione) {
+	public void setVideoPreparazione(Set<File> videoPreparazione) {
 		this.videoPreparazione = videoPreparazione;
 	}
 
-	public void setCommenti(List<Commento> commenti) {
+	public void setCommenti(Set<Commento> commenti) {
 		this.commenti = commenti;
 	}
 	
-	public void setVoti(List<Voto> voti) {
+	public void setVoti(Set<Voto> voti) {
 		this.voti = voti;
 	}
 	
@@ -193,7 +205,15 @@ public class Ricetta {
 	////////////////////////////////////////////////////////////
 
 	public boolean aggiungiImmaginePreparazione(File immagine) {
-		return immaginiPreparazione.add(immagine);
+		String fileExtension = getFileExtension(immagine);
+		System.out.println(fileExtension);
+		for (int i = 0; i < imageFileExtensionsAccepted.length; i++) {
+			fileExtension = fileExtension.toLowerCase();
+			if (fileExtension.equals(imageFileExtensionsAccepted[i])) {
+				return immaginiPreparazione.add(immagine);
+			}
+		}
+		throw new ImageNotSupportedException("Formato immagine non supportato!");
 	}
 	
 	public boolean rimuoviImmaginePrepazione(File immagine) {
@@ -201,7 +221,15 @@ public class Ricetta {
 	}
 	
 	public boolean aggiungiVideoPreparazione(File video) {
-		return videoPreparazione.add(video);
+		String fileExtension = getFileExtension(video);
+		System.out.println(fileExtension);
+		for (int i = 0; i < videoFileExtensionsAccepted.length; i++) {
+			fileExtension = fileExtension.toLowerCase();
+			if (fileExtension.equals(videoFileExtensionsAccepted[i])) {
+				return immaginiPreparazione.add(video);
+			}
+		}
+		throw new VideoNotSupportedException("Formato video non supportato!");
 	}
 	
 	public boolean rimuoviVideoPrepazione(File video) {
@@ -235,6 +263,17 @@ public class Ricetta {
 		}
 		votoComplessivo /= voti.size();
 		return new BigDecimal(votoComplessivo).setScale(2, RoundingMode.HALF_UP).doubleValue(); /* arrotondamento double ad una cifra decimale */
-	} 
+	}
+	
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
+        else return "";
+    }
 
 }

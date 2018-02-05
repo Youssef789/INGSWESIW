@@ -1,21 +1,23 @@
 package model;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Utente {
+	
+	private static final String[] imageFileExtensionsAccepted = { "jpg", "jpeg", "png" }; /* estensioni immagini accettati */
 	
 	private String username; /* username dell'utente */
 	private String email; /* email dell'utente */
 	private File immagineProfilo; /* immagine profilo dell'utente */
 	
-	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
-	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>(); /* elenco delle ricette pubblicate dall'utente  */
-	private List<Ricetta> ricettePreferite = new LinkedList<Ricetta>(); /* elenco delle ricette preferite dall'utente  */
+	private Set<Ricetta> ricetteInBozza = new LinkedHashSet<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
+	private Set<Ricetta> ricettePubblicate = new LinkedHashSet<Ricetta>(); /* elenco delle ricette pubblicate dall'utente  */
+	private Set<Ricetta> ricettePreferite = new LinkedHashSet<Ricetta>(); /* elenco delle ricette preferite dall'utente  */
 	  
-	private List<Commento> commentiPubblicati = new LinkedList<Commento>(); /* elenco dei commenti pubblicati dall'utente */
-	private List<Voto> votiEspressi = new LinkedList<Voto>(); /* elenco dei voti espressi dall'utente */
+	private Set<Commento> commentiPubblicati = new LinkedHashSet<Commento>(); /* elenco dei commenti pubblicati dall'utente */
+	private Set<Voto> votiEspressi = new LinkedHashSet<Voto>(); /* elenco dei voti espressi dall'utente */
 	
 	public Utente() { }
 	
@@ -31,23 +33,23 @@ public class Utente {
 		return immagineProfilo;
 	}
 	
-	public List<Ricetta> getRicetteInBozza() {
+	public Set<Ricetta> getRicetteInBozza() {
 		return ricetteInBozza;
 	}
 	
-	public List<Ricetta> getRicettePubblicate() {
+	public Set<Ricetta> getRicettePubblicate() {
 		return ricettePubblicate;
 	}
 	
-	public List<Ricetta> getRicettePreferite() {
+	public Set<Ricetta> getRicettePreferite() {
 		return ricettePreferite;
 	}
 	
-	public List<Commento> getCommentiPubblicati() {
+	public Set<Commento> getCommentiPubblicati() {
 		return commentiPubblicati;
 	}
 
-	public List<Voto> getVotiEspressi() {
+	public Set<Voto> getVotiEspressi() {
 		return votiEspressi;
 	}
 	
@@ -60,26 +62,35 @@ public class Utente {
 	}
 	
 	public void setImmagineProfilo(File immagineProfilo) {
-		this.immagineProfilo = immagineProfilo;
+		String fileExtension = getFileExtension(immagineProfilo);
+		System.out.println(fileExtension);
+		for (int i = 0; i < imageFileExtensionsAccepted.length; i++) {
+			fileExtension = fileExtension.toLowerCase();
+			if (fileExtension.equals(imageFileExtensionsAccepted[i])) {
+				this.immagineProfilo = immagineProfilo;
+				return;
+			}
+		}
+		throw new ImageNotSupportedException("Formato immagine non supportato!");
 	}
 		
-	public void setRicetteInBozza(List<Ricetta> ricetteInBozza) {
+	public void setRicetteInBozza(Set<Ricetta> ricetteInBozza) {
 		this.ricetteInBozza = ricetteInBozza;
 	}
 
-	public void setRicettePubblicate(List<Ricetta> ricettePubblicate) {
+	public void setRicettePubblicate(Set<Ricetta> ricettePubblicate) {
 		this.ricettePubblicate = ricettePubblicate;
 	}
 
-	public void setRicettePreferite(List<Ricetta> ricettePreferite) {
+	public void setRicettePreferite(Set<Ricetta> ricettePreferite) {
 		this.ricettePreferite = ricettePreferite;
 	}
 
-	public void setCommentiPubblicati(List<Commento> commentiPubblicati) {
+	public void setCommentiPubblicati(Set<Commento> commentiPubblicati) {
 		this.commentiPubblicati = commentiPubblicati;
 	}
 
-	public void setVotiEspressi(List<Voto> votiEspressi) {
+	public void setVotiEspressi(Set<Voto> votiEspressi) {
 		this.votiEspressi = votiEspressi;
 	}
 
@@ -110,7 +121,7 @@ public class Utente {
 	
 	@Override
 	public String toString() {
-		return "Utente [username = " + username + ", email = " + email + ", immagineProfilo = " + immagineProfilo + "]";
+		return "Utente [username = " + username + ", email = " + email + ", immagineProfilo = " + this.getImmagineProfilo() + "]";
 	}
 	
 	////////////////////////////////////////////////////////
@@ -156,5 +167,16 @@ public class Utente {
 	public boolean rimuoviVotoEspresso(Voto voto) {
 		return votiEspressi.remove(voto);
 	}
+	
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+        return fileName.substring(fileName.lastIndexOf(".") + 1);
+        else return "";
+    }
 	
 }

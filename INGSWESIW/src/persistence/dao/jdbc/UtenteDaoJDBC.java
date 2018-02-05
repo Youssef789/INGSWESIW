@@ -37,7 +37,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.executeUpdate();
 			File immagineProfilo = utente.getImmagineProfilo(); 
 			if (immagineProfilo == null) {
-				immagineProfilo = new File("assets/default-profile-picture.jpg");
+				immagineProfilo = new File("WebContent/images/default-profile-picture.jpg"); /* path dell'immagine di default del profilo utente */
 			} 			
 			FileInputStream fis = new FileInputStream(immagineProfilo);
 			insert = "insert into immagine_profilo (immagine_nome, immagine, utente_username) values (?, ?, ?)";
@@ -47,7 +47,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(3, utente.getUsername());
 			statement.executeUpdate();
 			fis.close();
-			
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} catch (FileNotFoundException e) {
@@ -122,10 +121,10 @@ public class UtenteDaoJDBC implements UtenteDao {
 	public void update(Utente utente) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update utente set email = ?, immagineProfilo = ? where username = ?";
+			String update = "update utente set email = ? where username = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, utente.getEmail());
-			statement.setString(3, utente.getUsername());
+			statement.setString(2, utente.getUsername());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());

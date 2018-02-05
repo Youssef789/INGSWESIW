@@ -104,7 +104,7 @@ public class CreateRecipe extends HttpServlet {
 		Ricetta ricetta=new Ricetta();
 		ricetta.setUtente(utente);
 		ricetta.setTitolo(title);
-		ricetta.setPathImmaginePrincipale(imagePath);
+		ricetta.setImmaginePrincipale(imagePath);
 		ricetta.setCategoria(Categoria.valueOf(category));
 		ricetta.setDifficolta(Difficolta.valueOf(difficulty));
 		ricetta.setTempoPreparazione(preparationTime);

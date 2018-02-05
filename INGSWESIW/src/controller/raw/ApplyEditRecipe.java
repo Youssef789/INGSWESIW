@@ -65,7 +65,7 @@ public class ApplyEditRecipe extends HttpServlet {
 			Ricetta ricetta=new Ricetta();
 			ricetta.setId(id);
 			ricetta.setTitolo(title);
-			ricetta.setPathImmaginePrincipale(imageName);
+			ricetta.setImmaginePrincipale(imageName);
 			ricetta.setCategoria(Categoria.valueOf(category));
 			ricetta.setDifficolta(Difficolta.valueOf(difficulty));
 			ricetta.setTempoPreparazione(preparationTime);

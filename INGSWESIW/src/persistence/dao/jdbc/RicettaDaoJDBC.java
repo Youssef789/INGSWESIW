@@ -41,7 +41,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(3, ricetta.getCategoria().toString());
 			statement.setString(4, ricetta.getDifficolta().toString());
 			statement.setString(5, ricetta.getTempoPreparazione());
-			statement.setString(6, ricetta.getPathImmaginePrincipale());
 			statement.setString(7, ricetta.getIngredienti());
 			statement.setString(8, ricetta.getDescrizione());
 			statement.setString(9, ricetta.getPreparazione());
@@ -80,7 +79,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(4, ricetta.getCategoria().toString());
 			statement.setString(5, ricetta.getDifficolta().toString());
 			statement.setString(6, ricetta.getTempoPreparazione());
-			statement.setString(7, ricetta.getPathImmaginePrincipale());
 			statement.setString(8, ricetta.getIngredienti());
 			statement.setString(9, ricetta.getDescrizione());
 			statement.setString(10, ricetta.getPreparazione());
@@ -128,7 +126,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -169,7 +166,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -212,7 +208,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -251,7 +246,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
+				ricetta.setImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -294,7 +289,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -337,7 +331,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -370,7 +363,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(2, ricetta.getCategoria().toString());
 			statement.setString(3, ricetta.getDifficolta().toString());
 			statement.setString(4, ricetta.getTempoPreparazione());
-			statement.setString(5, ricetta.getPathImmaginePrincipale());
 			statement.setString(6, ricetta.getIngredienti());
 			statement.setString(7, ricetta.getDescrizione());
 			statement.setString(8, ricetta.getPreparazione());
@@ -400,7 +392,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(3, ricetta.getCategoria().toString());
 			statement.setString(4, ricetta.getDifficolta().toString());
 			statement.setString(5, ricetta.getTempoPreparazione());
-			statement.setString(6, ricetta.getPathImmaginePrincipale());
 			statement.setString(7, ricetta.getIngredienti());
 			statement.setString(8, ricetta.getDescrizione());
 			statement.setString(9, ricetta.getPreparazione());
