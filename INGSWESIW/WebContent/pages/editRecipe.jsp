@@ -12,14 +12,14 @@
 <body>
 	<div class="col-xs-9" id="right">
 		<div class="col-md-9">
-			<form action="EditRecipe" method="get" enctype='multipart/form-data'>
+			<form action="EditRecipe?idRecipe=${recipe.id}" method="post" enctype='multipart/form-data'>
 				<div class="form-group">
 					<label for="title">Titolo:</label><input name="title" type="text"
 						value="${recipe.titolo}" class="form-control"/>
 				</div>
 				<div class="form-group">
 					<label for="photo">sceglie la foto principale:</label><input
-						type="file" name="photo" value="${recipe.pathImmaginePrincipale}" id="file">
+						type="file" name="photo" value="${recipe.nameImmaginePrincipale}" id="file">
 				</div>
 				<div class="form-group">
 					<label for="category">Categoria:</label> <select name="category"

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Commento;
 import model.Ricetta;
+import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.CommentoDao;
 import persistence.dao.RicettaDao;
@@ -19,7 +20,7 @@ import persistence.dao.RicettaDao;
 /**
  * Servlet implementation class GetComments
  */
-@WebServlet("/AllComments")
+
 public class AllComments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,14 +36,16 @@ public class AllComments extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String utenteUsername = (String) request.getSession().getAttribute("username");
+		Utente utente = new Utente();
+		utente.setUsername(utenteUsername);
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId=request.getParameter("idRecipe");
-		Long id=Long.parseLong(recipeId);
+		Long id=Long.parseLong(request.getParameter("idRecipe"));
 		Ricetta recipe= ricettaDao.findByPrimaryKey(id);
-		CommentoDao commentoDao=DatabaseManager.getInstance().getDaoFactory().getCommentoDAO();
-		List<Commento> comments=commentoDao.findByRicetta(recipe);
-		request.setAttribute("comments", comments);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/displayRecipe.jsp");
+		request.setAttribute("comments", recipe.getCommenti());
+		request.setAttribute("utente", utente);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/allcomments.jsp");
 		dispatcher.forward(request,response);
 	}
 

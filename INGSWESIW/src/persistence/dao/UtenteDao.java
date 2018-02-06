@@ -1,6 +1,8 @@
 package persistence.dao;
 
 import java.util.List;
+
+import model.Ricetta;
 import model.Utente;
 import persistence.dao.jdbc.UtenteCredenziali;
 
@@ -21,5 +23,7 @@ public interface UtenteDao {
 	public UtenteCredenziali findByPrimaryKeyCredential(String username);
 	
 	public void setPassword(Utente utente, String password);
+	
+	public void insertRicettaPreferita(Ricetta ricetta,Utente utente);
 	
 }

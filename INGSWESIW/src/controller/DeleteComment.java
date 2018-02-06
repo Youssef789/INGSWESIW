@@ -1,14 +1,20 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import model.Commento;
 import model.Ricetta;
+import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 import persistence.dao.CommentoDao;
@@ -20,9 +26,12 @@ import persistence.dao.CommentoDao;
 public class DeleteComment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	private class romoveComment{		
+		private String idComment;
+		@SuppressWarnings("unused")
+		private String remove;
+	}
+	
     public DeleteComment() {
         super();
         // TODO Auto-generated constructor stub
@@ -40,11 +49,15 @@ public class DeleteComment extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(request.getInputStream()));
+		String line =bufferedReader.readLine();
+		romoveComment jsonComment=new Gson().fromJson(line, romoveComment.class);
+		
 		CommentoDao commentoDao=DatabaseManager.getInstance().getDaoFactory().getCommentoDAO();
-		String commentId=request.getParameter("idComment");
-		Long id=Long.parseLong(commentId);
-		Commento comment= commentoDao.findByPrimaryKey(id);
+		Commento comment= commentoDao.findByPrimaryKey(Long.parseLong(jsonComment.idComment));
 		commentoDao.delete(comment);
+		response.getWriter().write("true");
+	
 	}
 
 }

@@ -246,5 +246,6 @@ public class VotoDaoJDBC implements VotoDao {
 		return voto;
 
 	}
+
 	
 }

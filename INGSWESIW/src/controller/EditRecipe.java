@@ -1,14 +1,19 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import model.Categoria;
+import model.Difficolta;
 import model.Ricetta;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
@@ -16,9 +21,12 @@ import persistence.dao.RicettaDao;
 /**
  * Servlet implementation class EditRecipe
  */
+@MultipartConfig
 @WebServlet("/EditRecipe")
 public class EditRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String SAVE_DIR="C:\\Users\\my\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames";
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,8 +42,7 @@ public class EditRecipe extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RicettaDao ricettaDao = DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String recipeId = request.getParameter("idRecipe");
-		Long id = Long.parseLong(recipeId);
-		Ricetta recipe = ricettaDao.findByPrimaryKey(id);
+		Ricetta recipe = ricettaDao.findByPrimaryKey(Long.parseLong(recipeId));
 		request.setAttribute("recipe", recipe);
 		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/editRecipe.jsp");
 		dispatcher.forward(request, response);
@@ -45,8 +52,44 @@ public class EditRecipe extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		Part filePart = request.getPart("photo");        
+	    String imageName = extracFilename(filePart);
+	    filePart.write(SAVE_DIR + File.separator +imageName);
+        String recipeId=request.getParameter("idRecipe");
+        String title =request.getParameter("title");
+		String category=request.getParameter("category");
+		String difficulty=request.getParameter("difficulty");
+		String preparationTime=request.getParameter("preparationTime");
+		String ingredient=request.getParameter("ingredient");
+		String description=request.getParameter("description");
+		String preparation=request.getParameter("preparation");
+		
+		Ricetta ricetta=new Ricetta();
+		ricetta.setId(Long.parseLong(recipeId));
+		ricetta.setTitolo(title);
+		ricetta.setNameImmaginePrincipale(imageName);
+		ricetta.setCategoria(Categoria.valueOf(category));
+		ricetta.setDifficolta(Difficolta.valueOf(difficulty));
+		ricetta.setTempoPreparazione(preparationTime);
+		ricetta.setIngredienti(ingredient);
+		ricetta.setDescrizione(description);
+		ricetta.setPreparazione(preparation);
+		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		ricettaDao.updateAsPubblicata(ricetta);
+		request.setAttribute("ricetta", ricetta);
+		response.sendRedirect("MyProfile");
+	}
+	
+	private String extracFilename(Part filePart) {
+		String contentDisp = filePart.getHeader("content-disposition");
+		String [] items =contentDisp.split(";");
+		for (String string : items) {
+			if(string.trim().startsWith("filename")) {
+				return string.substring(string.indexOf("=")+2, string.length() -1);
+			}
+		}
+		return " ";
 	}
 
 }

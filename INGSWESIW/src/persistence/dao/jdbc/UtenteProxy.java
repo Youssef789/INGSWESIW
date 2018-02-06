@@ -72,7 +72,7 @@ public class UtenteProxy extends Utente {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setPathImmaginePrincipale(result.getString("pathImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("pathImmaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));

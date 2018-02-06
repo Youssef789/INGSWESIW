@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Ricetta;
+import model.Utente;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
@@ -33,11 +34,15 @@ public class MyProfile extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicrttaDAO();
-//		List<Ricetta> recipes=ricettaDao.findByPrimaryKey(id);
-//		request.setAttribute("myrecipes", myrecipes);
-//		RequestDispatcher dispatcher=request.getRequestDispatcher("pages/profile/index.jsp");
-//		dispatcher.forward(request,response);
+		request.setCharacterEncoding("UTF-8");
+		String utenteUsername = (String) request.getSession().getAttribute("username");
+		Utente utente = new Utente();
+		utente.setUsername(utenteUsername);
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		List<Ricetta> myrecipes=ricettaDao.findAllPubblicateByUtente(utente);
+		request.setAttribute("myrecipes", myrecipes);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("pages/profile.jsp");
+		dispatcher.forward(request,response);
 	}
 
 	/**

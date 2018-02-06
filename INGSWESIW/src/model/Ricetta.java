@@ -15,7 +15,7 @@ public class Ricetta {
 	private Categoria categoria; /* categoria della ricetta */
 	private Difficolta difficolta; /* difficoltà della ricetta */
 	private String tempoPreparazione; /* tempo di preparazione della ricetta */
-	private String pathImmaginePrincipale; /* immagine principale della ricetta */
+	private String nameImmaginePrincipale; /* immagine principale della ricetta */
 	private String ingredienti; /* ingredienti e quantità della ricetta */
 	private String descrizione; /* descrizione della ricetta */
 	private String preparazione; /* spiegazione sulla preparazione della ricetta */
@@ -53,8 +53,8 @@ public class Ricetta {
 		return difficolta;
 	}
 
-	public String getPathImmaginePrincipale() {
-		return pathImmaginePrincipale;
+	public String getNameImmaginePrincipale() {
+		return nameImmaginePrincipale;
 	}
 
 	public String getTempoPreparazione() {
@@ -117,8 +117,8 @@ public class Ricetta {
 		this.difficolta = difficolta;
 	}
 
-	public void setPathImmaginePrincipale(String pathImmagine) {
-		this.pathImmaginePrincipale = pathImmagine;
+	public void setNameImmaginePrincipale(String nameImmagine) {
+		this.nameImmaginePrincipale = nameImmagine;
 	}
 
 	public void setTempoPreparazione(String tempoPreparazione) {

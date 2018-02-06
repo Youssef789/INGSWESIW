@@ -23,12 +23,13 @@
 							<li>
 								<figure class="recipe-photo">
 									<a href="GetRecipe?idRecipe=${recipe.id}"><img
-										src="image/image/${recipe.imageName}" width="214"
+										src="imageNames/${recipe.nameImmaginePrincipale}" width="214"
 										height="138"></a>
 
-									<a href="GetRecipe?idRecipe=${recipe.id}" id="title">${recipe.title}</a>
-									<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${recipe.category}</a>
-									<a href="" id="star">****</a>
+									<a href="GetRecipe?idRecipe=${recipe.id}" id="title">${recipe.titolo}</a>
+									<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${recipe.categoria}</a>
+									<a id="voti">4.7</a>
+									<label class="star-rating" for="voti" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
 								</figure>
 
 							</li>

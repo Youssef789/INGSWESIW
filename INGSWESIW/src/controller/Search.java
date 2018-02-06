@@ -35,9 +35,9 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String search=request.getParameter("search");
-		//List<Ricetta> result=ricettaDao.findByTitolo(search);
-		//request.setAttribute("result", result);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/index.jsp");
+		List<Ricetta> result=ricettaDao.findAllPubblicateByTitolo(search);
+		request.setAttribute("result", result);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/search.jsp");
 		dispatcher.forward(request,response);
 	}
 

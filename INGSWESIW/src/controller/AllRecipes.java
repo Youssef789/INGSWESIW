@@ -35,7 +35,7 @@ public class AllRecipes extends HttpServlet {
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		List<Ricetta> recipes=ricettaDao.findAllPubblicate();
 		request.setAttribute("recipes", recipes);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/index.jsp");
+		RequestDispatcher dispatcher=request.getRequestDispatcher("home.jsp");
 		dispatcher.forward(request,response);
 	}
 

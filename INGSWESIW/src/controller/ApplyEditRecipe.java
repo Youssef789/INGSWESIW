@@ -52,7 +52,6 @@ public class ApplyEditRecipe extends HttpServlet {
 	        String imageName=extracFilename(filePart);
 	        filePart.write(imagePath + File.separator + imageName);
 	        String recipeId=request.getParameter("idRecipe");
-			Long id=Long.parseLong(recipeId);
 	        String title =request.getParameter("title");
 			String category=request.getParameter("category");
 			String difficulty=request.getParameter("difficulty");
@@ -63,9 +62,9 @@ public class ApplyEditRecipe extends HttpServlet {
 			imagePath=imagePath + File.separator + imageName;
 			
 			Ricetta ricetta=new Ricetta();
-			ricetta.setId(id);
+			ricetta.setId(Long.parseLong(recipeId));
 			ricetta.setTitolo(title);
-			ricetta.setPathImmaginePrincipale(imageName);
+			//ricetta.setPathImmaginePrincipale(imageName);
 			ricetta.setCategoria(Categoria.valueOf(category));
 			ricetta.setDifficolta(Difficolta.valueOf(difficulty));
 			ricetta.setTempoPreparazione(preparationTime);
@@ -75,13 +74,13 @@ public class ApplyEditRecipe extends HttpServlet {
 			RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 			ricettaDao.updateAsPubblicata(ricetta);
 			request.setAttribute("ricetta", ricetta);
-			PrintWriter out = response.getWriter();
-			out.println("<html>");
-			out.println("<head><title>ricetta</title></head>");
-			out.println("<body>");
-			out.println("<h1>hai modificato la tua ricetta</h1>");
-			out.println("</body>");
-			out.println("</html>");	
+//			PrintWriter out = response.getWriter();
+//			out.println("<html>");
+//			out.println("<head><title>ricetta</title></head>");
+//			out.println("<body>");
+//			out.println("<h1>hai modificato la tua ricetta</h1>");
+//			out.println("</body>");
+//			out.println("</html>");	
 		}
 
 

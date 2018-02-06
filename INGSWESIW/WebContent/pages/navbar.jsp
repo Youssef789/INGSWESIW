@@ -20,7 +20,7 @@
 			
 				<form class="navbar-form navbar-left" action="Search">
 					<div class="form-group" class="col-xs-3">
-						<input id="search" type="text" class="form-control"
+						<input id="search" name="search" type="text" class="form-control"
 							placeholder="Search">
 					</div>
 					<button id="btnsearch" type="submit" class="btn btn-primary ">Search</button>
@@ -40,7 +40,7 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="home" href="AllRecipes">Home</a></li>
-					<li><a id="yourprofile" href="Profile">Profile</a></li>
+					<li><a id="yourprofile" href="MyProfile">Profile</a></li>
 					<li class="dropdown"><a id="user" class="dropdown-toggle"
 						data-toggle="dropdown" href="#">welcome : ${username}<span
 							class="caret"></span></a>
@@ -60,16 +60,17 @@
 				<nav id=mainNav>
 				
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="GetRecipeByCategory?category=antipasto">Antipasti</a></li>
-						<li><a href="GetRecipeByCategory?category=primo">Primi
-								Piatti</a></li>
-						<li><a href="GetRecipeByCategory?category=secondo">Secondi
-								Piatti</a></li>
-						<li><a href="GetRecipeByCategory?category=contorno">Contorni</a></li>
-						<li><a href="GetRecipeByCategory?category=lievitato">Lievitati</a></li>
-						<li><a href="GetRecipeByCategory?category=piattoUnico">Piatti
-								unici</a></li>
-						<li><a href="GetRecipeByCategory?category=dolce">Dolci</a></li>
+						<li><a href="GetRecipeByCategory?category=ANTIPASTI">Antipasti</a></li>
+						<li><a href="GetRecipeByCategory?category=PRIMI_PIATTI">Primi piatti</a></li>
+						<li><a href="GetRecipeByCategory?category=SECONDI_PIATTI">Secondi piatti</a></li>
+						<li><a href="GetRecipeByCategory?category=CONTORNI">Contorni</a></li>
+						<li><a href="GetRecipeByCategory?category=DOLCI">Dolci</a></li>					
+						<li><a href="GetRecipeByCategory?category=LIEVITATI">Lievitati</a></li>
+						<li><a href="GetRecipeByCategory?category=SALSE_E_SUGHI">Salse e sughi</a></li>
+						<li><a href="GetRecipeByCategory?category=MARMELLATE_E_CONSERVE">Marmellate e conserve</a></li>
+						<li><a href="GetRecipeByCategory?category=BEVANDE">Bevande</a></li>
+						<li><a href="GetRecipeByCategory?category=ALTRO">Altro</a></li>
+
 					</ul>
 
 				</nav>

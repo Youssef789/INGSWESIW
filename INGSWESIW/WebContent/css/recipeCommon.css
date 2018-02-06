@@ -14,13 +14,12 @@
  
   }
   
-  #search{ width: 400px;}
+  #search{ width: 300px;}
   #home,#yourprofile{display:block;}
   #user{
   display:block;
   }
 .recipe{
-  	  
     padding:20px;
     border-bottom: 1px solid #f4eefe;
     position: relative;
@@ -34,10 +33,21 @@
   }
   #category{
   position: absolute;
-    font-size: 18px;
+    font-size: 14px;
     margin-top: 50px;
     color: #54437e;
     order: 1;
+  }
+  #voti
+  {
+   position: relative;
+   display : inline-block;
+    font-size: 14px;
+    margin-top: 80px;
+    color: #54437e;
+  }
+.star-rating{
+  color: #f6973c;
   }
   .recipe-showcase{
   list-style: none;

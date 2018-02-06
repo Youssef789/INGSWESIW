@@ -29,5 +29,7 @@ public interface RicettaDao {
 	public void updateAsPubblicata(Ricetta ricetta);
 	
 	public void delete(Ricetta ricetta);
+	
+	
 
 }

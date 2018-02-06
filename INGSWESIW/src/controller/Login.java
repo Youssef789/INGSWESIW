@@ -43,31 +43,12 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("username",username);
 			out.print(username);
-//			response.setContentType("text/html");
-//			out.println("<html>");
-//			out.println("<head><title>Login</title></head>");
-//			out.println("<body>");
-//			out.println(username);
-//			out.println("<h1>Login effettuato con successo</h1>");			
-//			out.println("</body>");
-//			out.println("</html>");
 			response.sendRedirect("AllRecipes");
-			//RequestDispatcher dispatcher=request.getRequestDispatcher("ingsw.jsp");
+			//RequestDispatcher dispatcher=request.getRequestDispatcher("index.jsp");
 			//dispatcher.forward(request,response);
 		}else {
-//			response.setContentType("text/html");
-//			out.println("<html>");
-//			out.println("<head><title>Login</title></head>");
-//			out.println("<body>");
-//			out.println("<h1>email or passwrod is not correct</h1>");	
-//			out.println("<a href=\"login.jsp\">click here for login</a>");
-//			out.println("</body>");
-//			out.println("</html>");
 			RequestDispatcher dispatcher=request.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request,response);
-
-	
-		
 	}
 		
 	}
