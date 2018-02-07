@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+body {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../assets/background/background-2.jpg");
+	height: 100vh;
+	background-position: center;
+	background-size: cover; 
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+.wrap-login {
+	background: rgba(0, 0, 0, 0.5);
+	color: #ffff;
+	padding: 30px 10px;
+	margin-top: 2.75%;
+	border-radius: 25px;
+}
+
+#so-recipes {
+    border: 0px;
+	background: rgba(0,0,0,0.5);
+	color: #ffff;
+	padding: 10px 40px;
+}
+
+h2 {
+	font-family: Lucida Console, sans-serif;
+	text-align: center;
+	color: yellow;
+	margin-bottom: 10%;
+}
+
+#logo-so-recipes img  {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+}
+
+#buttons-so-recipes {
+	text-align: center;
+}
+
+#btn-account {
+	width: 25%;
+}
+
+#btn-login {
+	width: 25%;
+}
+
