@@ -4,8 +4,7 @@ import java.sql.*;
 
 public class DataSource {
 								
-	final private String dbURI; // = "jdbc:postgresql://localhost/SoRecipes"; (utilizzo reale)
-								// = "jdbc:postgresql://localhost/test";      (esempio)
+	final private String dbURI; // = "jdbc:postgresql://localhost/SoRecipes";
 	
 	final private String username; // = "postgres";
 	final private String password; // = "postgres";

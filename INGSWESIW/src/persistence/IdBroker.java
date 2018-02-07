@@ -13,10 +13,6 @@ import model.Voto;
 
 public class IdBroker {
 	
-	// Standard SQL (queste stringhe andrebbero scritte in un file di configurazione)
-	// private static final String query = "SELECT NEXT VALUE FOR SEQ_ID AS id";
-	// postgresql
-	
 	private static Map<String, String> queries_nextval;
 	
 	static {

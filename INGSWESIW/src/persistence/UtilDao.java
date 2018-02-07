@@ -24,6 +24,10 @@ public class UtilDao {
 					        "create TYPE difficolta_type as enum ('FACILE', 'MEDIA', 'DIFFICILE');" +
 		                    /* tables (enties) */
 					        "create TABLE utente (username VARCHAR(255) primary key not null, email VARCHAR(255) not null unique, password VARCHAR(255) not null);" +
+		                    
+					        
+			                
+			                
 			                "create TABLE ricetta (id BIGINT primary key not null, dataPubblicazione TIMESTAMP, dataUltimaModifica TIMESTAMP, titolo VARCHAR(255), categoria categoria_type, difficolta difficolta_type, tempoPreparazione VARCHAR(255), ingredienti TEXT, descrizione TEXT, preparazione TEXT, votoComplessivo REAL, utente_username VARCHAR(255) references utente (username) on delete cascade not null);" +  
 					        "create TABLE ricetta_preferita (ricetta_id BIGINT references ricetta (id) on delete restrict not null, utente_username VARCHAR(255) references utente (username) on delete restrict not null, primary key (ricetta_id, utente_username));" +
 			                "create TABLE commento (id BIGINT primary key not null, dataPubblicazione TIMESTAMP not null, dataUltimaModifica TIMESTAMP, contenuto VARCHAR(255) not null, ricetta_id BIGINT references ricetta (id) on delete cascade not null, utente_username VARCHAR(255) references utente (username) on delete cascade not null);" + 

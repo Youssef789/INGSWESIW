@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -10,6 +11,11 @@ public class Utente {
 	
 	private String username; /* username dell'utente */
 	private String email; /* email dell'utente */
+	
+	private String nome; /* nome dell'utente */
+	private String cognome; /* cognome dell'utente */
+	private Date dataNascita; /* data di nascita dell'utente */
+	
 	private File immagineProfilo; /* immagine profilo dell'utente */
 	
 	private Set<Ricetta> ricetteInBozza = new LinkedHashSet<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
@@ -28,7 +34,19 @@ public class Utente {
 	public String getEmail() {
 		return email;
 	}
-	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public Date getDataNascita() {
+		return dataNascita;
+	}
+
 	public File getImmagineProfilo() {
 		return immagineProfilo;
 	}

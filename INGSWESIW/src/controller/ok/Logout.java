@@ -8,17 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class logout
- */
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
-	
+
+	private static final long serialVersionUID = 5697590147053081397L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//HttpSession session= request.getSession();
 		//session.removeAttribute("username");
 		request.getSession().invalidate();
-		response.sendRedirect("ingsw.jsp");
+		response.sendRedirect("home.jsp");
 	}
 
 

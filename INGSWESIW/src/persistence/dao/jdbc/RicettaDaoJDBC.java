@@ -1,5 +1,7 @@
 package persistence.dao.jdbc;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +47,16 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(8, ricetta.getDescrizione());
 			statement.setString(9, ricetta.getPreparazione());
 			statement.setString(10, ricetta.getUtente().getUsername());
+			statement.executeUpdate();
+			if (immagineProfilo == null) {
+				immagineProfilo = new File("WebContent/images/default-profile-picture.jpg"); /* path dell'immagine di default del profilo utente */
+			} 			
+			FileInputStream fis = new FileInputStream(immagineProfilo);
+			insert = "insert into immagine_profilo (immagine_nome, immagine, utente_username) values (?, ?, ?)";
+			statement = connection.prepareStatement(insert);
+			statement.setString(1, immagineProfilo.getName());
+			statement.setBinaryStream(2, fis, immagineProfilo.length());
+			statement.setString(3, utente.getUsername());
 			statement.executeUpdate();
 			updatePathsImmaginiPreparazione(ricetta, connection);
 			updatePathsVideoPreparazione(ricetta, connection);

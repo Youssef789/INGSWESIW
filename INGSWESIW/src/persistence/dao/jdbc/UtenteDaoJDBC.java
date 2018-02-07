@@ -62,7 +62,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
 	}
 	
-
 	@Override
 	public Utente findByPrimaryKey(String username) {
 		Connection connection = this.dataSource.getConnection();
@@ -90,33 +89,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 		return utente;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public List<Utente> findAll() {		
 		Connection connection = this.dataSource.getConnection();
@@ -154,10 +126,18 @@ public class UtenteDaoJDBC implements UtenteDao {
 			statement.setString(1, utente.getEmail());
 			statement.setString(2, utente.getUsername());
 			statement.executeUpdate();
-			
-			
+			File immagineProfilo = utente.getImmagineProfilo(); 
+			FileInputStream fis = new FileInputStream(immagineProfilo);
+			update = "update immagine_profilo set immagine_nome = ?, immagine = ? where utente_username = ?";
+			statement = connection.prepareStatement(update);
+			statement.setString(1, immagineProfilo.getName());
+			statement.setBinaryStream(2, fis, immagineProfilo.length());
+			statement.setString(3, utente.getUsername());
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				connection.close();
@@ -167,21 +147,6 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public void delete(Utente utente) {
 		Connection connection = this.dataSource.getConnection();

@@ -1,0 +1,32 @@
+body {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../assets/background/background-1.jpg");
+	height: 100vh;
+	background-position: center;
+	background-size: cover;
+}
+
+#so-recipes {
+    border: 0px;
+	background: rgba(0,0,0,0.5);
+	color: #ffff;
+	padding: 50px 40px;
+}
+
+h2 {
+	font-family: Lucida Console, sans-serif;
+	text-align: center;
+	text-decoration: underline;
+	color: black;
+}
+
+#logo-so-recipes img  {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+}
+
+#buttons-so-recipes {
+	text-align: center;
+}
+

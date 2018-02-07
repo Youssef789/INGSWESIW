@@ -8,8 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import model.Categoria;
 import model.Commento;
@@ -63,37 +63,37 @@ public class UtenteProxy extends Utente {
 	}
 	
 	@Override
-	public List<Commento> getCommentiPubblicati() { 
-		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUtente(this);
+	public Set<Commento> getCommentiPubblicati() { 
+		Set<Commento> commenti = new LinkedHashSet<Commento>(new CommentoDaoJDBC(dataSource).findByUtente(this));
 		this.setCommentiPubblicati(commenti);
 		return super.getCommentiPubblicati(); 
 	}
 	
 	@Override
-	public List<Voto> getVotiEspressi() {
-		List<Voto> voti = new VotoDaoJDBC(dataSource).findByUtente(this);
+	public Set<Voto> getVotiEspressi() {
+		Set<Voto> voti = new LinkedHashSet<Voto>(new VotoDaoJDBC(dataSource).findByUtente(this));
 		this.setVotiEspressi(voti);
 		return super.getVotiEspressi(); 
 	}
 	
 	@Override
-	public List<Ricetta> getRicetteInBozza() {
-		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllBozzeByUtente(this);
+	public Set<Ricetta> getRicetteInBozza() {
+		Set<Ricetta> ricette = new LinkedHashSet<Ricetta>(new RicettaDaoJDBC(dataSource).findAllBozzeByUtente(this));
 		this.setRicetteInBozza(ricette);
 		return super.getRicetteInBozza(); 
 	}
 	
 	@Override
-	public List<Ricetta> getRicettePubblicate() {
-		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllPubblicateByUtente(this);
+	public Set<Ricetta> getRicettePubblicate() {
+		Set<Ricetta> ricette = new LinkedHashSet<Ricetta>(new RicettaDaoJDBC(dataSource).findAllPubblicateByUtente(this));
 		this.setRicetteInBozza(ricette);
 		return super.getRicettePubblicate(); 
 	}
 		
 	@Override
-	public List<Ricetta> getRicettePreferite() {
+	public Set<Ricetta> getRicettePreferite() {
 		Connection connection = this.dataSource.getConnection();
-		List<Ricetta> ricette = new LinkedList<Ricetta>();
+		Set<Ricetta> ricette = new LinkedHashSet<Ricetta>();
 		try {
 			Ricetta ricetta = null;
 			PreparedStatement statement;
