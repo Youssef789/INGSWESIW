@@ -163,7 +163,7 @@
 					<li class="dropdown"><a id="user" class="dropdown-toggle" data-toggle="dropdown" href="#">Benvenuto: ${username}<span class="caret"></span></a>
 						<ul class="dropdown-menu ">
 							<li><a href="recipe.jsp">Crea una ricetta</a></li>
-							<li><a href="logout">Effettua il logout</a></li>
+							<li><a href="Logout">Effettua il logout</a></li>
 						</ul></li>
 				</ul>
 			</div>
