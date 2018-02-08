@@ -34,7 +34,6 @@ public class EditRecipe extends HttpServlet {
      */
     public EditRecipe() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
