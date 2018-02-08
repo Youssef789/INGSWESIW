@@ -3,35 +3,32 @@
 <jsp:include page="pages/navbar.jsp" />
 
 <html>
-
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="assets/favicon/favicon.ico"/>
 <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="INGSWESIW/../css/recipeCommon.css">
-<title>Create your recipe</title>
+<link rel="stylesheet" href="css/recipeCommon.css">
+<title>Crea la tua ricetta | SoRecipes</title>
 </head>
 
 <body>
 
 	<!-- 	<div class="col-md-8 col-md-offset-2" id="recipe" >  -->
+	
 	<div class="col-xs-9" id="right">
 		<div class="col-md-9">
 			<h2 style="text-align: center">
-				<strong>crea la tua ricetta</strong>
+				<strong>Crea la tua ricetta</strong>
 			</h2>
-			<form action="CreateRecipe" method="post" id="fromrecipe"
-				enctype='multipart/form-data'>
+			<form action="CreateRecipe" method="post" id="fromrecipe" enctype='multipart/form-data'>
 				<div class="form-group">
-					<label for="title">Titolo:</label><input name="title" type="text"
-						placeholder="Titolo" class="form-control" />
+					<label for="title">Titolo</label><input name="title" type="text" placeholder="Inserisci il titolo della ricetta..." class="form-control" required/>
 				</div>
 				<div class="form-group">
-					<label for="photo">sceglie la foto principale:</label><input
-						type="file" name="photo" id="file">
+					<label for="photo">Inserisci la foto principale</label><input type="file" name="photo" id="file">
 				</div>
 				<div class="form-group">
-					<label for="category">Categoria:</label> <select name="category"
-						class="form-control">
+					<label for="category">Categoria</label> <select name="category" class="form-control" required>
 						<optgroup>
 							<option value="ANTIPASTI">Antipasti</option>
 							<option value="PRIMI_PIATTI">Primi piatti</option>
@@ -46,54 +43,53 @@
 							<option value="ALTRO">Altro</option>
 						</optgroup>
 					</select>
-
 				</div>
 				<div class="form-group">
-					<label for="preparationTime">Tempo Di Preparazione:</label><input
-						name="preparationTime" type="text"
-						placeholder="Tempo Di Preparazione" class="form-control" />
+					<label for="preparationTime">Tempo di preparazione</label><input name="preparationTime" type="text" placeholder="Inserisci il tempo di preparazione della ricetta..." class="form-control" />
 				</div>
-
-				<label for="difficulty">Difficoltà:</label>
+				<label for="difficulty">Difficoltà</label>
 				<div class="radio">
-					<label><input type="radio" name="difficulty" value="FACILE">Facile</label>
-					<label><input type="radio" name="difficulty" value="MEDIO">Medio</label>
-					<label><input type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
-				</div>
-
-				<div class="form-group">
-					<br> <label for="ingredient">Ingredienti:</label>
-					<textarea name="ingredient" class="form-control" rows="5"
-						id="ingredient"></textarea>
-					<br> <label for="description">Discrezione:</label>
-					<textarea name="description" class="form-control" rows="10"
-						id="discrezione"></textarea>
-					<br> <label for="preparation">Preparazione:</label>
-					<textarea name="preparation" class="form-control" rows="10"
-						id="preparazione"></textarea>
+					<label><input type="radio" name="difficulty" value="FACILE" required>Facile</label>
+					<label><input type="radio" name="difficulty" value="MEDIA" required>Media</label>
+					<label><input type="radio" name="difficulty" value="DIFFICILE" required>Difficile</label>
 				</div>
 				<div class="form-group">
-					<input name="create" type="submit" value="Create" class="btn btn-success"/>
-					
+					<br> <label for="ingredient">Ingredienti</label>
+					<textarea name="ingredient" class="form-control" rows="5" id="ingredient" placeholder="Inserisci gli ingredienti della ricetta..." required></textarea>
+					<br> <label for="description">Descrizione</label>
+					<textarea name="description" class="form-control" rows="5" id="discrezione" placeholder="Inserisci la descrizione della ricetta..." required></textarea>
+					<br> <label for="preparation">Preparazione</label>
+					<textarea name="preparation" class="form-control" rows="10" id="preparazione" placeholder="Inserisci la preparazione della ricetta..." required></textarea>
+				</div>
+				<div class="form-group">
+					<input name="create" type="submit" value="Pubblica la tua ricetta!" class="btn btn-success"/>
 				</div>
 			</form>
 		</div>
 	</div>
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script>
-function filePreview(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#fromrecipe + img').remove();
-            $('#file').after('<img src="'+e.target.result+'" width="350" height="300"/>');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-$("#file").change(function () {
-    filePreview(this);
-});
+	
+<script src="js/jquery-3.2.1.min.js"></script>
+
+<script>
+	
+	function filePreview(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#fromrecipe + img').remove();
+				$('#file')
+						.after(
+								'<img src="'+e.target.result+'" width="350" height="300"/>');
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
+	$("#file").change(function() {
+		filePreview(this);
+	});
+	
 </script>
+
 </body>
 </html>

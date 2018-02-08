@@ -1,7 +1,7 @@
 package controller;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +25,8 @@ import persistence.dao.RicettaDao;
 @WebServlet("/EditRecipe")
 public class EditRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String SAVE_DIR="C:\\Users\\my\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames";
+	
+	private static final String SAVE_DIR="C:\\Users\\Manuel\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames\\"; /* da cambiare assolutamente! */
 
        
     /**
@@ -52,10 +53,22 @@ public class EditRecipe extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
-		Part filePart = request.getPart("photo");        
-	    String imageName = extracFilename(filePart);
-	    filePart.write(SAVE_DIR + File.separator +imageName);
+		
+		/////////////////////////////////////////
+		/////////////////////////////////////////
+		/////////////////////////////////////////
+		
+	    Part filePart = request.getPart("photo");
+	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
+	    
+        filePart.write(SAVE_DIR + fileName);
+        
+        /////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////
+        
         String recipeId=request.getParameter("idRecipe");
         String title =request.getParameter("title");
 		String category=request.getParameter("category");
@@ -68,7 +81,7 @@ public class EditRecipe extends HttpServlet {
 		Ricetta ricetta=new Ricetta();
 		ricetta.setId(Long.parseLong(recipeId));
 		ricetta.setTitolo(title);
-		ricetta.setNameImmaginePrincipale(imageName);
+		ricetta.setNameImmaginePrincipale(fileName); /* da cambiare assolutamente! */
 		ricetta.setCategoria(Categoria.valueOf(category));
 		ricetta.setDifficolta(Difficolta.valueOf(difficulty));
 		ricetta.setTempoPreparazione(preparationTime);
@@ -79,17 +92,7 @@ public class EditRecipe extends HttpServlet {
 		ricettaDao.updateAsPubblicata(ricetta);
 		request.setAttribute("ricetta", ricetta);
 		response.sendRedirect("MyProfile");
-	}
-	
-	private String extracFilename(Part filePart) {
-		String contentDisp = filePart.getHeader("content-disposition");
-		String [] items =contentDisp.split(";");
-		for (String string : items) {
-			if(string.trim().startsWith("filename")) {
-				return string.substring(string.indexOf("=")+2, string.length() -1);
-			}
-		}
-		return " ";
+		
 	}
 
 }

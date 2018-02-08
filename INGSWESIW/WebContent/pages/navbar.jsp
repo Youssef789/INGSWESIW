@@ -3,63 +3,44 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" id=nav>
+	<nav class="navbar navbar-inverse navbar-fixed-top" id="nav">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-
-				<a class="navbar-brand" href="AllRecipes">SocialCook</a>
-			
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"></button>
+				<a class="navbar-brand">SoRecipes</a>
 				<form class="navbar-form navbar-left" action="Search">
 					<div class="form-group" class="col-xs-3">
-						<input id="search" name="search" type="text" class="form-control"
-							placeholder="Search">
+						<input id="search" name="search" type="text" class="form-control" placeholder="Inserisci il titolo di una ricetta">
 					</div>
-					<button id="btnsearch" type="submit" class="btn btn-primary ">Search</button>
+					<button id="btnsearch" type="submit" class="btn btn-primary">Cerca</button>
 				</form>
-				 
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
-				<!-- 
-				<ul class="nav navbar-nav navbar-right">
-					<li><a id="logout" href="#" onclick="logout()">Logout</a></li>
-					<fb:login-button id="fb-btn"
-						scope="public_profile,email,user_birthday"
-						onlogin="checkLoginState();">
-					</fb:login-button>
-				</ul>
- -->
-
 				<ul class="nav navbar-nav navbar-right">
 					<li><a id="home" href="AllRecipes">Home</a></li>
-					<li><a id="yourprofile" href="MyProfile">Profile</a></li>
+					<li><a id="yourprofile" href="MyProfile">Profilo</a></li>
 					<li class="dropdown"><a id="user" class="dropdown-toggle"
-						data-toggle="dropdown" href="#">welcome : ${username}<span
+						data-toggle="dropdown" href="#">Benvenuto: ${username} <span
 							class="caret"></span></a>
 						<ul class="dropdown-menu ">
-							<li><a href="recipe.jsp">Create Recipe</a></li>
-							<li><a href="logout">Logout</a></li>
+							<li><a href="recipe.jsp">Crea una ricetta</a></li>
+							<li><a href="Logout">Effettua il logout</a></li>
 						</ul></li>
 				</ul>
 			</div>
-
 		</div>
 	</nav>
-			
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-3">
-				<nav id=mainNav>
-				
+				<nav id="mainNav">
 					<ul class="nav nav-pills nav-stacked">
+						<li id="categories">CATEGORIE</li>
 						<li><a href="GetRecipeByCategory?category=ANTIPASTI">Antipasti</a></li>
 						<li><a href="GetRecipeByCategory?category=PRIMI_PIATTI">Primi piatti</a></li>
 						<li><a href="GetRecipeByCategory?category=SECONDI_PIATTI">Secondi piatti</a></li>
@@ -70,14 +51,11 @@
 						<li><a href="GetRecipeByCategory?category=MARMELLATE_E_CONSERVE">Marmellate e conserve</a></li>
 						<li><a href="GetRecipeByCategory?category=BEVANDE">Bevande</a></li>
 						<li><a href="GetRecipeByCategory?category=ALTRO">Altro</a></li>
-
 					</ul>
-
 				</nav>
-
 			</div>
 		</div>
 	</div>
-
 </body>
+
 </html>

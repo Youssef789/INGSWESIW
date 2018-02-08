@@ -5,12 +5,20 @@
 <head lang="it">
 <title>${recipe.titolo}</title>
 <meta charset="utf-8">
-	<style>
-	#btnfavorite{
+
+<style>
+
+#title {
+	margin-bottom: 10px;
+}
+
+#btnfavorite {
 	float: right;
 	margin-top: 20px;
-	}
-	</style>
+}
+
+</style>
+
       <link rel="stylesheet" href="INGSWESIW/../bootstrap-3.3.7-dist/css/bootstrap.min.css">
       <link rel="stylesheet" href="/INGSWESIW/fonts/font-awesome.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></head>
@@ -56,7 +64,7 @@
 							<li class="difficolta">Difficoltà: <strong>${recipe.difficolta}</strong>
 							</li>
 
-							<li class="preptime">Timpo Di Preparazione: <strong>${recipe.tempoPreparazione}</strong>
+							<li class="preptime">Tempo di preparazione: <strong>${recipe.tempoPreparazione}</strong>
 							</li>
 						</ul>
 					</div>
@@ -71,14 +79,14 @@
 
 					<div id="description">
 						<h2>
-							<span>descrizione</span>
+							<span>Descrizione</span>
 						</h2>
 						<p>${recipe.descrizione}</p>
 					</div>
 
 					<div>
 						<h2 id="preparation">
-							<span>Preparazione</span>
+							
 						</h2>
 						<h3 id="how">Come preparare la ricetta</h3>
 						<br>

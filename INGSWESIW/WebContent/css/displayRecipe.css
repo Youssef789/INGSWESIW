@@ -32,8 +32,8 @@ p {
 }
 
 .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input[type=radio]:checked 
-	~ label {
-	color:  #f6973c;
+	 ~ label {
+	color: #f6973c;
 }
 
 #category {

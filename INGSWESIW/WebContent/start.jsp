@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Home | SoRecipes</title>
+<title>Start | SoRecipes</title>
+<link rel="icon" href="assets/favicon/favicon.ico"/>
 <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/start.css">
-<link rel="icon" href="assets/favicon/favicon.ico"/>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 		<h1 class="logo" id="logo-so-recipes">
 			 <img src="assets/logo/logo.png"> 
 		</h1>
-		<h2 class="subtitles" id="subtitles-so-recipes">Social network sulla cucina</h2>
+		<h2 class="subtitles" id="subtitles-so-recipes">Social network<br>sulla cucina</h2>
 		<h3 class="buttons" id="buttons-so-recipes">
 		    <a href="account.jsp">
 		    	<button type="button" class="btn btn-primary" id="btn-account">Registrati</button>

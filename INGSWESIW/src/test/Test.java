@@ -90,29 +90,29 @@ public class Test {
 		// Inserimento ricette... //
 		////////////////////////////
 		
-		RicettaDao ricettaDao = factory.getRicettaDAO();
-		
-		Ricetta ricetta1 = new Ricetta();
-		ricetta1.setTitolo("Impepata di cozze");
-		ricetta1.setCategoria(Categoria.ANTIPASTI);
-		ricetta1.setDifficolta(Difficolta.MEDIA);
-		ricetta1.setUtente(utente1);
-		
-		Ricetta ricetta2 = new Ricetta();
-		ricetta2.setTitolo("Sformatino di broccoli e salsiccia");
-		ricetta2.setCategoria(Categoria.ANTIPASTI);
-		ricetta2.setDifficolta(Difficolta.FACILE);
-		ricetta2.setUtente(utente2);
-		
-		Ricetta ricetta3 = new Ricetta();
-		ricetta3.setTitolo("Pasta alla carbonara");
-		ricetta3.setCategoria(Categoria.PRIMI_PIATTI);
-		ricetta3.setDifficolta(Difficolta.FACILE);
-		ricetta3.setUtente(utente3);
-		
-		ricettaDao.saveAsPubblicata(ricetta1);
-		ricettaDao.saveAsPubblicata(ricetta2);
-		ricettaDao.saveAsPubblicata(ricetta3);
+//		RicettaDao ricettaDao = factory.getRicettaDAO();
+//		
+//		Ricetta ricetta1 = new Ricetta();
+//		ricetta1.setTitolo("Impepata di cozze");
+//		ricetta1.setCategoria(Categoria.ANTIPASTI);
+//		ricetta1.setDifficolta(Difficolta.MEDIA);
+//		ricetta1.setUtente(utente1);
+//		
+//		Ricetta ricetta2 = new Ricetta();
+//		ricetta2.setTitolo("Sformatino di broccoli e salsiccia");
+//		ricetta2.setCategoria(Categoria.ANTIPASTI);
+//		ricetta2.setDifficolta(Difficolta.FACILE);
+//		ricetta2.setUtente(utente2);
+//		
+//		Ricetta ricetta3 = new Ricetta();
+//		ricetta3.setTitolo("Pasta alla carbonara");
+//		ricetta3.setCategoria(Categoria.PRIMI_PIATTI);
+//		ricetta3.setDifficolta(Difficolta.FACILE);
+//		ricetta3.setUtente(utente3);
+//		
+//		ricettaDao.saveAsPubblicata(ricetta1);
+//		ricettaDao.saveAsPubblicata(ricetta2);
+//		ricettaDao.saveAsPubblicata(ricetta3);
 //		
 //		System.out.println("Elenco ricette pubblicate presenti..." + "\n");
 //		

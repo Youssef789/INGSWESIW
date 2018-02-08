@@ -6,20 +6,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class logout
- */
-@WebServlet("/logout")
+@WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//HttpSession session= request.getSession();
-		//session.removeAttribute("username");
-		request.getSession().invalidate();
-		response.sendRedirect("index.jsp");
-	}
+	private static final long serialVersionUID = 6122247415905136356L;
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getSession().invalidate();
+		response.sendRedirect("start.jsp");
+	}
 
 }

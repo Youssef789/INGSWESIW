@@ -1,7 +1,8 @@
 @charset "utf-8";
 
-h1 {
+h2 {
 	font-family: Lucida Console, sans-serif;
+	text-align: center;
 	color: yellow;
     margin-bottom: 30px;
 	margin-top: 20px;
@@ -12,11 +13,7 @@ h1 {
     color: #ffff;
     padding: 20px 20px;
     border-radius: 25px;
-    margin-top: 5%
-}
-
-h1 {
-    text-align: center;
+    margin-top: 7.5%
 }
 
 body {
