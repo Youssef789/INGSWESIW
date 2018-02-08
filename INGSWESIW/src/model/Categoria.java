@@ -15,5 +15,21 @@ public enum Categoria { /* Categoria della ricetta */
 	BEVANDE,               /* (es.) Limoncello */
 	
 	ALTRO; /* Varie ed eventuali */
+	
+	//////////////////////////
+	//////////////////////////
+	//////////////////////////
+	
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+	
+	public String toStringFormatted() { // (es.) PRIMI_PIATTI ---> Primi piatti
+		String stringFormatted = super.toString();
+		stringFormatted = stringFormatted.substring(0, 1).toUpperCase() + stringFormatted.substring(1).toLowerCase();
+		stringFormatted = stringFormatted.replace('_', ' ');
+		return stringFormatted;
+	}
 		
 }
