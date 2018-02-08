@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+h2 {
+	font: inherit;
+	font-size: 35px;
+	margin-bottom: 20px;
+	margin-top: 5px;
+	text-align: center;
+	color: #444;
+}
+
+#subscripe-title {
+	font-weight: bold !important;
+}
+
+#span-facebook {
+	font-weight: bold !important;
+}
+
+p {
+	overflow: hidden;
+	text-align: center;
+	margin-top: 10px;
+}
+
+p:before, p:after {
+	background-color: rgba(211, 211, 211, 0.9);
+	content: "";
+	display: inline-block;
+	height: 1px;
+	position: relative;
+	vertical-align: middle;
+	width: 50%;
+}
+
+p:before {
+	right: 0.5em;
+	margin-left: -50%;
+}
+
+p:after {
+	left: 0.5em;
+	margin-right: -50%;
+}
+
+.col-md-offset-4 {
+	padding: 10px 20px 10px 20px;
+	width: 350px;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 3px;
+	margin: 70px auto;
+}
+
+.span-facebook {
+	font-weight: bold !important;
+}
+
+.btn-facebook {
+	text-align: center;
+}
+
+.fa-facebook {
+	margin: auto;
+	font-size: medium;
+	text-align: center;
+}
+
+#username {
+	margin-top: -10px;
+}
+
+.form-control {
+	margin-bottom: -10px;
+}
+
+#warning-username {
+    font-size: 14px;
+    color: orangered;
+    margin-top: -5px;
+    text-align: center;
+}
+
+.btn-success {
+	margin-top: 10px;
+ 	cursor: pointer;
+ 	width: 100%;
+ 	font-size: large;
+}
+
+.colorgraph {
+    height: 7px;
+    border-top: 0;
+    background: #c4e17f;
+ 	border-radius: 5px;
+ 	background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+ 	background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  	background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  	background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}

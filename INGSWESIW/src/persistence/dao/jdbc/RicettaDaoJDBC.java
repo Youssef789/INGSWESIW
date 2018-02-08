@@ -47,8 +47,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(9, ricetta.getPreparazione());
 			statement.setString(10, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e1) {
 			if (connection != null) {
 				try {
@@ -86,8 +84,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(10, ricetta.getPreparazione());
 			statement.setString(11, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e1) {
 			if (connection != null) {
 				try {

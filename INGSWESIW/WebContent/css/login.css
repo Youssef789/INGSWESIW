@@ -1,42 +1,40 @@
-@charset "utf-8";
+@charset "UTF-8";
 
 h2 {
-	font-family: Lucida Console, sans-serif;
+	font: inherit;
+	font-size: 35px;
+	margin-bottom: 20px;
+	margin-top: 5px;
 	text-align: center;
-	margin-bottom: 10px;
-	margin-top: 1px;
-	padding-bottom: 20px;
-	color: yellow
+	color: #444;
 }
 
-.wrap-login {
-	background: rgba(0, 0, 0, 0.5);
-	color: #ffff;
-	padding: 40px 20px;
-	border-radius: 25px;
-	margin-top: 10%;
+span {
+	font-weight: bold !important;
 }
 
-.form-control {
-	height: 35px;
+.col-md-offset-4 {
+	padding: 20px;
+	width: 350px;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 3px;
+	margin: 50px auto;
 }
 
-body {
-	margin: 0;
-	padding: 0;
-	background: url("../image/background-login.jpg");
-  	background-size: cover;
-  	background-position: center center; 
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-    font-family: 'Barlow', sans-serif;
+.btn-success {
+	margin-top: 10px;
+ 	cursor: pointer;
+ 	width: 100%;
 }
 
-.btn {
-    background-color: #138dff;
-    width: 100%;
-}
-
-#forgot-password-a {
-	color: grey;
+.colorgraph {
+    height: 7px;
+    border-top: 0;
+    background: #c4e17f;
+ 	border-radius: 5px;
+ 	background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+ 	background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  	background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  	background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }

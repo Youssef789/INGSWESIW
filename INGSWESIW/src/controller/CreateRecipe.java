@@ -39,9 +39,16 @@ public class CreateRecipe extends HttpServlet {
 		/////////////////////////////////////////
 		
 	    Part filePart = request.getPart("photo");
+	    
+	    String realPath = getServletContext().getRealPath("image");
+	    
+	    System.out.println(realPath);
+	    
 	    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
 	    
-        filePart.write(SAVE_DIR + File.separator + fileName);
+        filePart.write(realPath + File.separator + fileName);
+        
+        System.out.println(fileName);
         
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////

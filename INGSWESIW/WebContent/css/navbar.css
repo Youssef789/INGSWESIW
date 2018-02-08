@@ -1,8 +1,66 @@
-@charset "utf-8";
+@charset "UTF-8";
 
-#categories  {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 20px;
-	margin-left: 15px;
-	margin-bottom: 20px;
+@font-face {
+	font-family: MuseoSans;
+    src: url(assets/font/MuseoSans.otf);
+}
+
+#so-recipes-inscription {
+	width: 12.5em;
+	height: auto;
+}
+
+#navbar-principal-1 {
+	background-color: rgba(51, 51, 51, 0.8);
+	vertical-align: top;
+}
+
+#navbar-search-form {
+	transition: background-color .2s ease-in-out;
+	font-size: 18px;
+	text-align: center;
+	padding: 10px;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	width: 25em;
+	margin-bottom: 10px;
+}
+
+#navbar-search-input {
+	font-family: "MuseoSans", Sans-serif;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	background-color: rgba(200, 200, 200, 0.3);
+	color: white;
+}
+
+.navbar-option {
+	transition: border-bottom .2s ease-in-out;
+    border-bottom: solid 5px transparent;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    width: 125px;
+    cursor: pointer;
+    text-align: center;
+    font-family: "MuseoSans", Sans-serif;
+}
+
+.navbar-option:hover {
+    border-bottom: solid 5px #AAA;
+}
+
+#navbar-principal-2 {
+	background-color: rgba(51, 51, 51, 0.6);
+}
+
+a {
+	color: white;
+	text-decoration: none;
 }
