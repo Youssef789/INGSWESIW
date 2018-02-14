@@ -1,29 +1,28 @@
 package model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Ricetta {
+public class Ricetta { 
 	
 	private Long id; /* id della ricetta */
-	private Timestamp dataPubblicazione; /* se la ricetta non è stata ancora pubblicata (è in bozza), sarà null, altrimenti gli viene assegnato nel jdbc in save */
-	private Timestamp dataUltimaModifica; /* fino a quando la ricetta non sarà modificata, sarà null, altrimenti gli viene assegnato nel jdbc in update */
+	private Timestamp dataPubblicazione; /* data di pubblicazione della ricetta (se la ricetta non è stata ancora pubblicata, ovvero è in bozza, sarà null, altrimenti gli viene assegnato nel jdbc quando la ricetta verrà pubblicata) */
+	private Timestamp dataUltimaModifica; /* data di ultima modifica della ricetta (fino a quando la ricetta pubblicata non sarà modificata sarà null, altrimenti gli viene assegnato nel jdbc dopo che la ricetta viene modificata) */
 	private String titolo; /* titolo della ricetta */
 	private Categoria categoria; /* categoria della ricetta */
 	private Difficolta difficolta; /* difficoltà della ricetta */
-	private String tempoPreparazione; /* tempo di preparazione della ricetta */
-	private String nameImmaginePrincipale; /* immagine principale della ricetta */
+	private String tempo; /* tempo della ricetta */
+	private String dosi; /* dosi della ricetta (es. 4 persone) */
+	private String immaginePrincipale; /* immagine principale della ricetta */
 	private String ingredienti; /* ingredienti e quantità della ricetta */
 	private String descrizione; /* descrizione della ricetta */
-	private String preparazione; /* spiegazione sulla preparazione della ricetta */
-	private Set<String> pathsImmaginiPreparazione = new HashSet<String>(); /* immagini a supporto alla spiegazione sulla preparazione della ricetta */
-	private Set<String> pathsVideoPreparazione = new HashSet<String>(); /* video a supporto alla spiegazione sulla preparazione della ricetta */
-	
-	private List<Commento> commenti = new LinkedList<Commento>(); /* elenco dei commenti effettuati sulla ricetta */
-	private List<Voto> voti = new LinkedList<Voto>(); /* elenco dei voti espressi sulla ricetta */
+	private String preparazione; /* preparazione della ricetta */
+		
+	private Set<Commento> commenti = new LinkedHashSet<Commento>(); /* elenco dei commenti effettuati sulla ricetta */
+	private Set<Voto> voti = new LinkedHashSet<Voto>(); /* elenco dei voti espressi sulla ricetta */
 	
 	private Utente utente; /* utente proprietario della ricetta */
 		
@@ -52,13 +51,17 @@ public class Ricetta {
 	public Difficolta getDifficolta() {
 		return difficolta;
 	}
-
-	public String getNameImmaginePrincipale() {
-		return nameImmaginePrincipale;
+	
+	public String getTempo() {
+		return tempo;
 	}
-
-	public String getTempoPreparazione() {
-		return tempoPreparazione;
+	
+	public String getDosi() {
+		return dosi;
+	}
+	
+	public String getImmaginePrincipale() {
+		return immaginePrincipale;
 	}
 
 	public String getIngredienti() {
@@ -72,20 +75,12 @@ public class Ricetta {
 	public String getPreparazione() {
 		return preparazione;
 	}
-
-	public Set<String> getPathsImmaginiPreparazione() {
-		return pathsImmaginiPreparazione;
-	}
-
-	public Set<String> getPathsVideoPreparazione() {
-		return pathsVideoPreparazione;
-	}
 	
-	public List<Commento> getCommenti() {
+	public Set<Commento> getCommenti() {
 		return commenti;
 	}
 
-	public List<Voto> getVoti() {
+	public Set<Voto> getVoti() {
 		return voti;
 	}
 	
@@ -116,13 +111,17 @@ public class Ricetta {
 	public void setDifficolta(Difficolta difficolta) {
 		this.difficolta = difficolta;
 	}
-
-	public void setNameImmaginePrincipale(String nameImmagine) {
-		this.nameImmaginePrincipale = nameImmagine;
+	
+	public void setTempo(String tempo) {
+		this.tempo = tempo;
 	}
-
-	public void setTempoPreparazione(String tempoPreparazione) {
-		this.tempoPreparazione = tempoPreparazione;
+	
+	public void setDosi(String dosi) {
+		this.dosi = dosi;
+	}
+	
+	public void setImmaginePrincipale(String immaginePrincipale) {
+		this.immaginePrincipale = immaginePrincipale;
 	}
 
 	public void setIngredienti(String ingredienti) {
@@ -137,19 +136,11 @@ public class Ricetta {
 		this.preparazione = preparazione;
 	}
 
-	public void setPathsImmaginiPreparazione(Set<String> pathsImmaginiPreparazione) {
-		this.pathsImmaginiPreparazione = pathsImmaginiPreparazione;
-	}
-
-	public void setVideoPreparazione(Set<String> pathsVideoPreparazione) {
-		this.pathsVideoPreparazione = pathsVideoPreparazione;
-	}
-
-	public void setCommenti(List<Commento> commenti) {
+	public void setCommenti(Set<Commento> commenti) {
 		this.commenti = commenti;
 	}
 	
-	public void setVoti(List<Voto> voti) {
+	public void setVoti(Set<Voto> voti) {
 		this.voti = voti;
 	}
 	
@@ -184,33 +175,17 @@ public class Ricetta {
 	
 	@Override
 	public String toString() {
-		return "Ricetta [id = " + id + ", titolo = " + titolo + ", categoria = " + categoria.toString() + ", difficolta = " + difficolta.toString() + ", username.id = " + utente.getUsername() + "]";
+		return "Ricetta [id = " + id + ", dataPubblicazione = " + dataPubblicazione + ", dataUltimaModifica = " + dataUltimaModifica + ", titolo = " + titolo + ", categoria = " + categoria + ", difficolta = " + difficolta + ", tempo = " + tempo + ", dosi = " + dosi + ", immaginePrincipale = " + immaginePrincipale + ", ingredienti = " + ingredienti + ", descrizione = " + descrizione + ", preparazione = " + preparazione + ", utente=" + utente.getUsername() + "]";
 	}
 		
-	//////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////
-
-	public boolean aggiungiImmaginePreparazione(String pathImmagine) {
-		return pathsImmaginiPreparazione.add(pathImmagine);
-	}
-	
-	public boolean rimuoviImmaginePrepazione(String pathImmagine) {
-		return pathsImmaginiPreparazione.remove(pathImmagine);
-	}
-	
-	public boolean aggiungiVideoPreparazione(String pathVideo) {
-		return pathsVideoPreparazione.add(pathVideo);
-	}
-	
-	public boolean rimuoviVideoPrepazione(String pathVideo) {
-		return pathsVideoPreparazione.remove(pathVideo);
-	}
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
 
 	public boolean aggiungiCommento(Commento commento) {
 		return commenti.add(commento);
 	}
-	
+
 	public boolean rimuoviCommento(Commento commento) {
 		return commenti.remove(commento);
 	}
@@ -223,16 +198,29 @@ public class Ricetta {
 		return voti.add(voto);
 	}
 	
-	//////////////////////////////////
-	//////////////////////////////////
-	//////////////////////////////////
+	////////////////////////////////////
+	////////////////////////////////////
+	////////////////////////////////////
 	
-	public Long getVotoComplessivo() {
-		Long votoComplessivo = new Long(0);
+	public Double getVotoComplessivo() {
+		Double votoComplessivo = new Double(0.0);
 		for (Voto voto : voti) {
 			votoComplessivo += voto.getValore();
 		}
-		return (votoComplessivo / voti.size());
-	} 
-
+		votoComplessivo /= voti.size();
+		return new BigDecimal(votoComplessivo).setScale(2, RoundingMode.HALF_UP).doubleValue(); /* arrotondamento double ad una cifra decimale */
+	}
+	
+	////////////////////////////////
+	////////////////////////////////
+	////////////////////////////////
+	
+	public int getNumeroCommenti() {
+		return commenti.size();
+	}
+	
+	public int getNumeroVoti() {
+		return voti.size();
+	}
+	
 }

@@ -1,32 +1,25 @@
 package model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Utente {
 	
 	private String username; /* username dell'utente */
 	private String email; /* email dell'utente */
-	private String immagineProfilo; /* immagine del profilo dell'utente */
+	private String immagineProfilo; /* immagine profilo dell'utente */
 	
-	/* Da implementare: nome e cognome */
-	/* Da implementare: data di nascita */
-	/* Da implementare: luogo (forse...) */
+	private Boolean admin; /* permessi di admin (true o false) */
 	
-	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
-	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>(); /* elenco delle ricette pubblicate dall'utente  */
-	private List<Ricetta> ricettePreferite = new LinkedList<Ricetta>(); /* elenco delle ricette preferite dall'utente  */
-	  
-	private List<Commento> commentiPubblicati = new LinkedList<Commento>(); /* elenco dei commenti pubblicati dall'utente */
-	private List<Voto> votiEspressi = new LinkedList<Voto>(); /* elenco dei voti espressi dall'utente */
-
-	/* Da implementare: followings */
-	/* Da implementare: followers */
+	private Set<Ricetta> ricetteInBozza = new LinkedHashSet<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
+	private Set<Ricetta> ricettePubblicate = new LinkedHashSet<Ricetta>(); /* elenco delle ricette pubblicate dall'utente */
+	private Set<Ricetta> ricettePreferite = new LinkedHashSet<Ricetta>(); /* elenco delle ricette preferite dall'utente */
+		  
+	private Set<Commento> commentiPubblicati = new LinkedHashSet<Commento>(); /* elenco dei commenti pubblicati dall'utente */
+	private Set<Voto> votiEspressi = new LinkedHashSet<Voto>(); /* elenco dei voti espressi dall'utente */
 	
-	/* Da implementare: notifiche ricevute */
-	
-	/* Da implementare: segnalazioni effettuate */
-	/* Da implementare: segnalazioni ricevute (amministratore) */
+	private Set<Utente> followings = new LinkedHashSet<Utente>(); /* elenco dei followings dell'utente (chi seguono l'utente) */
+	private Set<Utente> followers = new LinkedHashSet<Utente>(); /* elenco dei followers dell'utente (chi segue l'utente) */
 	
 	public Utente() { }
 	
@@ -41,27 +34,39 @@ public class Utente {
 	public String getImmagineProfilo() {
 		return immagineProfilo;
 	}
-	
-	public List<Ricetta> getRicetteInBozza() {
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+	public Set<Ricetta> getRicetteInBozza() {
 		return ricetteInBozza;
 	}
 	
-	public List<Ricetta> getRicettePubblicate() {
+	public Set<Ricetta> getRicettePubblicate() {
 		return ricettePubblicate;
 	}
 	
-	public List<Ricetta> getRicettePreferite() {
+	public Set<Ricetta> getRicettePreferite() {
 		return ricettePreferite;
 	}
 	
-	public List<Commento> getCommentiPubblicati() {
+	public Set<Commento> getCommentiPubblicati() {
 		return commentiPubblicati;
 	}
 
-	public List<Voto> getVotiEspressi() {
+	public Set<Voto> getVotiEspressi() {
 		return votiEspressi;
 	}
 	
+	public Set<Utente> getFollowings() {
+		return followings;
+	}
+
+	public Set<Utente> getFollowers() {
+		return followers;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -70,28 +75,40 @@ public class Utente {
 		this.email = email;
 	}
 	
-	public void setImmagineProfilo(String pathImmagineProfilo) {
-		this.immagineProfilo = pathImmagineProfilo;
+	public void setImmagineProfilo(String immagineProfilo) {
+		this.immagineProfilo = immagineProfilo;
 	}
-		
-	public void setRicetteInBozza(List<Ricetta> ricetteInBozza) {
+	
+	public void setAdmin(Boolean bool) {
+		this.admin = bool;
+	}
+
+	public void setRicetteInBozza(Set<Ricetta> ricetteInBozza) {
 		this.ricetteInBozza = ricetteInBozza;
 	}
 
-	public void setRicettePubblicate(List<Ricetta> ricettePubblicate) {
+	public void setRicettePubblicate(Set<Ricetta> ricettePubblicate) {
 		this.ricettePubblicate = ricettePubblicate;
 	}
 
-	public void setRicettePreferite(List<Ricetta> ricettePreferite) {
+	public void setRicettePreferite(Set<Ricetta> ricettePreferite) {
 		this.ricettePreferite = ricettePreferite;
 	}
 
-	public void setCommentiPubblicati(List<Commento> commentiPubblicati) {
+	public void setCommentiPubblicati(Set<Commento> commentiPubblicati) {
 		this.commentiPubblicati = commentiPubblicati;
 	}
 
-	public void setVotiEspressi(List<Voto> votiEspressi) {
+	public void setVotiEspressi(Set<Voto> votiEspressi) {
 		this.votiEspressi = votiEspressi;
+	}
+	
+	public void setFollowings(Set<Utente> followings) {
+		this.followings = followings;
+	}
+
+	public void setFollowers(Set<Utente> followers) {
+		this.followers = followers;
 	}
 
 	@Override
@@ -121,7 +138,7 @@ public class Utente {
 	
 	@Override
 	public String toString() {
-		return "Utente [username = " + username + ", email = " + email + ", immagineProfilo = " + immagineProfilo + "]";
+		return "Utente [username = " + username + ", email = " + email + ", immagineProfilo = " + immagineProfilo + ", admin = " + admin + "]";
 	}
 	
 	////////////////////////////////////////////////////////
@@ -166,6 +183,54 @@ public class Utente {
 	
 	public boolean rimuoviVotoEspresso(Voto voto) {
 		return votiEspressi.remove(voto);
+	}
+	
+	public boolean aggiungiFollowing(Utente utente) {
+		return followings.add(utente);
+	}
+	
+	public boolean rimuoviFollowing(Utente utente) {
+		return followings.remove(utente);
+	}
+	
+	public boolean aggiungiFollower(Utente utente) {
+		return followings.add(utente);
+	}
+	
+	public boolean rimuoviFollower(Utente utente) {
+		return followings.remove(utente);
+	}
+	
+	//////////////////////////////////////
+	//////////////////////////////////////
+	//////////////////////////////////////
+	
+	public int getNumeroRicetteInBozza() {
+		return ricetteInBozza.size();
+	}
+	
+	public int getNumeroRicettePubblicate() {
+		return ricettePubblicate.size();
+	}
+	
+	public int getNumeroRicettePreferite() {
+		return ricettePreferite.size();
+	}
+	
+	public int getNumeroCommentiPubblicati() {
+		return commentiPubblicati.size();
+	}
+	
+	public int getNumeroVotiEspressi() {
+		return votiEspressi.size();
+	}
+	
+	public int getNumeroFollowings() {
+		return followings.size();
+	}
+	
+	public int getNumeroFollowers() {
+		return followers.size();
 	}
 
 }

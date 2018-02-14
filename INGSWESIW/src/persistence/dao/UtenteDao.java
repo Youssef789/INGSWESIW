@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import java.util.List;
+import java.util.Set;
 
 import model.Ricetta;
 import model.Utente;
@@ -10,13 +10,13 @@ public interface UtenteDao {
 	
 	public void save(Utente utente, String password);
 	
-	public Utente findByPrimaryKey(String username);
-	
-	public List<Utente> findAll();       
-	
 	public void update(Utente utente); 
 	
 	public void delete(Utente utente); 
+	
+	public Set<Utente> findAll();       
+	
+	public Utente findByPrimaryKey(String username);
 	
 	public Utente findByEmail(String email);
 	
@@ -24,6 +24,20 @@ public interface UtenteDao {
 	
 	public void setPassword(Utente utente, String password);
 	
-	public void insertRicettaPreferita(Ricetta ricetta,Utente utente);
+	public Ricetta findRicettaPreferita(Utente utente, Ricetta ricetta);
+	
+	public void insertRicettaPreferita(Utente utente, Ricetta ricetta);
+	
+	public void deleteRicettaPreferita(Utente utente, Ricetta ricetta);
+	
+	public void insertFollowing(Utente utente, Utente following);
+	
+	public void deleteFollowing(Utente utente, Utente following);
+	
+	public Utente findFollower(Utente utente, Utente follower);
+	
+	public void insertFollower(Utente utente, Utente follower);
+	
+	public void deleteFollower(Utente utente, Utente follower);
 	
 }

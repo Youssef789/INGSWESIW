@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 public class Commento {
 	
 	private Long id; /* id del commento */
-	private Timestamp dataPubblicazione; /* gli viene assegnato nel jdbc in save */
-	private Timestamp dataUltimaModifica; /* fino a quando il commento non sarà modificato, sarà null, altrimenti gli viene assegnato nel jdbc in update */
+	private Timestamp dataPubblicazione; /* data di pubblicazione del commento (gli viene assegnato nel jdbc quando il commento verrà salvato) */
+	private Timestamp dataUltimaModifica; /* data di ultima modifica del commento (fino a quando il commento non sarà modificato sarà null, altrimenti gli viene assegnato nel jdbc dopo che il commento viene modificato) */
 	private String contenuto; /* contenuto del commento */
 	
 	private Ricetta ricetta; /* ricetta associata al commento */

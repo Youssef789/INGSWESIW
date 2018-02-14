@@ -2,10 +2,7 @@ package model;
 
 public class Voto {
 	
-	private static final int MIN_VOTO = 1; /* valore voto minimo assegnabile */
-	private static final int MAX_VOTO = 5; /* valore voto massimo assegnabile */
-	
-	private Long id; /* id del commento */
+	private Long id; /* id del voto */
 	private Integer valore; /* valore del voto */
 	
 	private Ricetta ricetta; /* ricetta associata al voto */
@@ -35,7 +32,6 @@ public class Voto {
 	
 	public void setValore(Integer valore) {
 		this.valore = valore;
-		checkValore();
 	}
 	
 	public void setRicetta(Ricetta ricetta) {
@@ -75,15 +71,5 @@ public class Voto {
 	public String toString() {
 		return "Voto [id = " + id + ", valore = " + valore + ", ricetta.id = " + ricetta.getId() + ", utente.username = " + utente.getUsername() + "]";
 	}
-	
-	////////////////////////////
-	////////////////////////////
-	////////////////////////////
-	
-	private void checkValore() {
-		if ( (valore < MIN_VOTO) || (valore > MAX_VOTO) ) {
-			throw new IllegalArgumentException("Valore del voto non valido!");
-		}
-	}
-	
+		
 }

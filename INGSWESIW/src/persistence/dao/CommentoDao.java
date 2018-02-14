@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import java.util.List;
+import java.util.Set;
 
 import model.Commento;
 import model.Ricetta;
@@ -10,16 +10,16 @@ public interface CommentoDao {
 		
 	public void save(Commento commento);  
 	
-	public Commento findByPrimaryKey(Long id);
-	
-	public List<Commento> findAll();       
-	
 	public void update(Commento commento); 
 	
 	public void delete(Commento commento);
 	
-	public List<Commento> findByRicetta(Ricetta ricetta); 
+	public Set<Commento> findAll(); 
 	
-	public List<Commento> findByUtente(Utente utente);
+	public Commento findByPrimaryKey(Long id);
+	
+	public Set<Commento> findByRicetta(Ricetta ricetta); /* su quale ricetta è stata pubblicato il commento */
+	
+	public Set<Commento> findByUtente(Utente utente); /* quale utente ha pubblicato il commento */
 
 }

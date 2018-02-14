@@ -1,10 +1,6 @@
 package persistence;
 
 public class DatabaseManager {
-	
-	//////////////////////////////////////
-	// DatabaseManager è un "Singleton" //
-	//////////////////////////////////////
 
 	private static DatabaseManager instance = null;
 

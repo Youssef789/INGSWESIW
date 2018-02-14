@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import model.Categoria;
 import model.Commento;
@@ -25,37 +25,38 @@ public class UtenteProxy extends Utente {
 	}
 	
 	@Override
-	public List<Commento> getCommentiPubblicati() { 
-		List<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUtente(this);
+	public Set<Commento> getCommentiPubblicati() { 
+		Set<Commento> commenti = new CommentoDaoJDBC(dataSource).findByUtente(this);
 		this.setCommentiPubblicati(commenti);
 		return super.getCommentiPubblicati(); 
 	}
 	
 	@Override
-	public List<Voto> getVotiEspressi() {
-		List<Voto> voti = new VotoDaoJDBC(dataSource).findByUtente(this);
+	public Set<Voto> getVotiEspressi() {
+		Set<Voto> voti = new VotoDaoJDBC(dataSource).findByUtente(this);
 		this.setVotiEspressi(voti);
 		return super.getVotiEspressi(); 
 	}
-	
+		
 	@Override
-	public List<Ricetta> getRicetteInBozza() {
-		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllBozzeByUtente(this);
+	public Set<Ricetta> getRicetteInBozza() {
+		Set<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllBozzeByUtente(this);
 		this.setRicetteInBozza(ricette);
 		return super.getRicetteInBozza(); 
 	}
 	
 	@Override
-	public List<Ricetta> getRicettePubblicate() {
-		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllPubblicateByUtente(this);
+	public Set<Ricetta> getRicettePubblicate() {
+		Set<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllPubblicateByUtente(this);
 		this.setRicetteInBozza(ricette);
 		return super.getRicettePubblicate(); 
 	}
 		
+
 	@Override
-	public List<Ricetta> getRicettePreferite() {
+	public Set<Ricetta> getRicettePreferite() {
 		Connection connection = this.dataSource.getConnection();
-		List<Ricetta> ricette = new LinkedList<Ricetta>();
+		Set<Ricetta> ricette = new LinkedHashSet<Ricetta>();
 		try {
 			Ricetta ricetta = null;
 			PreparedStatement statement;
@@ -71,12 +72,12 @@ public class UtenteProxy extends Utente {
 				ricetta.setTitolo(result.getString("titolo"));
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
-				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("pathImmaginePrincipale"));
+				ricetta.setTempo(result.getString("tempo"));
+				ricetta.setDosi(result.getString("dosi"));
+				ricetta.setImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
-				ricetta.setUtente(new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
 				ricette.add(ricetta);
 			}
 		} catch (SQLException e) {
@@ -90,6 +91,70 @@ public class UtenteProxy extends Utente {
 		}
 		this.setRicettePreferite(ricette);
 		return super.getRicettePreferite();
+	}
+	
+	@Override
+	public Set<Utente> getFollowings() {
+		Connection connection = this.dataSource.getConnection();
+		Set<Utente> utenti = new LinkedHashSet<Utente>();
+		try {
+			Utente utente = null;
+			PreparedStatement statement;
+			String query = "select * from following where utente_id = ?;";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, this.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				utente = new UtenteProxy(dataSource);
+				utente.setUsername(result.getString("username"));
+				utente.setEmail(result.getString("email"));
+				utente.setImmagineProfilo(result.getString("immagineProfilo"));
+				utente.setAdmin(result.getBoolean("admin"));
+				utenti.add(utente);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		this.setFollowings(utenti);
+		return super.getFollowings();
+	}
+	
+	@Override
+	public Set<Utente> getFollowers() {
+		Connection connection = this.dataSource.getConnection();
+		Set<Utente> utenti = new LinkedHashSet<Utente>();
+		try {
+			Utente utente = null;
+			PreparedStatement statement;
+			String query = "select * from followers where utente_id = ?;";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, this.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				utente = new UtenteProxy(dataSource);
+				utente.setUsername(result.getString("username"));
+				utente.setEmail(result.getString("email"));
+				utente.setImmagineProfilo(result.getString("immagineProfilo"));
+				utente.setAdmin(result.getBoolean("admin"));
+				utenti.add(utente);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		this.setFollowers(utenti);
+		return super.getFollowers();
 	}
 	
 }
