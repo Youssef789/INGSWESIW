@@ -29,27 +29,16 @@ public class CreateAccount extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		try {
-
-		
+		String password = request.getParameter("password1");
 			Utente utente = new Utente();
 			utente.setUsername(username);
 			utente.setEmail(email);
-
 			UtenteDao utenteDao = DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
 			utenteDao.save(utente, password);
-			
-			request.setAttribute("utente", utente);
-			
 			//RequestDispatcher dispacher = request.getRequestDispatcher("account.jsp");
 			//dispacher.forward(request, response);
-
 			response.sendRedirect("login.jsp");
 			
-		}
-		catch (Exception e) {
-		}
 		
 	}
 

@@ -7,11 +7,7 @@ public class Utente {
 	
 	private String username; /* username dell'utente */
 	private String email; /* email dell'utente */
-	private String immagineProfilo; /* immagine del profilo dell'utente */
-	
-	/* Da implementare: nome e cognome */
-	/* Da implementare: data di nascita */
-	/* Da implementare: luogo (forse...) */
+	private String immagineProfilo; /* immagine profilo dell'utente */
 	
 	private List<Ricetta> ricetteInBozza = new LinkedList<Ricetta>(); /* elenco delle ricette in bozza dell'utente */
 	private List<Ricetta> ricettePubblicate = new LinkedList<Ricetta>(); /* elenco delle ricette pubblicate dall'utente  */
@@ -20,13 +16,8 @@ public class Utente {
 	private List<Commento> commentiPubblicati = new LinkedList<Commento>(); /* elenco dei commenti pubblicati dall'utente */
 	private List<Voto> votiEspressi = new LinkedList<Voto>(); /* elenco dei voti espressi dall'utente */
 
-	/* Da implementare: followings */
-	/* Da implementare: followers */
-	
-	/* Da implementare: notifiche ricevute */
-	
-	/* Da implementare: segnalazioni effettuate */
-	/* Da implementare: segnalazioni ricevute (amministratore) */
+	private List<Utente> followings = new LinkedList<Utente>(); /* elenco dei followings dell'utente (chi seguono l'utente) */
+	private List<Utente> followers = new LinkedList<Utente>(); /* elenco dei followers dell'utente (chi segue l'utente) */
 	
 	public Utente() { }
 	
@@ -62,6 +53,14 @@ public class Utente {
 		return votiEspressi;
 	}
 	
+	public List<Utente> getFollowings() {
+		return followings;
+	}
+
+	public List<Utente> getFollowers() {
+		return followers;
+	}
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -92,6 +91,14 @@ public class Utente {
 
 	public void setVotiEspressi(List<Voto> votiEspressi) {
 		this.votiEspressi = votiEspressi;
+	}
+	
+	public void setFollowings(List<Utente> followings) {
+		this.followings = followings;
+	}
+
+	public void setFollowers(List<Utente> followers) {
+		this.followers = followers;
 	}
 
 	@Override
@@ -166,6 +173,54 @@ public class Utente {
 	
 	public boolean rimuoviVotoEspresso(Voto voto) {
 		return votiEspressi.remove(voto);
+	}
+	
+	public boolean aggiungiFollowing(Utente utente) {
+		return followings.add(utente);
+	}
+	
+	public boolean rimuoviFollowing(Utente utente) {
+		return followings.remove(utente);
+	}
+	
+	public boolean aggiungiFollower(Utente utente) {
+		return followings.add(utente);
+	}
+	
+	public boolean rimuoviFollower(Utente utente) {
+		return followings.remove(utente);
+	}
+	
+	//////////////////////////////////////
+	//////////////////////////////////////
+	//////////////////////////////////////
+	
+	public int getNumeroRicetteInBozza() {
+		return ricetteInBozza.size();
+	}
+	
+	public int getNumeroRicettePubblicate() {
+		return ricettePubblicate.size();
+	}
+	
+	public int getNumeroRicettePreferite() {
+		return ricettePreferite.size();
+	}
+	
+	public int getNumeroCommentiPubblicati() {
+		return commentiPubblicati.size();
+	}
+	
+	public int getNumeroVotiEspressi() {
+		return votiEspressi.size();
+	}
+	
+	public int getNumeroFollowings() {
+		return followings.size();
+	}
+	
+	public int getNumeroFollowers() {
+		return followers.size();
 	}
 
 }

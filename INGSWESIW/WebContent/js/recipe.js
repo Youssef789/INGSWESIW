@@ -23,7 +23,7 @@ function addComment(idRecipe){
 };
 
 function deleteComment(idComment){
-	if (confirm("Are you sure you want to delete this comment?") == true) {
+	if (confirm("Sei sicuro di voler eliminare questo commento?") == true) {
 		  var idRecipe = $("#idRecipe").text();
 		  var remove = "true";
 		  $.ajax({
@@ -41,7 +41,7 @@ function deleteComment(idComment){
 
 
 function editComment(idComment){
-	if (confirm("Are you sure you want to edit this comment?") == true) {
+	if (confirm("Sei sicuro di voler modificare questo commento?") == true) {
 		  $.ajax({
 				type: "GET",
 				url: "EditComment",
@@ -58,22 +58,30 @@ function editComment(idComment){
 
 
 
-//function deleteRecipe(idRecipe){
-//	if (confirm("Are you sure you want to delete this Recipe?") == true) {
-//		$ajax({
-//			type:"POST",
-//			url:"DeleteRecipe",
-//			datatype: "json",
-//			data: JSON.stringify({"idRecipe" :idRecipe}),
-//			success:function(data){
-//				$("#display"+idRecipe).remove();
-//			}
-//		});
-//	}
-//};
-
-
-
-function removeFavourite(idRecipe){
 	
-};
+
+	
+	function displayvoto(idRecipe) {
+		$.ajax({
+			type: "GET",
+			url:"GetVotes",
+			data: {idRecipe:idRecipe},
+			success: function(data){
+				$("#resultvoto").html(data);
+			}
+		});
+	} 
+	
+
+	
+	 (function(d, s, id) {
+	    var js, fjs = d.getElementsByTagName(s)[0];
+	    if (d.getElementById(id)) return;
+	    js = d.createElement(s); js.id = id;
+	    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1";
+	    fjs.parentNode.insertBefore(js, fjs);
+	  }(document, 'script', 'facebook-jssdk'));
+	 function myFunction() {
+		   var x = document.URL;
+		   document.getElementById("page").src='https://www.facebook.com/plugins/share_button.php?href='+x+'&layout=button_count&size=large&mobile_iframe=true&width=83&height=28&appId';
+		  }

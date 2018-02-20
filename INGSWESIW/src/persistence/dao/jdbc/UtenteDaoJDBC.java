@@ -42,6 +42,7 @@ public class UtenteDaoJDBC implements UtenteDao {
 			}
 		}
 	}
+
 	
 	@Override
 	public Utente findByPrimaryKey(String username) {
@@ -199,22 +200,41 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}
 	}
 	@Override
-	public void insertRicettaPreferita(Ricetta ricetta, Utente utente) {
+	public Ricetta findRicettaPreferita(Utente utente, Ricetta ricetta) {
+		Connection connection = this.dataSource.getConnection();
+		Ricetta ricettaTmp = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from ricetta_preferita where utente_username = ? and ricetta_id = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, utente.getUsername());
+			statement.setLong(2, ricetta.getId());
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				ricettaTmp = new RicettaDaoJDBC(dataSource).findByPrimaryKey(ricetta.getId());
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+		return ricettaTmp;
+	}
+	
+	@Override
+	public void insertRicettaPreferita(Utente utente, Ricetta ricetta) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			PreparedStatement statement;
-			String query = "select * from ricetta_preferita where ricetta_id = ? and utente_username = ?";
-			statement = connection.prepareStatement(query);
-			statement.setString(1, ricetta.getIngredienti());
-			statement.setString(2, utente.getUsername());
-			ResultSet result = statement.executeQuery();
-			if (!result.next()) {
-				String insert = "insert into ricetta_preferita (ricetta_id, utente_username) values (?, ?)";
-				statement = connection.prepareStatement(insert);
-				statement.setString(1, ricetta.getIngredienti());
-				statement.setString(2, utente.getUsername());
-				statement.executeUpdate();
-			}
+			String insert = "insert into ricetta_preferita (utente_username, ricetta_id) values (?, ?)";
+			statement = connection.prepareStatement(insert);
+			statement.setString(1, utente.getUsername());
+			statement.setLong(2, ricetta.getId());
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -226,22 +246,37 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}	
 	}
 	
-	public void deleteRicettaPreferita(Ricetta ricetta, Utente utente) {
+	@Override
+	public void deleteRicettaPreferita(Utente utente, Ricetta ricetta) {
 		Connection connection = this.dataSource.getConnection();
 		try {
 			PreparedStatement statement;
-			String query = "select * from ricetta_preferita where ricetta_id = ? and utente_username = ?";
-			statement = connection.prepareStatement(query);
-			statement.setString(1, ricetta.getIngredienti());
-			statement.setString(2, utente.getUsername());
-			ResultSet result = statement.executeQuery();
-			if (result.next()) {
-				String delete = "delete from ricetta_preferita where ricetta_id = ? and utente_username = ?";
-				statement = connection.prepareStatement(delete);
-				statement.setString(1, ricetta.getIngredienti());
-				statement.setString(2, utente.getUsername());
-				statement.executeUpdate();
+			String delete = "delete from ricetta_preferita where utente_username = ? and ricetta_id = ?";
+			statement = connection.prepareStatement(delete);
+			statement.setString(1, utente.getUsername());
+			statement.setLong(2, ricetta.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
 			}
+		}	
+	}
+	
+	@Override
+	public void insertFollowing(Utente utente, Utente following) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			PreparedStatement statement;
+			String insert = "insert into following (utente_username, following_username) values (?, ?)";
+			statement = connection.prepareStatement(insert);
+			statement.setString(1, utente.getUsername());
+			statement.setString(2, following.getUsername());
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -253,4 +288,92 @@ public class UtenteDaoJDBC implements UtenteDao {
 		}	
 	}
 
+	@Override
+	public void deleteFollowing(Utente utente, Utente following) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			PreparedStatement statement;
+			String delete = "delete from following where utente_username = ? and following_username = ?";
+			statement = connection.prepareStatement(delete);
+			statement.setString(1, utente.getUsername());
+			statement.setString(2, following.getUsername());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+	}
+	
+	@Override
+	public Utente findFollowing(Utente utente, Utente following) {
+		Connection connection = this.dataSource.getConnection();
+		Utente followerTmp = null;
+		try {
+			PreparedStatement statement;
+			String query = "select * from following where utente_username = ? and following_username = ?";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, utente.getUsername());
+			statement.setString(2, following.getUsername());
+			ResultSet result = statement.executeQuery();
+			if (result.next()) {
+				followerTmp = new UtenteDaoJDBC(dataSource).findByPrimaryKey(following.getUsername());
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+		return followerTmp;
+	}
+
+	@Override
+	public void insertFollower(Utente utente, Utente follower) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			PreparedStatement statement;
+			String insert = "insert into follower (utente_username, follower_username) values (?, ?)";
+			statement = connection.prepareStatement(insert);
+			statement.setString(1, utente.getUsername());
+			statement.setString(2, follower.getUsername());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+	}
+
+	@Override
+	public void deleteFollower(Utente utente, Utente follower) {
+		Connection connection = this.dataSource.getConnection();
+		try {
+			PreparedStatement statement;
+			String delete = "delete from follower where utente_username = ? and follower_username = ?";
+			statement = connection.prepareStatement(delete);
+			statement.setString(1, utente.getUsername());
+			statement.setString(2, follower.getUsername());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}	
+	}
 }

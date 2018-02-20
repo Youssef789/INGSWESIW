@@ -34,7 +34,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 		try {
 			Long id = IdBroker.getId(connection, ricetta);
 			ricetta.setId(id);
-			String insert = "insert into ricetta (id, titolo, categoria, difficolta, tempoPreparazione, nameImmaginePrincipale, ingredienti, descrizione, preparazione, utente_username) values (?, ?, cast(? as categoria_type), cast(? as difficolta_type), ?, ?, ?, ?, ?, ?)";
+			String insert = "insert into ricetta (id, titolo, categoria, difficolta, tempoPreparazione, immaginePrincipale, ingredienti, descrizione, preparazione, utente_username) values (?, ?, cast(? as categoria_type), cast(? as difficolta_type), ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, ricetta.getId());
 			statement.setString(2, ricetta.getTitolo());
@@ -47,8 +47,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(9, ricetta.getPreparazione());
 			statement.setString(10, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e1) {
 			if (connection != null) {
 				try {
@@ -72,7 +70,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 		try {
 			Long id = IdBroker.getId(connection, ricetta);
 			ricetta.setId(id);
-			String insert = "insert into ricetta (id, dataPubblicazione, titolo, categoria, difficolta, tempoPreparazione, nameImmaginePrincipale, ingredienti, descrizione, preparazione, utente_username) values (?, ?, ?, cast(? as categoria_type), cast(? as difficolta_type), ?, ?, ?, ?, ?, ?)";
+			String insert = "insert into ricetta (id, dataPubblicazione, titolo, categoria, difficolta, tempoPreparazione, immaginePrincipale, ingredienti, descrizione, preparazione, utente_username) values (?, ?, ?, cast(? as categoria_type), cast(? as difficolta_type), ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insert);
 			statement.setLong(1, ricetta.getId());
 			statement.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis())); /* assegnamento dataPubblicazione */
@@ -86,8 +84,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(10, ricetta.getPreparazione());
 			statement.setString(11, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e1) {
 			if (connection != null) {
 				try {
@@ -128,7 +124,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("nameImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -169,7 +165,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("nameImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -212,7 +208,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("nameImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -251,7 +247,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("nameImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -294,7 +290,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("nameImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -337,7 +333,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
 				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
 				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("nameImmaginePrincipale"));
+				ricetta.setNameImmaginePrincipale(result.getString("immaginePrincipale"));
 				ricetta.setIngredienti(result.getString("ingredienti"));
 				ricetta.setDescrizione((result.getString("descrizione")));
 				ricetta.setPreparazione(result.getString("preparazione"));
@@ -364,7 +360,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 	public void updateAsBozza(Ricetta ricetta) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update ricetta set titolo = ?, categoria = cast(? as categoria_type), difficolta = cast(? as difficolta_type), tempoPreparazione = ?, nameImmaginePrincipale = ?, ingredienti = ?, descrizione = ?, preparazione = ? where id = ?";
+			String update = "update ricetta set titolo = ?, categoria = cast(? as categoria_type), difficolta = cast(? as difficolta_type), tempoPreparazione = ?, immaginePrincipale = ?, ingredienti = ?, descrizione = ?, preparazione = ? where id = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setString(1, ricetta.getTitolo());
 			statement.setString(2, ricetta.getCategoria().toString());
@@ -376,8 +372,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(8, ricetta.getPreparazione());
 			statement.setLong(9, ricetta.getId());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -393,7 +387,7 @@ public class RicettaDaoJDBC implements RicettaDao {
 	public void updateAsPubblicata(Ricetta ricetta) {
 		Connection connection = this.dataSource.getConnection();
 		try {
-			String update = "update ricetta set dataUltimaModifica = ?, titolo = ?, categoria = cast(? as categoria_type), difficolta = cast(? as difficolta_type), tempoPreparazione = ?, nameImmaginePrincipale = ?, ingredienti = ?, descrizione = ?, preparazione = ? where id = ?";
+			String update = "update ricetta set dataUltimaModifica = ?, titolo = ?, categoria = cast(? as categoria_type), difficolta = cast(? as difficolta_type), tempoPreparazione = ?, immaginePrincipale = ?, ingredienti = ?, descrizione = ?, preparazione = ? where id = ?";
 			PreparedStatement statement = connection.prepareStatement(update);
 			statement.setTimestamp(1, new java.sql.Timestamp(System.currentTimeMillis()));
 			statement.setString(2, ricetta.getTitolo());
@@ -406,8 +400,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(9, ricetta.getPreparazione());
 			statement.setLong(10, ricetta.getId());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -447,12 +439,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 	//////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////
 	
-	private void updateNameImmaginiPreparazione(Ricetta ricetta, Connection connection) {
-		// TODO Auto-generated method stub
-	}
-	
-	private void updatePathsVideoPreparazione(Ricetta ricetta, Connection connection) {
-		// TODO Auto-generated method stub
-	}
+
 
 }

@@ -11,6 +11,47 @@
   </servlet-mapping>
   
   <servlet>
+    <servlet-name>Follow</servlet-name>
+    <servlet-class>controller.Follow</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Follow</servlet-name>
+    <url-pattern>/Follow</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AvailableEmail</servlet-name>
+    <servlet-class>controller.AvailableEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AvailableEmail</servlet-name>
+    <url-pattern>/AvailableEmail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Favorites</servlet-name>
+    <servlet-class>controller.Favorites</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Favorites</servlet-name>
+    <url-pattern>/Favorites</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProfile</servlet-name>
+    <servlet-class>controller.EditProfile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProfile</servlet-name>
+    <url-pattern>/EditProfile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddFavourite</servlet-name>
+    <servlet-class>controller.AddFavourite</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddFavourite</servlet-name>
+    <url-pattern>/AddFavourite</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>DeleteRecipe</servlet-name>
     <servlet-class>controller.DeleteRecipe</servlet-class>
   </servlet>
@@ -18,7 +59,6 @@
     <servlet-name>DeleteRecipe</servlet-name>
     <url-pattern>/DeleteRecipe</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Vote</servlet-name>
     <servlet-class>controller.Vote</servlet-class>
@@ -27,8 +67,7 @@
     <servlet-name>Vote</servlet-name>
     <url-pattern>/Vote</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>AllComments</servlet-name>
     <servlet-class>controller.AllComments</servlet-class>
   </servlet>
@@ -36,7 +75,6 @@
     <servlet-name>AllComments</servlet-name>
     <url-pattern>/AllComments</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Comment</servlet-name>
     <servlet-class>controller.Comment</servlet-class>
@@ -45,7 +83,6 @@
     <servlet-name>Comment</servlet-name>
     <url-pattern>/Comment</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>GetRecipeByCategory</servlet-name>
     <servlet-class>controller.GetRecipeByCategory</servlet-class>
@@ -86,8 +123,11 @@
     <servlet-name>AllRecipes</servlet-name>
     <url-pattern>/AllRecipes</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>AllRecipes</servlet-name>
+    <url-pattern></url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>home.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

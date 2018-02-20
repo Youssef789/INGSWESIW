@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.jdt.internal.compiler.ast.DoubleLiteral;
+
 import model.Ricetta;
+import model.Voto;
 import persistence.DatabaseManager;
 import persistence.dao.RicettaDao;
 
@@ -32,22 +36,21 @@ public class GetVotes extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+		String recipeId=request.getParameter("idRecipe");
+		Ricetta recipe= ricettaDao.findByPrimaryKey(Long.parseLong(recipeId));
+		Double votoComplessivo = recipe.getVotoComplessivo();	
+		//System.out.println(votoComplessivo);
+		request.setAttribute("votoComplessivo", votoComplessivo);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/displayRecipe.jsp");
+		dispatcher.forward(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
-		String recipeId=request.getParameter("idRecipe");
-		Long id=Long.parseLong(recipeId);
-		//Ricetta recipe= ricettaDao.findByPrimaryKey(id);
-		//Long votoComplessivo= recipe.getVotoComplessivo();
-		//request.setAttribute("votoComplessivo", votoComplessivo);
-		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/displayRecipe.jsp");
-		dispatcher.forward(request,response);
+		
 	}
 
 }

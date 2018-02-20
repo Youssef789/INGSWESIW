@@ -5,6 +5,9 @@
 <meta charset="utf-8">
 </head>
 <body>
+<c:if test="${empty username}">
+		<c:redirect url="login.jsp" />
+</c:if>
 <form action ="javascript:updateComment({${idComment})">
 					<div class="form-group">
 								<textarea name ="updatecomment{${idComment}"class="form-control" rows="5" id="updatecomment{${idComment}" >${commento}</textarea>

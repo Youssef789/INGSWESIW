@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ import persistence.dao.RicettaDao;
 @WebServlet("/EditRecipe")
 public class EditRecipe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String SAVE_DIR="C:\\Users\\my\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames";
+	//private static final String SAVE_DIR="C:\\Users\\my\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames";
 
        
     /**
@@ -53,9 +54,14 @@ public class EditRecipe extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		Part filePart = request.getPart("photo");        
-	    String imageName = extracFilename(filePart);
-	    filePart.write(SAVE_DIR + File.separator +imageName);
+		String appPath = request.getServletContext().getRealPath("imageNames");
+        Part filePart = request.getPart("photo");
+	    String imageName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
+
+		//System.out.println(appPath + File.separator + imageName);
+
+        filePart.write( appPath + File.separator + imageName);
+
         String recipeId=request.getParameter("idRecipe");
         String title =request.getParameter("title");
 		String category=request.getParameter("category");
@@ -78,18 +84,9 @@ public class EditRecipe extends HttpServlet {
 		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		ricettaDao.updateAsPubblicata(ricetta);
 		request.setAttribute("ricetta", ricetta);
-		response.sendRedirect("MyProfile");
+		response.sendRedirect("MyRecipes");
 	}
 	
-	private String extracFilename(Part filePart) {
-		String contentDisp = filePart.getHeader("content-disposition");
-		String [] items =contentDisp.split(";");
-		for (String string : items) {
-			if(string.trim().startsWith("filename")) {
-				return string.substring(string.indexOf("=")+2, string.length() -1);
-			}
-		}
-		return " ";
-	}
+	
 
 }

@@ -8,7 +8,8 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="INGSWESIW/../css/recipeCommon.css">
-<title>Create your recipe</title>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<title>Crea ricetta | SoRecipes</title>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
 	<div class="col-xs-9" id="right">
 		<div class="col-md-9">
 			<h2 style="text-align: center">
-				<strong>crea la tua ricetta</strong>
+				<strong>Crea la tua ricetta</strong>
 			</h2>
 			<form action="CreateRecipe" method="post" id="fromrecipe"
 				enctype='multipart/form-data'>
@@ -26,8 +27,10 @@
 						placeholder="Titolo" class="form-control" />
 				</div>
 				<div class="form-group">
-					<label for="photo">sceglie la foto principale:</label><input
-						type="file" name="photo" id="file">
+					<label for="photo">Scegli la foto principale:</label>
+					<input type="file" name="photo" id="file">
+					<img id="image" src="#" alt="" />
+					
 				</div>
 				<div class="form-group">
 					<label for="category">Categoria:</label> <select name="category"
@@ -57,7 +60,7 @@
 				<label for="difficulty">Difficoltà:</label>
 				<div class="radio">
 					<label><input type="radio" name="difficulty" value="FACILE">Facile</label>
-					<label><input type="radio" name="difficulty" value="MEDIO">Medio</label>
+					<label><input type="radio" name="difficulty" value="MEDIA">Medio</label>
 					<label><input type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
 				</div>
 
@@ -65,7 +68,7 @@
 					<br> <label for="ingredient">Ingredienti:</label>
 					<textarea name="ingredient" class="form-control" rows="5"
 						id="ingredient"></textarea>
-					<br> <label for="description">Discrezione:</label>
+					<br> <label for="description">Descrizione:</label>
 					<textarea name="description" class="form-control" rows="10"
 						id="discrezione"></textarea>
 					<br> <label for="preparation">Preparazione:</label>
@@ -73,27 +76,18 @@
 						id="preparazione"></textarea>
 				</div>
 				<div class="form-group">
-					<input name="create" type="submit" value="Create" class="btn btn-success"/>
+					<input name="create" type="submit" value="Crea" class="btn btn-success"/>
 					
 				</div>
 			</form>
 		</div>
 	</div>
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script>
-function filePreview(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#fromrecipe + img').remove();
-            $('#file').after('<img src="'+e.target.result+'" width="350" height="300"/>');
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-$("#file").change(function () {
-    filePreview(this);
-});
-</script>
+	
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/preview.js"></script>
+
+
+
+
 </body>
 </html>

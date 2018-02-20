@@ -1,32 +1,58 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="pages/nav.jsp"/>
 
 <html>
-<head>
+
+<head lang="it">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="bootstrap-social-gh-pages/bootstrap-social.css">
 <link rel="stylesheet" href="css/account.css">
-<title>Create your Account</title>
+<link rel="icon" href="assets/favicon/favicon.ico"/>
+<title>Iscriviti | SoRecipes</title>
 </head>
+
 <body>
-<h1>Create your Account</h1>
+	<c:if test="${!empty username}">
+		<c:redirect url="AllRecipes"/>
+	</c:if>
 
-<section class="moduleRegistration" class="row">
-	
-<div class="col-md-4 col-md-offset-4" id="fm" >
-	<form action="CreateAccount" method="post" >
-		<div class="form-group"><label for="username">Username:</label> <input name="username" type="text" placeholder="Username" class="form-control" /> </div> 
-		<div class="form-group"><label for="email">Email:</label><input name="email" type="email" placeholder="Email" class="form-control" /></div> 
-		<div class="form-group"><label for="password">Password:</label> <input name="password" type="password" placeholder="Password" class="form-control" /> </div> 
-		<div class="form-group"><label for="confermaPassword">Conferm password:</label>  <input name="confirmPassword" type="password" placeholder="Confirm Password" class="form-control" /> </div> 	
-		<div class="form-group"><input name="create" type="submit" value="Create"  class="btn btn-success"/></div>		
-	</form>
+	<div class="col-md-4 col-md-offset-4">
+	    <h2><span id="subscripe-title">Iscriviti</span> al sito</h2>
 
-</div>
-</section>
-	
+	    <hr class="colorgraph">
+		
+		<form action="CreateAccount" method="POST" id="form-sign-up" onSubmit="return validate();">
+			<div class="form-group">
+				<label for="username"></label> <input name="username" id="username" type="text" onKeyUp='validateUsername()' class="form-control" placeholder="Username" required autocomplete="off"/>
+			</div>
+			<div id='warning-username'></div>
+			<div class="form-group">
+				<label for="email"></label> <input name="email" id="email" type="email" onKeyUp='validateEmail()' class="form-control"  placeholder="Email" required autocomplete="off"/>
+			</div>
+			<div id='warning-email'></div>
+			<div class="form-group">
+				<label for="password"></label> <input name="password1" id="password1" type="password" onKeyUp='regexPassword()' class="form-control" placeholder="Password"/>
+			</div>
+			<div id='warning-regex-password'></div>
+			<div class="form-group">
+				<label for="password"></label> <input name="password2" id="password2" type="password" onKeyUp='checkEqualsPassword()' class="form-control" placeholder="Ripeti password" required/>
+			</div>
+			<div id='warning-not-equals-password'></div>
+			<div class="form-group">
+				<input name="create" type="submit" id='submit' value="Iscriviti" class="btn btn-success"/>
+			</div>
+		</form>
+	</div>
 
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 </body>
+
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/account.js"></script>
+
+
 </html>
