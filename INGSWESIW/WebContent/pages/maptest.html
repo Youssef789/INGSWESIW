@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<meta charset="windows-1256">
+<title>title here</title>
+</head>
+<body>
+
+
+<form>
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label for="geocomplete" class="form-control">search for a place</label>
+    		<input class="form-control" type="text" id="geocomplete"  placeholder="Search location">
+   			<div class="input-group-btn">
+       	    <button class="btn btn-default get_map" type="submit">Locate</button>
+    		</div>
+		</div>
+	</div>
+	
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="RequestAddress" class="form-control">Address selected</label>
+	    		<input class="form-control" type="text" name="RequestAddress" >
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="lat/lng" class="form-control">lat</label>
+	    		<input class="form-control" type="text" name="lat" >
+			</div>
+		</div>
+<h4>Location Details</h4> <br>
+<div class="col-md-6">
+<div class="form-group">
+	<label for="search_addr" class="control-label">Address: </label>
+    <input type="text" name="search_addr" class="form-control">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+	<label for="search_latitude" class="control-label">Latitude: </label>
+    <input type="text" name="search_latitude" class="form-control">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group">
+	<label for="search_longitude" class="control-label">Longitude: </label>
+    <input type="text" name="search_longitude" class="form-control">
+</div>
+</div>
+
+
+</div>
+</form>
+<!-- display google map -->
+<div id="geomap"></div>
+
+<!-- display selected location information -->
+<h4>Location Details</h4>
+<p>Address: <input type="text" class="search_addr" size="45"></p>
+<p>Latitude: <input type="text" class="search_latitude" size="30"></p>
+<p>Longitude: <input type="text" class="search_longitude" size="30"></p>
+
+<script>
+
+if(navigator.geolocation){
+	navigator.geolocation.getCurrentPosition(showLocation,showError,
+	{
+		enableHightAccuracy: true;
+		timeout=10000
+	});
+}
+function showError(error) {
+	var x=document.getElementById("alert");
+	
+}
+
+
+geocode();
+function geocode() {
+	var location='22 main st Boston MA';
+axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+	params:{
+		address:location,
+		radius:5000,
+		type:restaurants,
+		key:'AIzaSyBECPJx_2oKER3IIid9ThmZThmhHMM9-lg',
+	}
+})
+
+</script>
+</body>
+</html>

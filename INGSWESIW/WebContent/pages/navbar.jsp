@@ -16,31 +16,26 @@
 						class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand" href="AllRecipes">SocialCook</a>
+				<a class="navbar-brand" href="AllRecipes">
+				<img alt="Dispute Bills" src="image/logo.png" style="width:130px;">
+				</a>
 			
 				<form class="navbar-form navbar-left" action="Search">
-					<div class="form-group" class="col-xs-3">
-						<input id="search" name="search" type="text" class="form-control"
-							placeholder="Search">
-					</div>
-					<button id="btnsearch" type="submit" class="btn btn-primary ">Search</button>
+					<div class="input-group">
+	        			<input type="text" class="form-control" placeholder="Search" name="search">
+	        				<div class="input-group-btn">
+	          					<button class="btn btn-default" type="submit"> <i id="iconsearch" class="glyphicon glyphicon-search"></i></button>
+	        				</div>
+	      			</div>
 				</form>
 				 
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
-				<!-- 
-				<ul class="nav navbar-nav navbar-right">
-					<li><a id="logout" href="#" onclick="logout()">Logout</a></li>
-					<fb:login-button id="fb-btn"
-						scope="public_profile,email,user_birthday"
-						onlogin="checkLoginState();">
-					</fb:login-button>
-				</ul>
- -->
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a id="home" href="AllRecipes">Home</a></li>
-					<li><a id="yourprofile" href="MyProfile">Profile</a></li>
+				<c:if test="${!empty username}">
+				<li><a id="home" href="AllRecipes">Home</a></li>
+					<li><a id="yourprofile" href="MyRecipes">Profile</a></li>
 					<li class="dropdown"><a id="user" class="dropdown-toggle"
 						data-toggle="dropdown" href="#">welcome : ${username}<span
 							class="caret"></span></a>
@@ -48,18 +43,24 @@
 							<li><a href="recipe.jsp">Create Recipe</a></li>
 							<li><a href="logout">Logout</a></li>
 						</ul></li>
+				</c:if>
+				<c:if test="${empty username}">
+				 <li><a id="signup" href="account.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			     <li><a id="signin" href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>	
+					<fb:login-button  id="fb-btn"
+						scope="public_profile,email,user_birthday"
+						onlogin="checkLoginState();">
+					</fb:login-button>				
+				</c:if>					
 				</ul>
 			</div>
 
 		</div>
 	</nav>
 			
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-3">
-				<nav id=mainNav>
-				
-					<ul class="nav nav-pills nav-stacked">
+	<div class="container ">
+			<div class="sidenav">
+						<ul class="nav nav-pills nav-stacked">
 						<li><a href="GetRecipeByCategory?category=ANTIPASTI">Antipasti</a></li>
 						<li><a href="GetRecipeByCategory?category=PRIMI_PIATTI">Primi piatti</a></li>
 						<li><a href="GetRecipeByCategory?category=SECONDI_PIATTI">Secondi piatti</a></li>
@@ -70,13 +71,10 @@
 						<li><a href="GetRecipeByCategory?category=MARMELLATE_E_CONSERVE">Marmellate e conserve</a></li>
 						<li><a href="GetRecipeByCategory?category=BEVANDE">Bevande</a></li>
 						<li><a href="GetRecipeByCategory?category=ALTRO">Altro</a></li>
-
+						<li><a href="ricettevideos.jsp">Videos</a></li>
 					</ul>
 
-				</nav>
-
 			</div>
-		</div>
 	</div>
 
 </body>

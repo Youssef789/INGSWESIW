@@ -1,12 +1,15 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import model.Ricetta;
 import model.Utente;
@@ -15,14 +18,14 @@ import persistence.dao.RicettaDao;
 import persistence.dao.UtenteDao;
 
 
-/**
- * Servlet implementation class AddFavourite
- */
-@WebServlet("/AddFavourite")
+
 public class AddFavourite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	
+	private class Favourite{		
+		private String tipo;
+		private String idRecipe;
+	}
 	
     public AddFavourite() {
         super();
@@ -33,8 +36,22 @@ public class AddFavourite extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		String utenteUsername = (String) request.getSession().getAttribute("username");
+//		Utente utente = new Utente();
+//		utente.setUsername(utenteUsername);		
+//		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+//		String recipeId =request.getParameter("idRecipe");
+//		Ricetta ricetta =ricettaDao.findByPrimaryKey(Long.parseLong(recipeId));
+//		UtenteDao utenteDao=DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+//		Ricetta ricettapreferita=utenteDao.findRicettaPreferita(utente,ricetta);
+//		String utente_username= ricettapreferita.getUtente().getUsername();
+//		Long ricetta_id =ricettapreferita.getId();
+//		//System.out.println(utente_username+ricetta_id);
+//		
+//		request.setAttribute("utente_username", utente_username);
+//		request.setAttribute("ricetta_id", ricetta_id);
+//		RequestDispatcher dispatcher=request.getRequestDispatcher("/pages/displayRecipe.jsp");
+//		dispatcher.forward(request,response);
 	}
 
 	/**
@@ -45,11 +62,24 @@ public class AddFavourite extends HttpServlet {
 		String utenteUsername = (String) request.getSession().getAttribute("username");
 		Utente utente = new Utente();
 		utente.setUsername(utenteUsername);
+//		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+//		Favourite favourite = new Gson().fromJson(bufferedReader.readLine(), Favourite.class);
+//		
+//		RicettaDao ricettaDao=DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
+//		Ricetta ricetta = ricettaDao.findByPrimaryKey(Long.parseLong(favourite.idRecipe));
+//		UtenteDao utenteDao=DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
+//
+//		if(favourite.tipo.equals("add"))
+//		utenteDao.insertRicettaPreferita(utente,ricetta);
+//		if(favourite.tipo.equals("remove"))
+//		utenteDao.deleteRicettaPreferita(utente,ricetta);
+//		response.getWriter().write("true");
+
 		RicettaDao ricettaDao =DatabaseManager.getInstance().getDaoFactory().getRicettaDAO();
 		String recipeId =request.getParameter("idRecipe");
 		Ricetta ricetta =ricettaDao.findByPrimaryKey(Long.parseLong(recipeId));
 		UtenteDao utenteDao=DatabaseManager.getInstance().getDaoFactory().getUtenteDAO();
-		utenteDao.insertRicettaPreferita(ricetta,utente);
+		utenteDao.insertRicettaPreferita(utente,ricetta);
 		response.getWriter().write("true");
 	}
 

@@ -41,42 +41,42 @@
         })
     }
 
-    function buildProfile(user){
-        let profile=`
-        <img src="${user.picture.data.url}">
-        <h3>${user.name}</h3>
-        <ul class="list-group">
-            <li class="list-group-item">Email : ${user.email}</li>
-            <li class="list-group-item">Birthday : ${user.birthday}</li>
-           
-        </ul>
-        `;
-        document.getElementById('profile').innerHTML=profile;
-    }
+//    function buildProfile(user){
+//        let profile=`
+//        <img src="${user.picture.data.url}">
+//        <h3>${user.name}</h3>
+//        <ul class="list-group">
+//            <li class="list-group-item">Email : ${user.email}</li>
+//            <li class="list-group-item">Birthday : ${user.birthday}</li>
+//           
+//        </ul>
+//        `;
+//        document.getElementById('profile').innerHTML=profile;
+//    }
 
-    function setElements(isLoggedIn){
-        if(isLoggedIn){
-            document.getElementById('logout').style.display='black';
-            document.getElementById('profile').style.display='black';
-            document.getElementById('home').style.display='black';
-            document.getElementById('yourprofile').style.display='black';
-            document.getElementById('signup').style.display='none';
-            document.getElementById('signin').style.display='none';
-            document.getElementById('fb-btn').style.display='none';
-            document.getElementById('heading').style.display='none';
-        }
-        else{
-            document.getElementById('logout').style.display='none';
-            document.getElementById('profile').style.display='none';
-            document.getElementById('yourprofile').style.display='none';
-            document.getElementById('home').style.display='none';
-            document.getElementById('signup').style.display='black';
-            document.getElementById('signin').style.display='black';
-            document.getElementById('fb-btn').style.display='black';
-            document.getElementById('heading').style.display='black';
-            
-        }
-    }
+//    function setElements(isLoggedIn){
+//        if(isLoggedIn){
+//            document.getElementById('logout').style.display='black';
+//            document.getElementById('profile').style.display='black';
+//            document.getElementById('home').style.display='black';
+//            document.getElementById('yourprofile').style.display='black';
+//            document.getElementById('signup').style.display='none';
+//            document.getElementById('signin').style.display='none';
+//            document.getElementById('fb-btn').style.display='none';
+//            document.getElementById('heading').style.display='none';
+//        }
+//        else{
+//            document.getElementById('logout').style.display='none';
+//            document.getElementById('profile').style.display='none';
+//            document.getElementById('yourprofile').style.display='none';
+//            document.getElementById('home').style.display='none';
+//            document.getElementById('signup').style.display='black';
+//            document.getElementById('signin').style.display='black';
+//            document.getElementById('fb-btn').style.display='black';
+//            document.getElementById('heading').style.display='black';
+//            
+//        }
+//    }
 
     function logout(){
         FB.logout(function(response){

@@ -10,6 +10,10 @@
 <title>Edit your recipe</title>
 </head>
 <body>
+
+<c:if test="${empty username}">
+		<c:redirect url="login.jsp" />
+</c:if>
 	<div class="col-xs-9" id="right">
 		<div class="col-md-9">
 			<form action="EditRecipe?idRecipe=${recipe.id}" method="post" enctype='multipart/form-data'>

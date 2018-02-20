@@ -29,6 +29,14 @@ public class RicettaProxy extends Ricetta {
 		return super.getVoti(); 
 	}
 	
-	
+	@Override
+	public Double getVotoComplessivo() {
+		List<Voto> voti = new VotoDaoJDBC(dataSource).findByRicetta(this);
+		Double votoComplessivo = new Double(0);
+		for (Voto voto : voti) {
+			votoComplessivo += voto.getValore();
+		}
+		return (votoComplessivo / voti.size());
+	}
 
 }

@@ -227,8 +227,8 @@ public class Ricetta {
 	//////////////////////////////////
 	//////////////////////////////////
 	
-	public Long getVotoComplessivo() {
-		Long votoComplessivo = new Long(0);
+	public Double getVotoComplessivo() {
+		Double votoComplessivo = new Double(0);
 		for (Voto voto : voti) {
 			votoComplessivo += voto.getValore();
 		}

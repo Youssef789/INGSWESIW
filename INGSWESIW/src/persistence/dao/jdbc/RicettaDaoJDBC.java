@@ -47,8 +47,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(9, ricetta.getPreparazione());
 			statement.setString(10, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e1) {
 			if (connection != null) {
 				try {
@@ -86,8 +84,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(10, ricetta.getPreparazione());
 			statement.setString(11, ricetta.getUtente().getUsername());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e1) {
 			if (connection != null) {
 				try {
@@ -376,8 +372,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(8, ricetta.getPreparazione());
 			statement.setLong(9, ricetta.getId());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -406,8 +400,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 			statement.setString(9, ricetta.getPreparazione());
 			statement.setLong(10, ricetta.getId());
 			statement.executeUpdate();
-			updateNameImmaginiPreparazione(ricetta, connection);
-			updatePathsVideoPreparazione(ricetta, connection);
 		} catch (SQLException e) {
 			throw new PersistenceException(e.getMessage());
 		} finally {
@@ -447,12 +439,6 @@ public class RicettaDaoJDBC implements RicettaDao {
 	//////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////
 	
-	private void updateNameImmaginiPreparazione(Ricetta ricetta, Connection connection) {
-		// TODO Auto-generated method stub
-	}
-	
-	private void updatePathsVideoPreparazione(Ricetta ricetta, Connection connection) {
-		// TODO Auto-generated method stub
-	}
+
 
 }

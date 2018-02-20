@@ -59,24 +59,12 @@ public class UtenteProxy extends Utente {
 		try {
 			Ricetta ricetta = null;
 			PreparedStatement statement;
-			String query = "select * from ricetta_preferita where utente_id = ?;";
+			String query = "select * from ricetta_preferita where utente_username = ?;";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, this.getUsername());
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				ricetta = new RicettaProxy(dataSource);
-				ricetta.setId(result.getLong("id"));
-				ricetta.setDataPubblicazione(result.getTimestamp("dataPubblicazione"));
-				ricetta.setDataUltimaModifica(result.getTimestamp("dataUltimaModifica"));
-				ricetta.setTitolo(result.getString("titolo"));
-				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
-				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
-				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("pathImmaginePrincipale"));
-				ricetta.setIngredienti(result.getString("ingredienti"));
-				ricetta.setDescrizione((result.getString("descrizione")));
-				ricetta.setPreparazione(result.getString("preparazione"));
-				ricetta.setUtente(new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
+				ricetta = new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id"));				
 				ricette.add(ricetta);
 			}
 		} catch (SQLException e) {

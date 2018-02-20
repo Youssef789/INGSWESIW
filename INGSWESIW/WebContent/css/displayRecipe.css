@@ -35,6 +35,9 @@ p {
 	~ label {
 	color:  #f6973c;
 }
+#resultvoto{
+	color:  #f6973c;
+}
 
 #category {
 	color: #f6973c;
@@ -85,23 +88,16 @@ p {
 	text-align: center;
 }
 
-#mainNav {
-	position: fixed;
-	left: 0px;
-	width: 200px;
-	top: 100px;
-}
 
-#right {
-	position: absolute;
-	top: 100px;
+
+#recipe-body {
+	position: relative;
+	padding:50px;
+	top: 50px;
 	left: 200px;
 	width: 750px;
 }
 
-#search {
-	width: 500px;
-}
 
 #home, #yourprofile {
 	display: block;
@@ -115,4 +111,31 @@ p {
 	float: right;
 	padding: 10px;
 	border: 5px solid;
+}
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #222;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+.sidenav a {
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+
+   color: black;
+}
+ #iconsearch{
+padding-top: 6px;
 }
