@@ -17,7 +17,10 @@ function getfollow() {
 		});
 	}
 	
-	
+
+
+
+
 	function addfollow(){
 		var idUser= $("#userid").text();
 		var tipo="add";
@@ -49,3 +52,6 @@ function getfollow() {
 		});
 		}
 	}
+	
+	
+	

@@ -1,8 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="user" class="model.Utente" scope="session" />
-<jsp:setProperty name="user" property="username" value="fin."/>
-<jsp:useBean id="recipe" class="model.Ricetta" scope="session" />
+<jsp:useBean id="utente" class="model.Utente" scope="request" />
+<jsp:useBean id="recipe" class="model.Ricetta" scope="request" />
+
+
 <jsp:include page="nav.jsp"/>
 
 <html>
@@ -41,8 +42,46 @@
 				<div class="profile-userbuttons">
 				
 								
-					<button type="button" class="btn btn-success btn-sm">Followers</button>
-					<button type="button" class="btn btn-danger btn-sm">Following</button>
+					<button onclick="javascript:getfollowers()" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#followers">Followers</button>
+						<div class="modal fade" id="followers">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>	
+										<h3 class="modal-title">Followers</h3>
+									</div>
+									<div class="modal-body">
+									<div id="follower">
+									
+									</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					<button onclick="javascript:getfollowings()"  type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#following">Following</button>
+					
+					<div class="modal fade" id="following">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>	
+										<h3 class="modal-title">Following</h3>
+									</div>
+									<div class="modal-body">
+									<div id="followings">
+									
+									</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					
 					<c:if test="${username != utente.username}">
 					<div id="warning-follow">
 					
@@ -108,5 +147,45 @@
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script src="js/profile.js"></script>
  	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ 	<script type="text/javascript">
+ 	function getfollowings() {
+ 		var idUser= $("#userid").text();
+ 		$.ajax({
+ 			type: "GET",		
+ 			url: "GetFollowing",			
+ 			data: {idUser:idUser},
+ 			success: function(data){
+ 				$("#followings").html(data);
+ 			}	
+ 		});
+	}
+ 	
+ 	function getfollowers() {
+ 		var idUser= $("#userid").text();
+ 		$.ajax({
+ 			type: "GET",		
+ 			url: "GetFollowers",			
+ 			data: {idUser:idUser},
+ 			success: function(data){
+ 				$("#follower").html(data);
+ 			}	
+ 		});
+ 	}
+ 	
+ 	function deleteRecipe(idRecipe){
+		if (confirm("Sei sicuro di voler eliminare questa ricetta?") == true) {
+				// swal("Good job!", "idRecipe"+ idRecipe, "success");
+			$.ajax({
+				type: "POST",
+				url:"DeleteRecipe",
+				data: {"idRecipe" :idRecipe},
+				success:function(data){
+					$("#display"+idRecipe).remove();
+					swal("Good job!", "The recipe was deleted. ", "success");
+				}
+			});
+		}
+	}
+ 	</script>
 </body>
 </html>

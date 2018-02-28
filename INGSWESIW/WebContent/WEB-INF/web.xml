@@ -9,7 +9,6 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Follow</servlet-name>
     <servlet-class>controller.Follow</servlet-class>
@@ -18,7 +17,6 @@
     <servlet-name>Follow</servlet-name>
     <url-pattern>/Follow</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AvailableEmail</servlet-name>
     <servlet-class>controller.AvailableEmail</servlet-class>

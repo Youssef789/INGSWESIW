@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="recipe" class="model.Ricetta" scope="request" />
+
 <jsp:include page="pages/navbar.jsp" />
 
 <html>
@@ -21,9 +23,7 @@
 </head>
 <body>	
 <header>	
- <div class="container">
-           
-            <div class="row">
+
         		 <section class="recipe">
         		 	<c:forEach var="recipe" items="${recipes}">
 	         <div class="container" style="padding-left: 200px;padding-top: 100px;">
@@ -49,8 +49,7 @@
         		 	</c:forEach>
         		
         		 </section>	
-        		</div>
-        		</div>
+        	
 </header>
 	<jsp:include page="pages/footer.html"></jsp:include>
     <script src="js/jquery-3.2.1.min.js"></script>

@@ -85,7 +85,7 @@ public class UtenteProxy extends Utente {
 		try {
 			Utente utente = null;
 			PreparedStatement statement;
-			String query = "select * from following where utente_id = ?;";
+			String query = "select * from following where utente_username = ?;";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, this.getUsername());
 			ResultSet result = statement.executeQuery();
@@ -113,7 +113,7 @@ public class UtenteProxy extends Utente {
 		try {
 			Utente utente = null;
 			PreparedStatement statement;
-			String query = "select * from followers where utente_id = ?;";
+			String query = "select * from follower where utente_username = ?;";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, this.getUsername());
 			ResultSet result = statement.executeQuery();

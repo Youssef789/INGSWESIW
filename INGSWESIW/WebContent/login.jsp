@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <jsp:include page="pages/nav.jsp"/>
 
 <html>
@@ -31,7 +32,7 @@
 	    <h2><span>Accedi</span> al sito</h2> 
 	    <hr class="colorgraph">
 	    <div class="col-xl-12" style="">
-			    <fb:login-button id="fb-button" scope="public_profile,email,user_birthday" onlogin="checkLoginState();"><h3>Entra O Registrati con Facebook</h3></fb:login-button>	
+			    <fb:login-button id="fb-button" scope="public_profile,email,user_birthday" onlogin="checkLoginState();"><h3>Entra con Facebook</h3></fb:login-button>	
 		</div>
 		<form method="post" action="javascript:checkLogin()">
 			<div class="form-group">
