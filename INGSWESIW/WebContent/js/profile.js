@@ -6,11 +6,11 @@ function getfollow() {
 			data: {idUser:idUser},
 			success: function(response){
 				if (response == "true"){
-					$("#warning-follow").replaceWith("<button id=\"add\" type=\"button\" onclick=\"javascript:addfollow()\" class=\"btn btn-primary btn-sm\" >follow "
+					$("#warning-follow").replaceWith("<button id=\"add\" style=\"width: 90%;\" type=\"button\" onclick=\"javascript:addfollow()\" class=\"btn btn-primary btn-sm\" >follow "
 							+"</button>");
 				}
 				else{
-					$("#warning-follow").replaceWith("<button id=\"remove\" type=\"button\" onclick=\"javascript:removefollow()\" class=\"btn btn-primary btn-sm\" >unfollow "
+					$("#warning-follow").replaceWith("<button id=\"remove\" style=\"width: 90%;\"  type=\"button\" onclick=\"javascript:removefollow()\" class=\"btn btn-primary btn-sm\" >unfollow "
 							+"</button>");
 				}
 			}	
@@ -30,7 +30,7 @@ function getfollow() {
 			datatype: "json",
 			data: JSON.stringify({"idUser" : idUser, "tipo" : tipo}),
 			success: function(data){
-				$("#add").replaceWith("<button id=\"remove\"  type=\"button\" onclick=\"javascript:removefollow()\" class=\"btn btn-primary btn-sm\" >unfollow"
+				$("#add").replaceWith("<button id=\"remove\" style=\"width: 90%;\"  type=\"button\" onclick=\"javascript:removefollow()\" class=\"btn btn-primary btn-sm\" >unfollow"
 						+"</button>");
 			}
 		});
@@ -46,7 +46,7 @@ function getfollow() {
 			datatype: "json",
 			data: JSON.stringify({"idUser" : idUser, "tipo" : tipo}),
 			success: function(data){
-				$("#remove").replaceWith("<button id=\"add\"  type=\"button\" onclick=\"javascript:addfollow("+idUser+")\" class=\"btn btn-primary btn-sm\" >follow"
+				$("#remove").replaceWith("<button id=\"add\" style=\"width: 90%;\"  type=\"button\" onclick=\"javascript:addfollow("+idUser+")\" class=\"btn btn-primary btn-sm\" >follow"
 						+"</button>");
 			}
 		});

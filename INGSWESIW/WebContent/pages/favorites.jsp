@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %><html>
-<jsp:useBean id="recipe" class="model.Ricetta" scope="request" />
 
 <jsp:include page="nav.jsp" />
 <head>
@@ -66,9 +65,9 @@
 		</div>
 	<div class="col-md-9">
             <div class="profile-content">
-	 <section class="recipe" id="display">
+	 <section class="recipe" >
         	<c:forEach var="recipe" items="${ricette}">
-				<ul class="recipe-showcase">
+				<ul class="recipe-showcase" id="displayrecipe${recipe.id}">
         		 		<li>
         		 		<figure class="recipe-photo">
 									<a href="GetRecipe?idRecipe=${recipe.id}"><img src="imageNames/${recipe.nameImmaginePrincipale}" width="214"height="138"></a>
@@ -98,7 +97,7 @@ function removefavorite(idRecipe) {
 		data: JSON.stringify({"idRecipe" : idRecipe, "tipo" : tipo}),
 		success: function(data){
 			swal("OK!", "La ricetta è stata rimossa dai preferiti.", "success");
-			$("#recipe"+recipe.id).remove();
+			$("#displayrecipe"+idRecipe).remove();
 
 		}
 	});

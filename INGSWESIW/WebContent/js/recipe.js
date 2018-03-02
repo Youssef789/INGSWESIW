@@ -8,16 +8,18 @@ function addComment(idRecipe){
 		success: function(data){	
 			var out = JSON.parse(data);
 			$("#comments").prepend(
-					"<div class=\"media\">"
+					"<div style=\"padding:40px;\" class=\"media\">"
 					+"<div class=\"media-left\">"
 					+"<img src=\"image/unknown-user.png\" class=\"media-object\" style=\"width:60px\">"
 					+"</div>"
 					+"<div class=\"media-body\">"
 					+"<h4 class=\"media-heading\">"+out.username+"<small><i> Posted on "+out.dataPubblicazione+"</i></small></h4>"
 					+"<p>"+out.containComment+"</p>"
+					+"<a onclick=\"javascript:deleteComment("+out.id+")\"><span class=\"glyphicon glyphicon-trash\" style=\"float:right\"></span></a>"
+					+"<a onclick=\"javascript:editComment("+out.id+")\"><span class=\"glyphicon glyphicon-edit\" style=\"float:right\"></span></a>"
 					+"</div>"
 					+"</div>");	
-			$("#comment"+idRecipe).val("");
+			$("#comment").val("");
 		}
 	});	 
 };
@@ -32,7 +34,9 @@ function deleteComment(idComment){
 				datatype: "json",
 				data: JSON.stringify({"idComment": idComment, "remove" : remove}),
 				success: function(data){
-					 $("#comments"+idComment).remove();
+					 $("#comment__"+idComment).remove();
+						swal("Ook!", "il tuo commento è stato cancellato", "success");
+
 			    	}
 				});
 	}

@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="utente" class="model.Utente" scope="request" />
-<jsp:useBean id="recipe" class="model.Ricetta" scope="request" />
 
 
 <jsp:include page="nav.jsp"/>
@@ -121,9 +119,9 @@
 		</div>
 		<div class="col-md-9">
             <div class="profile-content">
-	 <section class="recipe" id="display">
+	 <section class="recipe">
         	<c:forEach var="recipe" items="${myrecipes}">
-				<ul class="recipe-showcase">
+				<ul class="recipe-showcase" id="displayrecipe${recipe.id}">
         		 		<li>
         		 		<figure class="recipe-photo">
 									<a href="GetRecipe?idRecipe=${recipe.id}"><img src="imageNames/${recipe.nameImmaginePrincipale}" width="214"height="138"></a>
@@ -174,14 +172,14 @@
  	
  	function deleteRecipe(idRecipe){
 		if (confirm("Sei sicuro di voler eliminare questa ricetta?") == true) {
-				// swal("Good job!", "idRecipe"+ idRecipe, "success");
 			$.ajax({
 				type: "POST",
 				url:"DeleteRecipe",
 				data: {"idRecipe" :idRecipe},
 				success:function(data){
-					$("#display"+idRecipe).remove();
-					swal("Good job!", "The recipe was deleted. ", "success");
+					$("#displayrecipe"+idRecipe).remove();
+					swal("OK!", "La ricetta è stata rimossa.", "success");
+
 				}
 			});
 		}

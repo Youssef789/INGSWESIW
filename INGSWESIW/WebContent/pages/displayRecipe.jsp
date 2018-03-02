@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="recipe" class="model.Ricetta" scope="request" />
 
 
 <jsp:include page="navbar.jsp" />
@@ -38,7 +37,7 @@
 <body onload="displayComments(${recipe.id});getfavourite(${recipe.id});formatString();">
 
 	
-			<div id="recipe-body">
+		<div class="col-md-9" id="recipe-body">
 			<c:if test="${!empty username}">	
 				<div>
 				<form id="myForm">
@@ -67,8 +66,8 @@
 
 					<h1 id="title">${recipe.titolo}</h1>
 					<!--image--->
-					<figure id="image">
-						<img src="imageNames/${recipe.nameImmaginePrincipale}">
+					<figure >
+						<img id="image" src="imageNames/${recipe.nameImmaginePrincipale}">
 					</figure>
 					<br>
 					<div>
@@ -212,11 +211,11 @@
 			data: {idRecipe:idRecipe},
 			success: function(response){
 				if (response == "true"){
-					$("#warning").replaceWith("<button id=\"add\" style=\"float:right; color:#8B0000;\" type=\"button\" onclick=\"javascript:addfavorite("+idRecipe+")\" class=\"btn btn-warning\" >Add to Favourites "
-							+"<span id=\"heart\" class=\"glyphicon glyphicon-heart\"></span></button>");
+					$("#warning").replaceWith("<button id=\"add\" style=\"float:right; \" type=\"button\" onclick=\"javascript:addfavorite("+idRecipe+")\" class=\"btn btn-primary btn-md\" >Add to Favourites "
+							+"<span style=\"color:Tomato;\" id=\"heart\" class=\"glyphicon glyphicon-heart\"></span></button>");
 				}
 				else{
-					$("#warning").replaceWith("<button id=\"remove\" style=\"float:right;\" type=\"button\" onclick=\"javascript:removefavorite("+idRecipe+")\" class=\"btn btn-primary\" >Remove from Favourites "
+					$("#warning").replaceWith("<button id=\"remove\" style=\"float:right;\" type=\"button\" onclick=\"javascript:removefavorite("+idRecipe+")\" class=\"btn btn-primary btn-md\" >Remove from Favourites "
 							+"<span id=\"ok\" class=\"glyphicon glyphicon-ok\"></span></button>");
 				}
 			}	
@@ -230,7 +229,7 @@
 			datatype: "json",
 			data: JSON.stringify({"idRecipe" : idRecipe, "tipo" : tipo}),
 			success: function(data){
-				$("#add").replaceWith("<button id=\"remove\" style=\"float:right;\" type=\"button\" onclick=\"javascript:removefavorite("+idRecipe+")\" class=\"btn btn-primary\" >Remove from Favourites "
+				$("#add").replaceWith("<button id=\"remove\" style=\"float:right;\" type=\"button\" onclick=\"javascript:removefavorite("+idRecipe+")\" class=\"btn btn-primary btn-md\" >Remove from Favourites "
 						+"<span id=\"ok\" class=\"glyphicon glyphicon-ok\"></span></button>");
 			}
 		});
@@ -245,8 +244,8 @@
 			datatype: "json",
 			data: JSON.stringify({"idRecipe" : idRecipe, "tipo" : tipo}),
 			success: function(data){
-				$("#remove").replaceWith("<button id=\"add\" style=\"float:right; color:#8B0000;\" type=\"button\" onclick=\"javascript:addfavorite("+idRecipe+")\" class=\"btn btn-warning\" >Add to Favourites "
-						+"<span id=\"heart\" class=\"glyphicon glyphicon-heart\"></span></button>");
+				$("#remove").replaceWith("<button id=\"add\" style=\"float:right; \" type=\"button\" onclick=\"javascript:addfavorite("+idRecipe+")\" class=\"btn btn-primary btn-md\" >Add to Favourites "
+						+"<span style=\"color:Tomato;\" id=\"heart\" class=\"glyphicon glyphicon-heart\"></span></button>");
 			}
 		});
 		}

@@ -34,7 +34,7 @@
 						data-toggle="dropdown" href="#">welcome : ${username}<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu ">
-							<li><a href="recipe.jsp">Create Recipe</a></li>
+							<li><a href="recipe.jsp">Crea ricetta</a></li>
 							<li><a href="logout">Logout</a></li>
 						</ul></li>
 				</c:if>

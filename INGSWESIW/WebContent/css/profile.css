@@ -34,6 +34,7 @@
 
 .profile-userbuttons {
   margin-top: 10px;
+  
 }
 
 .profile-userbuttons .btn {
@@ -41,11 +42,12 @@
   font-size: 11px;
   font-weight: 600;
   padding: 6px 15px;
-  margin-right: 5px;
+  margin-left: 20px;
 }
 
 .profile-userbuttons .btn.btn-primary{
   margin-top: 20px;
+  
 }
     
 .profile-usermenu {

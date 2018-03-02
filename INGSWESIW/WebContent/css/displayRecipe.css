@@ -54,8 +54,7 @@ p {
 	order: 2;
 }
 
-#image {
-	display: block;
+#image{
 	width: 100%;
 	height: auto;
 	max-height: 100%;
