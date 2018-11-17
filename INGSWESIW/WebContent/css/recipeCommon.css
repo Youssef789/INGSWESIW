@@ -1,9 +1,7 @@
 
- #fb-btn{margin-top:15px;}
-  #mainNav{
+
+  .sidenav{
   position: fixed;
-  left: 0px;
-  width: 200px;
   top: 100px;
   }
   #right{
@@ -11,8 +9,10 @@
   top:100px;
   left: 200px;
   width: 750px;
- 
   }
+  #iconsearch{
+padding-top: 6px;
+}
   
   #search{ width: 300px;}
   #home,#yourprofile{display:block;}
@@ -70,3 +70,41 @@
   height: auto;
   padding:10px;
   }
+   #fb-btn{padding-top:15px;}
+   
+   .sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #222;
+    overflow-x: hidden;
+    padding-top: 80px;
+}
+
+.sidenav a {
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+
+   color: black;
+}
+ #iconsearch{
+padding-top: 6px;
+}
+
+.fa.fa-user, .fa.fa-clock-o {
+    padding-right: 5px;
+    color: #909090;
+    font-size: 8px;
+}
+.btn.btn-success{
+	text-align: center;
+	width: 100%;
+}

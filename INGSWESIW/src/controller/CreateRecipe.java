@@ -26,7 +26,7 @@ import persistence.dao.RicettaDao;
 
 @MultipartConfig
 public class CreateRecipe extends HttpServlet {
-	private static final String SAVE_DIR="C:\\Users\\my\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames";
+	//private static final String SAVE_DIR="C:\\Users\\my\\git\\INGSWESIW\\INGSWESIW\\WebContent\\imageNames";
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,12 +41,13 @@ public class CreateRecipe extends HttpServlet {
 		String utenteS = (String) request.getSession().getAttribute("username");	
 		Utente utente = new Utente();
 		utente.setUsername(utenteS);
-		String appPath = request.getServletContext().getRealPath("images");
-        Part filePart = request.getPart("photo");        
-        String imageName = extracFilename(filePart);
+		String appPath = request.getServletContext().getRealPath("imageNames");
+        Part filePart = request.getPart("photo");
+	    String imageName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
+
 		//System.out.println(appPath + File.separator + imageName);
 
-        filePart.write(SAVE_DIR + File.separator + imageName);
+        filePart.write( appPath + File.separator + imageName);
 		String title =request.getParameter("title");
 		String category=request.getParameter("category");
 		String difficulty=request.getParameter("difficulty");
@@ -72,27 +73,6 @@ public class CreateRecipe extends HttpServlet {
 		response.sendRedirect("AllRecipes");
 	}
 	
-	private String extracFilename(Part filePart) {
-		String contentDisp = filePart.getHeader("content-disposition");
-		String [] items =contentDisp.split(";");
-		for (String string : items) {
-			if(string.trim().startsWith("filename")) {
-				return string.substring(string.indexOf("=")+2, string.length() -1);
-			}
-		}
-		return " ";
-	}
 	
-//	private String extracFilename(Part filePart) {
-//		String contentDisp = filePart.getHeader("content-disposition");
-//		String [] items =contentDisp.split(";");
-//		for (String string : items) {
-//			if(string.trim().startsWith("filename")) {
-//				return string.substring(string.indexOf("=")+2, string.length() -1);
-//			}
-//		}
-//		return " ";
-//	}
-//
 
 }

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <jsp:include page="navbar.jsp" />
 <html>
 <head>
@@ -17,8 +18,6 @@
 									<a href="GetRecipe?idRecipe=${recipe.id}"><img src="imageNames/${recipe.nameImmaginePrincipale}" width="214"height="138"></a>
 									<a href="GetRecipe?idRecipe=${recipe.id}" id="title">${recipe.titolo}</a>
 									<a href="GetRecipe?idRecipe=${recipe.id}" id="category">${recipe.categoria}</a>
-									<a id="voti">4.7</a>
-									<label class="star-rating" for="voti" title=""><i class="fa fa-star" aria-hidden="true"></i></label>
         		 					
         		 		</figure>
         		 		</li>

@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import model.Categoria;
 import model.Commento;
-import model.Difficolta;
 import model.Ricetta;
 import model.Utente;
 import model.Voto;
@@ -37,7 +35,7 @@ public class UtenteProxy extends Utente {
 		this.setVotiEspressi(voti);
 		return super.getVotiEspressi(); 
 	}
-	
+		
 	@Override
 	public List<Ricetta> getRicetteInBozza() {
 		List<Ricetta> ricette = new RicettaDaoJDBC(dataSource).findAllBozzeByUtente(this);
@@ -59,24 +57,12 @@ public class UtenteProxy extends Utente {
 		try {
 			Ricetta ricetta = null;
 			PreparedStatement statement;
-			String query = "select * from ricetta_preferita where utente_id = ?;";
+			String query = "select * from ricetta_preferita where utente_username = ?;";
 			statement = connection.prepareStatement(query);
 			statement.setString(1, this.getUsername());
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				ricetta = new RicettaProxy(dataSource);
-				ricetta.setId(result.getLong("id"));
-				ricetta.setDataPubblicazione(result.getTimestamp("dataPubblicazione"));
-				ricetta.setDataUltimaModifica(result.getTimestamp("dataUltimaModifica"));
-				ricetta.setTitolo(result.getString("titolo"));
-				ricetta.setCategoria(Categoria.valueOf(result.getString("categoria")));
-				ricetta.setDifficolta(Difficolta.valueOf(result.getString("difficolta")));
-				ricetta.setTempoPreparazione(result.getString("tempoPreparazione"));
-				ricetta.setNameImmaginePrincipale(result.getString("pathImmaginePrincipale"));
-				ricetta.setIngredienti(result.getString("ingredienti"));
-				ricetta.setDescrizione((result.getString("descrizione")));
-				ricetta.setPreparazione(result.getString("preparazione"));
-				ricetta.setUtente(new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("utente_username")));	
+				ricetta = new RicettaDaoJDBC(dataSource).findByPrimaryKey(result.getLong("ricetta_id"));
 				ricette.add(ricetta);
 			}
 		} catch (SQLException e) {
@@ -90,6 +76,62 @@ public class UtenteProxy extends Utente {
 		}
 		this.setRicettePreferite(ricette);
 		return super.getRicettePreferite();
+	}
+	
+	@Override
+	public List<Utente> getFollowings() {
+		Connection connection = this.dataSource.getConnection();
+		List<Utente> utenti = new LinkedList<Utente>();
+		try {
+			Utente utente = null;
+			PreparedStatement statement;
+			String query = "select * from following where utente_username = ?;";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, this.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				utente = new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("following_username"));
+				utenti.add(utente);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		this.setFollowings(utenti);
+		return super.getFollowings();
+	}
+	
+	@Override
+	public List<Utente> getFollowers() {
+		Connection connection = this.dataSource.getConnection();
+		List<Utente> utenti = new LinkedList<Utente>();
+		try {
+			Utente utente = null;
+			PreparedStatement statement;
+			String query = "select * from follower where utente_username = ?;";
+			statement = connection.prepareStatement(query);
+			statement.setString(1, this.getUsername());
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				utente = new UtenteDaoJDBC(dataSource).findByPrimaryKey(result.getString("follower_username"));
+				utenti.add(utente);
+			}
+		} catch (SQLException e) {
+			throw new PersistenceException(e.getMessage());
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new PersistenceException(e.getMessage());
+			}
+		}
+		this.setFollowers(utenti);
+		return super.getFollowers();
 	}
 	
 }

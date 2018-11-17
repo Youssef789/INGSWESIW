@@ -8,7 +8,7 @@
 </head>
 <body>
  <c:forEach var="comment" items="${comments}">
-			<div class="media" id="comment__">
+			<div class="media" id="comment__${comment.id}">
 				<div class="media-left">
 					<img src="image/unknown-user.png" class="media-object" style="width: 60px">
 				</div>

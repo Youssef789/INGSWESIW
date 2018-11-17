@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <jsp:include page="navbar.jsp" />
 <html>
 <head>
@@ -10,35 +11,115 @@
 <title>Edit your recipe</title>
 </head>
 <body>
+
+<c:if test="${empty username}">
+		<c:redirect url="login.jsp" />
+</c:if>
 	<div class="col-xs-9" id="right">
 		<div class="col-md-9">
 			<form action="EditRecipe?idRecipe=${recipe.id}" method="post" enctype='multipart/form-data'>
 				<div class="form-group">
-					<label for="title">Titolo:</label><input name="title" type="text"
-						value="${recipe.titolo}" class="form-control"/>
+					<label for="title">Titolo:</label>
+					<input name="title" type="text" value="${recipe.titolo}" class="form-control"/>
 				</div>
 				<div class="form-group">
-					<label for="photo">sceglie la foto principale:</label><input
-						type="file" name="photo" value="${recipe.nameImmaginePrincipale}" id="file">
+					<label for="photo">sceglie la foto principale:</label>
+					<input type="file" name="photo" value="${recipe.nameImmaginePrincipale}" id="file">
+					<img id="image" src="imageNames/${recipe.nameImmaginePrincipale}" alt="" />
 				</div>
 				<div class="form-group">
-					<label for="category">Categoria:</label> <select name="category"
-						class="form-control">
+					<label for="category">Categoria:</label> 
+					<select class="form-control" name="category" >
+						
 						<optgroup>
-							<option value="${recipe.categoria}">${recipe.categoria}</option>
-							<option value="ANTIPASTI">Antipasti</option>
-							<option value="PRIMI_PIATTI">Primi piatti</option>
-							<option value="SECONDI_PIATTI">Secondi piatti</option>
-							<option value="PIATTI_UNICI">Piatti unici</option>
-							<option value="CONTORNI">Contorni</option>
-							<option value="DOLCI">Dolci</option>
-							<option value="LIEVITATI">Lievitati</option>
-							<option value="SALSE_E_SUGHI">Salse e sughi</option>
-							<option value="MARMELLATE_E_CONSERVE">Marmellate e conserve</option>
-							<option value="BEVANDE">Bevande</option>
-							<option value="ALTRO">Altro</option>
-						</optgroup>
-					</select>
+						
+							<c:if test="${recipe.categoria == 'ANTIPASTI'}">
+								<option selected value="ANTIPASTI">Antipasti</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'ANTIPASTI'}">
+								<option value="ANTIPASTI">Antipasti</option>
+							</c:if>
+							
+							<c:if test="${recipe.categoria == 'PRIMI_PIATTI'}">
+								<option selected value="PRIMI_PIATTI">Primi piatti</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'PRIMI_PIATTI'}">
+								<option value="PRIMI_PIATTI">Primi piatti</option>
+							</c:if>
+							
+							<c:if test="${recipe.categoria == 'SECONDI_PIATTI'}">
+								<option selected value="SECONDI_PIATTI">Secondi piatti</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'SECONDI_PIATTI'}">
+								<option value="SECONDI_PIATTI">Secondi piatti</option>
+							</c:if>
+							
+							<c:if test="${recipe.categoria == 'PIATTI_UNICI'}">
+								<option selected value="PIATTI_UNICI">Piatti unici</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'PIATTI_UNICI'}">
+								<option value="PIATTI_UNICI">Piatti unici</option>
+							</c:if>
+							
+							<c:if test="${recipe.categoria == 'CONTORNI'}">
+								<option selected value="CONTORNI">Contorni</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'CONTORNI'}">
+								<option value="CONTORNI">Contorni</option>
+							</c:if>
+							
+							<c:if test="${recipe.categoria == 'DOLCI'}">
+								<option selected value="DOLCI">Dolci</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'DOLCI'}">
+								<option value="DOLCI">Dolci</option>
+							</c:if>
+
+							<c:if test="${recipe.categoria == 'DOLCI'}">
+								<option selected value="DOLCI">Dolci</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'DOLCI'}">
+								<option value="DOLCI">Dolci</option>
+							</c:if>
+
+							<c:if test="${recipe.categoria == 'LIEVITATI'}">
+								<option selected value="LIEVITATI">Lievitati</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'LIEVITATI'}">
+								<option value="LIEVITATI">Lievitati</option>
+							</c:if>
+
+							<c:if test="${recipe.categoria == 'SALSE_E_SUGHI'}">
+								<option selected value="SALSE_E_SUGHI">Salse e sughi</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'SALSE_E_SUGHI'}">
+								<option value="SALSE_E_SUGHI">Salse e sughi</option>
+							</c:if>
+
+							<c:if test="${recipe.categoria == 'MARMELLATE_E_CONSERVE'}">
+								<option selected value="MARMELLATE_E_CONSERVE">Marmellate e conserve</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'MARMELLATE_E_CONSERVE'}">
+								<option value="MARMELLATE_E_CONSERVE">Marmellate e conserve</option>
+							</c:if>
+
+							<c:if test="${recipe.categoria == 'BEVANDE'}">
+								<option selected value="BEVANDE">Bevande</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'BEVANDE'}">
+								<option value="BEVANDE">Bevande</option>
+							</c:if>
+
+							<c:if test="${recipe.categoria == 'ALTRO'}">
+								<option selected value="ALTRO">Altro</option>
+							</c:if>
+							<c:if test="${recipe.categoria != 'ALTRO'}">
+								<option value="ALTRO">Altro</option>
+							</c:if>
+										
+							</optgroup>
+						</select>
+					
 
 				</div>
 				<div class="form-group">
@@ -46,11 +127,30 @@
 					<input value="${recipe.tempoPreparazione}" name="preparationTime" type="text" class="form-control" />
 				</div>
 
-				<label for="difficulty">Difficoltà: ${recipe.difficolta}</label>
+				<label for="difficulty">Difficoltà:</label>
 				<div class="radio">
-					<label><input type="radio" name="difficulty" value="FACILE">Facile</label>
-					<label><input type="radio" name="difficulty" value="MEDIO">Medio</label>
-					<label><input type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
+				
+					<c:if test="${recipe.difficolta == 'FACILE'}">
+						<label><input checked type="radio" name="difficulty" value="FACILE">Facile</label>
+					</c:if>
+					<c:if test="${recipe.difficolta != 'FACILE'}">
+						<label><input type="radio" name="difficulty" value="FACILE">Facile</label>
+					</c:if>
+					
+					<c:if test="${recipe.difficolta == 'MEDIA'}">
+						<label><input checked type="radio" name="difficulty" value="MEDIA">Media</label>
+					</c:if>
+					<c:if test="${recipe.difficolta != 'MEDIA'}">
+						<label><input type="radio" name="difficulty" value="MEDIA">Media</label>
+					</c:if>
+					
+					<c:if test="${recipe.difficolta == 'DIFFICILE'}">
+						<label><input checked type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
+					</c:if>
+					<c:if test="${recipe.difficolta != 'DIFFICILE'}">
+						<label><input type="radio" name="difficulty" value="DIFFICILE">Difficile</label>
+					</c:if>
+					
 				</div>
 
 				<div class="form-group">
@@ -72,5 +172,7 @@
 	</div>
 	<script src="INGSWESIW/../js/jquery-3.2.1.min.js"></script>
 	<script src="INGSWESIW/../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script src="INGSWESIW/../js/preview.js"></script>
+	
 </body>
 </html>

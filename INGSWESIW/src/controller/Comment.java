@@ -34,6 +34,7 @@ public class Comment extends HttpServlet {
 	
 	@SuppressWarnings("unused")
 	private class InfoComment{
+		private Long id;
 		private String username;
 		private String containComment;
 		private Date dataPubblicazione;
@@ -76,6 +77,7 @@ public class Comment extends HttpServlet {
 	    commentoDao.save(comment);
 	   
 	    InfoComment infoComment = new InfoComment();
+	    infoComment.id=comment.getId();
 	    infoComment.username=utente.getUsername();
 	    infoComment.containComment=comment.getContenuto();
 	    infoComment.dataPubblicazione = comment.getDataPubblicazione();

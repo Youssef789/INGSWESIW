@@ -1,36 +1,67 @@
-@charset "utf-8";
-h2{
-	
-	margin-bottom: 10px;
-}
-.container
-{
-	margin-top: 100px
-}
+@charset "UTF-8";
 
-.wrap-login{
-	border:0px;
-	background: rgba(0,0,0,0.5);
-	color:#ffff;
-	padding:50px 40px;
-	
-}
 body {
-	margin:0;
-	padding:0;
-	background: url("../image/background-login.jpg");
-  	background-size: cover;
-  	background-position: center center; 
-	background-repeat:no-repeat;
-	background-attachment: fixed;
-    font-family: 'Barlow', sans-serif;
-
+	background-image: url("../assets/background/background.jpg");
 }
 
-
-.btn{
-
-    background-color: #138dff;
-   
+h2 {
+	font: inherit;
+	font-size: 35px;
+	margin-bottom: -10px;
+	margin-top: 5px;
+	text-align: center;
+	color: #444;
 }
 
+span {
+	font-weight: bold !important;
+}
+
+.col-md-offset-4 {
+	padding: 10px 20px 10px 20px;
+	width: 350px;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 3px;
+	margin: 12.0em auto;
+ 	position: absolute;
+  	top: 0; 
+  	left: 0; 
+  	right: 0;
+}
+
+#warning-login {
+	font: inherit;
+    font-size: 14px;
+    color: orangered;
+    margin-top: -5px;
+    text-align: center;
+}
+
+.form-control {
+	margin-bottom: -10px;
+}
+
+#fb-button {
+	text-align: center;
+	width: 100%;
+	padding-bottom: 10px;
+}
+
+.btn-success {
+	margin-top: 20px;
+ 	cursor: pointer;
+ 	width: 100%;
+ 	font-size: large;
+}
+
+.colorgraph {
+    height: 7px;
+    border-top: 0;
+    background: #c4e17f;
+ 	border-radius: 5px;
+ 	background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+ 	background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  	background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  	background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}

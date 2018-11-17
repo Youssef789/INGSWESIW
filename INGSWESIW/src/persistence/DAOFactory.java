@@ -20,6 +20,12 @@ public abstract class DAOFactory {
 	 */
 
 	public static final int POSTGRESQL = 2;
+	
+	/**
+	 * Numeric constant '3' corresponds to explicit MariaDB choice
+	 */
+	
+	public static final int MARIADB = 3;
 
 	// --- Actual factory method ---
 
@@ -33,6 +39,8 @@ public abstract class DAOFactory {
 		switch (whichFactory) {
 			case HSQLDB:
 				return null; // new HsqldbDAOFactory();
+			case MARIADB:
+				return null; // new MariadbDAOFactory();
 			case POSTGRESQL:
 				return new PostgresDAOFactory();
 			default:
