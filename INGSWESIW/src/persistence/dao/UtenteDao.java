@@ -8,7 +8,7 @@ import persistence.dao.jdbc.UtenteCredenziali;
 
 public interface UtenteDao {
 	
-public void save(Utente utente, String password);
+	public void save(Utente utente, String password);
 	
 	public void update(Utente utente); 
 	

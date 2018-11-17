@@ -19,7 +19,7 @@ $(document).ready(function(){
 		$.get(
 				"https://www.googleapis.com/youtube/v3/playlistItems",{
 					part:'snippet',
-					maxResults:5,
+					maxResults:10,
 					playlistId:playlistid,
 					key:'AIzaSyBY6U753kczJuKO9d0urFsYtr-_sV_YeRM'
 				},

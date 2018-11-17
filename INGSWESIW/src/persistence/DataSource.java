@@ -6,6 +6,7 @@ public class DataSource {
 								
 	final private String dbURI; // = "jdbc:postgresql://localhost/SoRecipes"; (utilizzo reale)
 								// = "jdbc:postgresql://localhost/test";      (esempio)
+	//"jdbc:mariadb://localhost:3307/DB?user=root&password=myPassword" (esempio per mariadb)
 	
 	final private String username; // = "postgres";
 	final private String password; // = "postgres";
